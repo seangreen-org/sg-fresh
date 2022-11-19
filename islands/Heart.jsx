@@ -22,7 +22,7 @@ export default function Heart(props) {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        fontSize: beat ? '25vw' : '15vw',
+        fontSize: beat ? `${25 + getRandomInt(20, 0)}vw` : '15vw',
         textShadow: `0 0 5vmin #aaa`,
         filter: `hue-rotate(${hue}deg)`,
         transition: 'filter 1s ease-in-out, font-size .5s',
