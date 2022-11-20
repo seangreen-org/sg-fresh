@@ -12,7 +12,6 @@ function getRandomColor() {
   return keys[Math.floor(Math.random() * keys.length)];
 }
 
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
