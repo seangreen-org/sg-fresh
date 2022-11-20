@@ -27,6 +27,6 @@ export const handler = {
       log.debug('intruder alert!');
     }
 
-    return new Response();
+    return new Response('hello');
   },
 };
