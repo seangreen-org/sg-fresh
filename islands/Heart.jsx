@@ -1,6 +1,10 @@
 import { useState } from 'preact/hooks';
-import { getRandomInt } from '../util.js';
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
 export default function Heart(props) {
   const [hue, setHue] = useState(props.hue || 0);
   const [beat, setBeat] = useState(false);
