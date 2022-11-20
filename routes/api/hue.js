@@ -2,7 +2,7 @@ import * as queryString from 'https://deno.land/x/querystring@v1.0.2/mod.js';
 import * as log from "https://deno.land/std/log/mod.ts";
 import { getRandomInt } from '../../util.js';
 
-console.info('HI!')
+log.info('HI!')
 
 export const handler = {
   GET (req) {
