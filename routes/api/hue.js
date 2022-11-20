@@ -7,7 +7,7 @@ export const handler = {
     const rotation = queryString.parse(req.url.split('?')[1]).rotation;
 
     if (!Deno.env.get('external')) {
-      console.log('at home... send fetch');
+      console.debug('at home... send fetch');
       fetch(
         'https://192.168.86.30/api/MQdR757RjJg7Q6xgFtFSEN0jhi-XTQKLbwKKsD4G/lights/1/state',
         {
@@ -21,7 +21,7 @@ export const handler = {
         }
       );
     } else {
-      console.log('intruder alert!');
+      console.debug('intruder alert!');
     }
 
     return new Response();
