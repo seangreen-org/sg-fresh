@@ -1,10 +1,5 @@
 import { useState } from 'preact/hooks';
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
-}
+import { getRandomInt } from '../util.js';
 
 export default function Heart(props) {
   const [hue, setHue] = useState(props.hue || 0);
@@ -14,6 +9,9 @@ export default function Heart(props) {
     const hue = getRandomInt(360, 0);
     setHue(hue);
     setBeat(!beat)
+
+    // !! why cant i read a post body in fresh on the api side?
+    fetch(`/api/hue?rotation=${hue}`);
   }
 
   return (

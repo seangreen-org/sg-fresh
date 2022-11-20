@@ -4,13 +4,15 @@
 
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/[hue].jsx";
-import * as $1 from "./routes/index.jsx";
+import * as $1 from "./routes/api/hue.js";
+import * as $2 from "./routes/index.jsx";
 import * as $$0 from "./islands/Heart.jsx";
 
 const manifest = {
   routes: {
     "./routes/[hue].jsx": $0,
-    "./routes/index.jsx": $1,
+    "./routes/api/hue.js": $1,
+    "./routes/index.jsx": $2,
   },
   islands: {
     "./islands/Heart.jsx": $$0,
