@@ -1,6 +1,8 @@
 import * as queryString from 'https://deno.land/x/querystring@v1.0.2/mod.js';
 import { getRandomInt } from '../../util.js';
 
+console.info('HI!')
+
 export const handler = {
   GET (req) {
     // !! how to color match this value?
