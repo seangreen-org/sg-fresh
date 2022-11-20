@@ -1,16 +1,16 @@
 import * as queryString from 'https://deno.land/x/querystring@v1.0.2/mod.js';
-import * as log from "https://deno.land/std/log/mod.ts";
 import { getRandomInt } from '../../util.js';
 
-log.info('HI!')
+const isInternal = () =>
+  JSON.stringify(Deno.env.get('SG_NETWORK')) === JSON.stringify('internal');
 
 export const handler = {
-  GET (req) {
+  GET(req) {
     // !! how to color match this value?
-    const rotation = queryString.parse(req.url.split('?')[1]).rotation;
+    const _rotation = queryString.parse(req.url.split('?')[1]).rotation;
 
-    if (!Deno.env.get('external')) {
-      log.debug('at home... send fetch');
+    if (isInternal()) {
+      console.log('at home... send fetch');
       fetch(
         'https://192.168.86.30/api/MQdR757RjJg7Q6xgFtFSEN0jhi-XTQKLbwKKsD4G/lights/1/state',
         {
@@ -24,9 +24,9 @@ export const handler = {
         }
       );
     } else {
-      log.debug('intruder alert!');
+      console.log('intruder alert!');
     }
 
-    return new Response('hello');
+    return new Response();
   },
 };
