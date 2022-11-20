@@ -4,11 +4,15 @@ const isInternal = () =>
 export const handler = {
   async POST(request) {
     const rotation = (await request.json()).hue;
-    fetch(
-      `http://${
-        isInternal ? 'localhost' : '86.25.145.140'
-      }:3000/?rotation=${rotation}`
-    );
+    try {
+      await fetch(
+        `http://${
+          isInternal() ? 'localhost' : '86.25.145.140'
+        }:3000/?rotation=${rotation}`
+      );
+    } catch (error) {
+      console.error('hue proxy call failed', error);
+    }
 
     return new Response();
   },
