@@ -5,12 +5,11 @@ const isInternal = () =>
   JSON.stringify(Deno.env.get('SG_NETWORK')) === JSON.stringify('internal');
 
 export const handler = {
-  GET(req) {
-    // !! how to color match this value?
-    const _rotation = queryString.parse(req.url.split('?')[1]).rotation;
+  async POST(request) {
+    const rotation = (await request.json()).hue;
 
     if (isInternal()) {
-      console.log('at home... send fetch');
+      console.log('at home... send fetch', { rotation });
       fetch(
         'https://192.168.86.30/api/MQdR757RjJg7Q6xgFtFSEN0jhi-XTQKLbwKKsD4G/lights/1/state',
         {
@@ -28,5 +27,5 @@ export const handler = {
     }
 
     return new Response();
-  },
+  }
 };

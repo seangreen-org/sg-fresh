@@ -10,8 +10,11 @@ export default function Heart(props) {
     setHue(hue);
     setBeat(!beat)
 
-    // !! why cant i read a post body in fresh on the api side?
-    fetch(`/api/hue?rotation=${hue}`);
+    fetch('/api/hue', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hue })
+    });
   }
 
   return (
