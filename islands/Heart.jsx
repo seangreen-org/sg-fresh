@@ -3,7 +3,9 @@ import { useEffect, useState } from 'preact/hooks';
 const rotationColorMap = {
   green: 0,
   blue: 100,
+  purple: 130,
   pink: 200,
+  red: 250,
   orange: 300,
 };
 
@@ -31,6 +33,7 @@ export default function Heart({ color: initialColor }) {
   }, [color]);
 
   function randomize() {
+    // !! ensure not same colour
     setColor(getRandomColor());
     setBeat(!beat);
   }
