@@ -25,6 +25,16 @@ export default function Heart({ color: initialColor }) {
   const [beat, setBeat] = useState(false);
 
   useEffect(() => {
+    const historyListener = addEventListener('popstate', (event) => {
+      setColor(event.state?.color || initialColor);
+    });
+
+    return () => {
+      removeEventListener('popstate', historyListener);
+    };
+  }, []);
+
+  useEffect(() => {
     fetch('/api/hue', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -39,6 +49,7 @@ export default function Heart({ color: initialColor }) {
     } else {
       setColor(newColor);
       setBeat(!beat);
+      window.history.pushState({ color: newColor }, newColor, newColor);
     }
   }
 
