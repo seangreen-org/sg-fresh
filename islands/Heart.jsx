@@ -59,7 +59,7 @@ export default function Heart({ color: initialColor }) {
         background: 'none',
         border: 'none',
         cursor: 'pointer',
-        fontSize: beat ? `${45 + getRandomInt(10, 0)}vw` : '15vw',
+        fontSize: beat ? `${25 + getRandomInt(10, 0)}vw` : '45vw',
         textShadow: `0 0 2vmin #aaa`,
         filter: `hue-rotate(${rotationColorMap[color]}deg)`,
         transition: 'filter 1s ease-in-out, font-size .5s',
