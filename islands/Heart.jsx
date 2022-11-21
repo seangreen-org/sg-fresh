@@ -33,13 +33,8 @@ export default function Heart({ color: initialColor }) {
   }, [color]);
 
   function randomize() {
-    const newColor = getRandomColor();
-    if (newColor === color) {
-      randomize();
-    } else {
-      setColor(newColor);
-      setBeat(!beat);
-    }
+    setColor(getRandomColor());
+    setBeat(!beat);
   }
 
   return (
