@@ -69,6 +69,8 @@ export default function Heart({ color: initialColor }) {
         audio.pause();
       }
     }
+
+    setBeat(!beat);
   }
 
   return (
