@@ -66,7 +66,7 @@ export default function Heart({ color: initialColor }) {
       }}
       onClick={randomize}
     >
-      {color !== 'gasm' ? '💚' : '😘'}
+      {color !== 'asm' ? '💚' : '😘'}
     </button>
   );
 }

@@ -5,16 +5,14 @@
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/[color].jsx";
 import * as $1 from "./routes/api/hue.js";
-import * as $2 from "./routes/asm.jsx";
-import * as $3 from "./routes/index.jsx";
+import * as $2 from "./routes/index.jsx";
 import * as $$0 from "./islands/Heart.jsx";
 
 const manifest = {
   routes: {
     "./routes/[color].jsx": $0,
     "./routes/api/hue.js": $1,
-    "./routes/asm.jsx": $2,
-    "./routes/index.jsx": $3,
+    "./routes/index.jsx": $2,
   },
   islands: {
     "./islands/Heart.jsx": $$0,
