@@ -23,6 +23,9 @@ function getRandomInt(min, max) {
 export default function Heart({ color: initialColor }) {
   const [color, setColor] = useState(initialColor);
   const [beat, setBeat] = useState(false);
+  const [audio, setAudio] = useState();
+
+  const isOrgasm = () => color === 'asm';
 
   useEffect(() => {
     const historyListener = addEventListener('popstate', (event) => {
@@ -53,6 +56,21 @@ export default function Heart({ color: initialColor }) {
     }
   }
 
+  function toggleSong() {
+    if (!audio) {
+      const song = new Audio('/music/inside-my-love.mp3');
+      song.play();
+      setAudio(song);
+    } else {
+      console.log(audio.paused)
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  }
+
   return (
     <button
       style={{
@@ -64,9 +82,9 @@ export default function Heart({ color: initialColor }) {
         filter: `hue-rotate(${rotationColorMap[color]}deg)`,
         transition: 'filter 1s ease-in-out, font-size .5s',
       }}
-      onClick={randomize}
+      onClick={!isOrgasm() ? randomize : toggleSong}
     >
-      {color !== 'asm' ? '💚' : '😘'}
+      {!isOrgasm() ? '💚' : '😘'}
     </button>
   );
 }
