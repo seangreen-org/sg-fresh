@@ -61,13 +61,10 @@ export default function Heart({ color: initialColor }) {
       const song = new Audio('/music/inside-my-love.mp3');
       song.play();
       setAudio(song);
+    } else if (audio.paused) {
+      audio.play();
     } else {
-      console.log(audio.paused)
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
+      audio.pause();
     }
 
     setBeat(!beat);
