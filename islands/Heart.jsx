@@ -20,7 +20,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-export default function Heart({ color: initialColor }) {
+export default function Heart({ color: initialColor, emoji = '💚' }) {
   const [color, setColor] = useState(initialColor);
   const [beat, setBeat] = useState(false);
   const [audio, setAudio] = useState();
@@ -28,8 +28,8 @@ export default function Heart({ color: initialColor }) {
   const isOrgasm = () => color === 'asm';
 
   useEffect(() => {
-    const historyListener = addEventListener('popstate', (event) => {
-      setColor(event.state?.color || initialColor);
+    const historyListener = addEventListener('popstate', event => {
+      setColor(event.state?.color);
     });
 
     return () => {
@@ -81,9 +81,9 @@ export default function Heart({ color: initialColor }) {
         filter: `hue-rotate(${rotationColorMap[color]}deg)`,
         transition: 'filter 1s ease-in-out, font-size .5s',
       }}
-      onClick={!isOrgasm() ? randomize : toggleSong}
+      onClick={isOrgasm() ? toggleSong : randomize}
     >
-      {!isOrgasm() ? '💚' : '😘'}
+      {isOrgasm() ? '😘' : emoji }
     </button>
   );
 }

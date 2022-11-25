@@ -1,11 +1,10 @@
-# fresh project
+# 👟 Furessssshhh! 💚
 
-### Usage
+## Usage
+`deno task start`
 
-Start the project:
+-----
 
-```
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
+### Ideas
+- TypeScript would be really handy for dev
+- Biometric on home network edge (WebAuthN)

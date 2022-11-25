@@ -10,8 +10,8 @@ export const handler = {
           isInternal() ? 'localhost' : '86.25.145.140'
         }:3000/?color=${color}`
       );
-    } catch (error) {
-      console.error('hue proxy call failed', error);
+    } catch {
+      console.error('hue proxy call failed');
     }
 
     return new Response();
