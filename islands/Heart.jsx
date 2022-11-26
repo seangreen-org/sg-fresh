@@ -56,13 +56,13 @@ export default function Heart({
     } else {
       setColor(newColor);
       setBeat(!beat);
-      console.log('push', { prefix, newColor });
-      window.history.pushState(
-        { color: newColor },
-        newColor,
-        `/${prefix}/${newColor}`
-      );
+      pushHistory(newColor);
     }
+  }
+
+  function pushHistory(newColor) {
+    const url = `/${prefix ? `${prefix}/${newColor}` : newColor}`;
+    window.history.pushState({ color: newColor }, newColor, url);
   }
 
   function toggleSong() {
