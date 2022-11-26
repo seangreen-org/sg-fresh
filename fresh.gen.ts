@@ -9,6 +9,7 @@ import * as $2 from "./routes/api/hue.js";
 import * as $3 from "./routes/char/[color].jsx";
 import * as $4 from "./routes/char/index.jsx";
 import * as $5 from "./routes/index.jsx";
+import * as $6 from "./routes/robots.txt.jsx";
 import * as $$0 from "./islands/Heart.jsx";
 
 const manifest = {
@@ -19,6 +20,7 @@ const manifest = {
     "./routes/char/[color].jsx": $3,
     "./routes/char/index.jsx": $4,
     "./routes/index.jsx": $5,
+    "./routes/robots.txt.jsx": $6,
   },
   islands: {
     "./islands/Heart.jsx": $$0,
