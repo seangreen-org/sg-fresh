@@ -21,7 +21,7 @@ function getRandomInt(min, max) {
 }
 
 export default function Heart({
-  color: initialColor,
+  color: initialColor = 'green',
   emoji = '💚',
   prefix = '',
 }) {
