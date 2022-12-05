@@ -1,19 +1,25 @@
-let heart;
+const getHeartSizeFromFontSize = (fontSize) =>
+  parseInt(fontSize.replace(/vw$/));
+
+const getDegreesFromFilter = (style) =>
+  parseInt(style.match(/hue-rotate\((\d+)deg\)/)[1]);
 
 export default {
-  launch: () => {
+  launch: (path = '/') => {
     cy.intercept('/api/hue').as('hue');
-    cy.visit('/');
-  },
-  getHeart: () => {
-    heart = cy.get('button').contains('💚');
+    cy.visit(path);
+
+    const heart = cy.get('button').contains('💚');
 
     const api = {
-      touch: () => {
+      touchHeart: () => {
         heart.click();
         return api;
       },
-      assertDegrees: (assertion) => {
+      getCurrentPathAsync: () => new Promise(resolve => {
+        cy.url().then(url => resolve(new URL(url).pathname));
+      }),
+      assertHeartDegrees: (assertion) => {
         heart.should(($heart) => {
           if (!assertion(getDegreesFromFilter($heart[0].style.filter))) {
             throw new Error(
@@ -23,7 +29,7 @@ export default {
         });
         return api;
       },
-      assertSize: (assertion) => {
+      assertHeartSize: (assertion) => {
         heart.should(($heart) => {
           if (!assertion(getHeartSizeFromFontSize($heart[0].style.fontSize))) {
             throw new Error(
@@ -48,9 +54,3 @@ export default {
     return api;
   },
 };
-
-const getHeartSizeFromFontSize = (fontSize) =>
-  parseInt(fontSize.replace(/vw$/));
-
-const getDegreesFromFilter = (style) =>
-  parseInt(style.match(/hue-rotate\((\d+)deg\)/)[1]);

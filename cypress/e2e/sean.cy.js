@@ -6,40 +6,63 @@ const sean = it;
 describe('Sean', () => {
   const baseHeartColor = 'green';
 
-  beforeEach(() => {
-    app.launch();
-  });
-
   sean('has a green heart', () => {
     app
-      .getHeart()
-      .assertDegrees((degrees) => degrees === rotationColorMap[baseHeartColor]);
+      .launch()
+      .assertHeartDegrees(
+        (degrees) => degrees === rotationColorMap[baseHeartColor]
+      );
   });
 
   sean('has a green heart that beats when touched', () => {
     const baseHeartSize = 15;
 
     app
-      .getHeart()
-      .assertSize((size) => size === baseHeartSize)
-      .touch()
-      .assertSize((size) => size > baseHeartSize)
-      .touch()
-      .assertSize((size) => size === baseHeartSize);
+      .launch()
+      .assertHeartSize((size) => size === baseHeartSize)
+      .touchHeart()
+      .assertHeartSize((size) => size > baseHeartSize)
+      .touchHeart()
+      .assertHeartSize((size) => size === baseHeartSize);
   });
 
-  sean('changes colour when heart is touched', () => {
+  sean('has a heart that changes colour when touched', () => {
     app
-      .getHeart()
-      .touch()
-      .assertDegrees((degrees) => degrees !== rotationColorMap[baseHeartColor]);
+      .launch()
+      .touchHeart()
+      .assertHeartDegrees(
+        (degrees) => degrees !== rotationColorMap[baseHeartColor]
+      );
   });
 
-  sean('changes light when heart is touched', () => {
+  sean('has a heart that changes light when touched', () => {
     app
-      .getHeart()
+      .launch()
       .assertHueApiColor((color) => color === baseHeartColor)
-      .touch()
+      .touchHeart()
       .assertHueApiColor((color) => color !== baseHeartColor);
+  });
+
+  describe('routing', () => {
+    sean('has a heart that changes colour when requested', () => {
+      const theColor = 'purple';
+
+      app
+        .launch(theColor)
+        .assertHeartDegrees(
+          (degrees) => degrees === rotationColorMap[theColor]
+        );
+    });
+
+    sean('has a heart that changes the url when touched', async () => {
+      const url = await app.launch().touchHeart().getCurrentPathAsync();
+      expect(url.replace(/^\//, '') in rotationColorMap).to.equal(true);
+    });
+  });
+
+  describe('server side rendering', () => {
+    sean('has a green heart that is rendered server side', () => {
+      // !! continue
+    });
   });
 });
