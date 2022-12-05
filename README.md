@@ -3,8 +3,8 @@
 ## Usage
 `deno task start`
 
------
+### Testing
+`npx cypress open`
 
-### Ideas
-- TypeScript would be really handy for dev
-- Biometric on home network edge (WebAuthN)
+### Deployment
+Push to github linked to Deno Deploy.
