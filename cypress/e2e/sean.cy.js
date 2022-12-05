@@ -1,14 +1,19 @@
 import app from './app.js';
+import rotationColorMap from '../../support/rotationColorMap.js';
 
 const sean = it;
 
 describe('Sean', () => {
+  const baseHeartColor = 'green';
+
   beforeEach(() => {
     app.launch();
   });
 
   sean('has a green heart', () => {
-    app.getHeart().assertDegrees((degrees) => degrees === 0);
+    app
+      .getHeart()
+      .assertDegrees((degrees) => degrees === rotationColorMap[baseHeartColor]);
   });
 
   sean('has a green heart that beats when touched', () => {
@@ -27,16 +32,14 @@ describe('Sean', () => {
     app
       .getHeart()
       .touch()
-      .assertDegrees((degrees) => degrees !== 0);
+      .assertDegrees((degrees) => degrees !== rotationColorMap[baseHeartColor]);
   });
 
   sean('changes light when heart is touched', () => {
-    const baseColor = 'green';
-
     app
       .getHeart()
-      .assertHueApiColor((color) => color === baseColor)
+      .assertHueApiColor((color) => color === baseHeartColor)
       .touch()
-      .assertHueApiColor((color) => color !== baseColor);
+      .assertHueApiColor((color) => color !== baseHeartColor);
   });
 });

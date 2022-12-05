@@ -1,13 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-
-const rotationColorMap = {
-  green: 0,
-  blue: 100,
-  purple: 130,
-  pink: 200,
-  red: 250,
-  orange: 300,
-};
+import rotationColorMap from '../support/rotationColorMap.js';
 
 function getRandomColor() {
   const keys = Object.keys(rotationColorMap);
@@ -21,7 +13,7 @@ function getRandomInt(min, max) {
 }
 
 export default function Heart({
-  color: initialColor = 'green',
+  color: initialColor = Object.keys(rotationColorMap)[0],
   emoji = '💚',
   prefix = '',
 }) {

@@ -1,11 +1,9 @@
-const location = 'http://localhost:8000/'; // !! move to env
-
 let heart;
 
 export default {
   launch: () => {
-    cy.visit(location);
-    cy.intercept(`${location}/api/hue`).as('hue');
+    cy.intercept('/api/hue').as('hue');
+    cy.visit('/');
   },
   getHeart: () => {
     heart = cy.get('button').contains('💚');
