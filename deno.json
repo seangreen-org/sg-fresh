@@ -1,10 +1,26 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=static/,routes/ dev.ts"
+    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "test": "npx cypress run",
+    "deploy": "deno run --allow-run ./scripts/deploy.js"
   },
   "importMap": "./import_map.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
+  },
+  "fmt": {
+    "files": {
+      "exclude": [
+        "node_modules"
+      ]
+    }
+  },
+  "lint": {
+    "files": {
+      "exclude": [
+        "node_modules"
+      ]
+    }
   }
 }
