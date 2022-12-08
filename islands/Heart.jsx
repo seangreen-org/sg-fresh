@@ -13,7 +13,7 @@ function getRandomInt(min, max) {
 }
 
 export default function Heart({
-  color: initialColor = Object.keys(rotationColorMap)[0],
+  color: initialColor = Object.keys(rotationColorMap)[1],
   emoji = '💚',
   prefix = '',
 }) {
