@@ -6,6 +6,6 @@ async function runCommandBailOnError(command) {
 }
 
 console.log('💚', 'deploy');
-runCommandBailOnError('deno lint');
-runCommandBailOnError('npx cypress run');
-runCommandBailOnError('git push');
+await runCommandBailOnError('deno lint');
+await runCommandBailOnError('npx cypress run');
+await runCommandBailOnError('git push');
