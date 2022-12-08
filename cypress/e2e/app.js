@@ -20,7 +20,7 @@ export default {
         cy.url().then(url => resolve(new URL(url).pathname));
       }),
       assertHeartDegrees: (assertion) => {
-heart.should(($heart) => {
+        heart.should(($heart) => {
           if (!assertion(getDegreesFromFilter($heart[0].style.filter))) {
             throw new Error(
               `degrees doesn\'t pass assertion: ${assertion.toString()}`
