@@ -1,4 +1,4 @@
-# 👟 Furessssshhh! 💚
+# 👟 Furessssshhh!! 💚
 
 ## Usage
 `deno task start`
