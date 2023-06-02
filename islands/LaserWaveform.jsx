@@ -6,15 +6,29 @@ const getAverage = (data) => {
   return avg;
 };
 
-const Sparkle = function(x, y, averageFrequency) {
+const Sparkle = function (x, y, averageFrequency, maxFrequency) {
   this.x = x;
   this.y = y;
   this.size = Math.random() * 2;
   this.life = 0;
 
-  const colors = averageFrequency < 100 ? [[0, 255, 0], [128, 0, 128]] : [[0, 255, 255], [255, 0, 255], [255, 255, 0]];
+  let colors;
+  if (maxFrequency > 230) {
+    colors = [[255, 255, 255]]; // all white
+  } else if (averageFrequency < 100) {
+    colors = [
+      [0, 255, 0],
+      [128, 0, 128],
+    ]; // green and purple
+  } else {
+    colors = [
+      [0, 255, 255],
+      [255, 0, 255],
+      [255, 255, 0],
+    ]; // cyan, magenta, yellow
+  }
   this.color = colors[Math.floor(Math.random() * colors.length)];
-}
+};
 
 const LaserWaveform = ({ audioAnalyserRef }) => {
   const [isActive, setIsActive] = useState(false);
@@ -44,6 +58,7 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
       const bufferLength = audioAnalyserRef.current.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
       audioAnalyserRef.current.getByteFrequencyData(dataArray);
+      const maxFrequency = Math.max(...dataArray);
       const averageFrequency = getAverage(dataArray);
       setIsActive(Boolean(averageFrequency));
 
@@ -64,7 +79,9 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
         ctx.lineTo(x, y);
 
         if (averageFrequency > 20 && Math.random() < 0.01) {
-          sparkles.current.push(new Sparkle(x, y, averageFrequency));
+          sparkles.current.push(
+            new Sparkle(x, y, averageFrequency, maxFrequency)
+          );
         }
       }
 
@@ -94,7 +111,9 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
       // Draw sparkles
       for (let i = 0; i < sparkles.current.length; i++) {
         const sparkle = sparkles.current[i];
-        ctx.fillStyle = `rgba(${sparkle.color[0]}, ${sparkle.color[1]}, ${sparkle.color[2]}, ${1 - sparkle.life})`;
+        ctx.fillStyle = `rgba(${sparkle.color[0]}, ${sparkle.color[1]}, ${
+          sparkle.color[2]
+        }, ${1 - sparkle.life})`;
         ctx.beginPath();
         ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, 2 * Math.PI);
         ctx.fill();
