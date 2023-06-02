@@ -6,13 +6,13 @@ const getAverage = (data) => {
   return avg;
 };
 
-const Sparkle = function(x, y) {
+const Sparkle = function(x, y, averageFrequency) {
   this.x = x;
   this.y = y;
   this.size = Math.random() * 2;
   this.life = 0;
 
-  const colors = [[0, 255, 255], [255, 0, 255], [255, 255, 0]];
+  const colors = averageFrequency < 100 ? [[0, 255, 0], [128, 0, 128]] : [[0, 255, 255], [255, 0, 255], [255, 255, 0]];
   this.color = colors[Math.floor(Math.random() * colors.length)];
 }
 
@@ -64,7 +64,7 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
         ctx.lineTo(x, y);
 
         if (averageFrequency > 20 && Math.random() < 0.01) {
-          sparkles.current.push(new Sparkle(x, y));
+          sparkles.current.push(new Sparkle(x, y, averageFrequency));
         }
       }
 
