@@ -106,7 +106,7 @@ export default function Heart({
   function createAudioAnalyser() {
     const audioContext = new window.AudioContext();
     const analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
+    analyser.fftSize = 32;
 
     const audioSource = audioContext.createMediaElementSource(audioRef.current);
     audioSource.connect(analyser);
