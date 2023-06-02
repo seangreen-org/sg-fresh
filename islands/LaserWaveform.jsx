@@ -78,7 +78,7 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
 
         ctx.lineTo(x, y);
 
-        if (averageFrequency > 20 && Math.random() < 0.01) {
+        if (averageFrequency > 50 && Math.random() < 0.01) {
           sparkles.current.push(
             new Sparkle(x, y, averageFrequency, maxFrequency)
           );
