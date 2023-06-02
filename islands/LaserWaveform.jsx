@@ -6,19 +6,15 @@ const getAverage = (data) => {
   return avg;
 };
 
-const Sparkle = function (x, y) {
+const Sparkle = function(x, y) {
   this.x = x;
   this.y = y;
   this.size = Math.random() * 2;
   this.life = 0;
 
-  const colors = [
-    [0, 255, 255],
-    [255, 0, 255],
-    [255, 255, 0],
-  ];
+  const colors = [[0, 255, 255], [255, 0, 255], [255, 255, 0]];
   this.color = colors[Math.floor(Math.random() * colors.length)];
-};
+}
 
 const LaserWaveform = ({ audioAnalyserRef }) => {
   const [isActive, setIsActive] = useState(false);
@@ -63,9 +59,10 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
           Math.sin(angle) *
             (amplitude + averageFrequency / 2) *
             Math.sin(x / wavelength - phase * speed) +
-          Math.sin(x / 100) * 40; // Increase variance
+          Math.sin(x / 100) * 40;
 
         ctx.lineTo(x, y);
+
         if (averageFrequency > 20 && Math.random() < 0.01) {
           sparkles.current.push(new Sparkle(x, y));
         }
@@ -78,14 +75,14 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
       // Second (bottom) waveform
       ctx.beginPath();
       for (let x = 0; x <= width; x += 1) {
-        const angle = x * frequency + phase;
+        const angle = x * frequency + phase + Math.PI; // Added a phase shift
         const y =
           centerY +
-          amplitude / 2 +
+          amplitude / 2 -
           Math.sin(angle) *
             (amplitude + averageFrequency / 2) *
-            Math.sin(x / wavelength - phase * speed) +
-          Math.cos(x / 100) * 40; // Increase variance
+            Math.sin(x / wavelength + phase * speed) +
+          Math.cos(x / 100) * 40;
 
         ctx.lineTo(x, y);
       }
@@ -96,10 +93,8 @@ const LaserWaveform = ({ audioAnalyserRef }) => {
 
       // Draw sparkles
       for (let i = 0; i < sparkles.current.length; i++) {
-        let sparkle = sparkles.current[i];
-        ctx.fillStyle = `rgba(${sparkle.color[0]}, ${sparkle.color[1]}, ${
-          sparkle.color[2]
-        }, ${1 - sparkle.life})`;
+        const sparkle = sparkles.current[i];
+        ctx.fillStyle = `rgba(${sparkle.color[0]}, ${sparkle.color[1]}, ${sparkle.color[2]}, ${1 - sparkle.life})`;
         ctx.beginPath();
         ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, 2 * Math.PI);
         ctx.fill();
