@@ -55,7 +55,7 @@ export default function Heart({
       audioAnalyserRef.current.getByteFrequencyData(dataArray);
 
       const averageFrequency = getAverage(dataArray);
-      const rotation = (averageFrequency / 128) * 360 + 200;
+      const rotation = (averageFrequency / 128) * 360 + 69;
       setRotation(Math.min(rotation, 360));
       setScale(averageFrequency);
     };
