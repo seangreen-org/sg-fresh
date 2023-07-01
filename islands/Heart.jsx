@@ -58,21 +58,27 @@ export default function Heart({
     const animateEmojiToMusic = () => {
       const beatThreshold = 100;
       const emojis = [
-        '🕺🏻',
-        '💃🏻',
-        '🪩',
-        '❤️‍🔥',
-        '💖',
-        '🐕',
-        '🫨',
-        '🫠',
         '❤️',
         '💚',
         '💛',
         '💜',
         '💝',
-        '🧡',
+        '🧡', // frequent heart emojis
+        '❤️',
+        '💚',
+        '💛',
+        '💜',
+        '💝',
+        '🧡', // duplicate for more frequency
+        '🕺🏻',
+        '💃🏻',
+        '🪩',
+        '❤️‍🔥',
+        '💖',
+        '🫨',
+        '🫠',
         '🩷',
+        '🐕', // rare dog emoji
       ];
       const bufferLength = audioAnalyserRef.current.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
@@ -89,7 +95,11 @@ export default function Heart({
 
       if (averageFrequency > beatThreshold) {
         setAudioBeatCount((prevBeatCount) => {
-          if (prevBeatCount >= 256) {
+          const songProgress =
+            audioRef.current.currentTime / audioRef.current.duration;
+          const beatCountThreshold = 256 - songProgress * 20;
+
+          if (prevBeatCount >= beatCountThreshold) {
             setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
             return 0;
           } else {
