@@ -21,6 +21,7 @@ export default function Heart({
   const [color, setColor] = useState(initialColor);
   const [rotation, setRotation] = useState(initialRotation);
   const [shadowHsl, setShadowHsl] = useState();
+  const [shadowSpread, setShadowSpread] = useState(2);
   const [beat, setBeat] = useState(false);
   const [audioBeatCount, setAudioBeatCount] = useState(0);
   const [scale, setScale] = useState(0);
@@ -84,6 +85,7 @@ export default function Heart({
       setRotation(Math.min(rotation, 360));
       setScale(averageFrequency);
       setShadowHsl(Math.round((averageFrequency / 255) * 360));
+      setShadowSpread(Math.round(averageFrequency / 25));
 
       if (averageFrequency > beatThreshold) {
         setAudioBeatCount((prevBeatCount) => {
@@ -171,7 +173,7 @@ export default function Heart({
             ? `${25 + getRandomInt(10, 0)}vw`
             : '15vw',
           textShadow: shadowHsl
-            ? `0 0 2vmin hsl(${shadowHsl}, 100%, 50%)`
+            ? `0 0 ${shadowSpread}vmin hsl(${shadowHsl}, 100%, 50%)`
             : `0 0 2vmin #aaa`,
           filter: `hue-rotate(${rotation || rotationColorMap[color]}deg)`,
           transform: `scale(${1 + scale / 128})`,
