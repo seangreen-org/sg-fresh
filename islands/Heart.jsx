@@ -72,10 +72,11 @@ export default function Heart({
       setShadowHsl(Math.round((averageFrequency / 255) * 360));
       setShadowSpread(Math.round(averageFrequency / 25));
 
-      if (averageFrequency > beatThreshold) {
+      const songProgress =
+        audioRef.current.currentTime / audioRef.current.duration;
+
+      if (songProgress > 0.07 && averageFrequency > beatThreshold) {
         setAudioBeatCount((prevBeatCount) => {
-          const songProgress =
-            audioRef.current.currentTime / audioRef.current.duration;
           const beatCountThreshold = 256 - songProgress * 20;
 
           if (prevBeatCount >= beatCountThreshold) {
