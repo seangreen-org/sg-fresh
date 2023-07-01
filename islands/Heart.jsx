@@ -75,7 +75,7 @@ export default function Heart({
       const songProgress =
         audioRef.current.currentTime / audioRef.current.duration;
 
-      if (songProgress > 0.07 && averageFrequency > beatThreshold) {
+      if (songProgress > 0.06 && averageFrequency > beatThreshold) {
         setAudioBeatCount((prevBeatCount) => {
           const beatCountThreshold = 256 - songProgress * 20;
 
