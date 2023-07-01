@@ -70,7 +70,7 @@ export default function Heart({
       setRotation(Math.min(rotation, 360));
       setScale(averageFrequency);
       setShadowHsl(Math.round((averageFrequency / 255) * 360));
-      setShadowSpread(Math.round(averageFrequency / 25));
+      setShadowSpread(Math.round(averageFrequency / 15));
 
       const songProgress =
         audioRef.current.currentTime / audioRef.current.duration;

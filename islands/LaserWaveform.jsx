@@ -18,7 +18,6 @@ const Sparkle = function (x, y, averageFrequency, maxFrequency) {
   } else if (averageFrequency < 100) {
     colors = [
       [0, 255, 0],
-      [128, 0, 128],
     ]; // green and purple
   } else {
     colors = [
