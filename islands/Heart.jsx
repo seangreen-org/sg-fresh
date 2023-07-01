@@ -20,6 +20,7 @@ export default function Heart({
   const [emoji, setEmoji] = useState(initialEmoji);
   const [color, setColor] = useState(initialColor);
   const [rotation, setRotation] = useState(initialRotation);
+  const [shadowHsl, setShadowHsl] = useState();
   const [beat, setBeat] = useState(false);
   const [audioBeatCount, setAudioBeatCount] = useState(0);
   const [scale, setScale] = useState(0);
@@ -82,6 +83,7 @@ export default function Heart({
       const rotation = (averageFrequency / 128) * 360 + 69;
       setRotation(Math.min(rotation, 360));
       setScale(averageFrequency);
+      setShadowHsl(Math.round((averageFrequency / 255) * 360));
 
       if (averageFrequency > beatThreshold) {
         setAudioBeatCount((prevBeatCount) => {
@@ -168,7 +170,9 @@ export default function Heart({
             : beat
             ? `${25 + getRandomInt(10, 0)}vw`
             : '15vw',
-          textShadow: `0 0 2vmin #aaa`,
+          textShadow: shadowHsl
+            ? `0 0 2vmin hsl(${shadowHsl}, 100%, 50%)`
+            : `0 0 2vmin #aaa`,
           filter: `hue-rotate(${rotation || rotationColorMap[color]}deg)`,
           transform: `scale(${1 + scale / 128})`,
           transition: `filter ${scale ? 0.2 : 1}s ease-in-out, font-size .5s`,
