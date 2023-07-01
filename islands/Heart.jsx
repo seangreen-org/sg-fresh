@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'preact/hooks';
+import emojis from '../support/emojis.js';
 import LaserWaveform from './LaserWaveform.jsx';
 import rotationColorMap from '../support/rotationColorMap.js';
 
@@ -14,7 +15,7 @@ function getRandomInt(min = Math.ceil(min), max = Math.foor(max)) {
 export default function Heart({
   color: initialColor = Object.keys(rotationColorMap)[0],
   rotation: initialRotation = 0,
-  initialEmoji = '💚',
+  initialEmoji = emojis[0],
   prefix = '',
 }) {
   const [emoji, setEmoji] = useState(initialEmoji);
@@ -33,7 +34,7 @@ export default function Heart({
   const isOrgasm = () => color === 'asm';
 
   if (isOrgasm() && emoji === initialEmoji) {
-    setEmoji('😘');
+    setEmoji('❤️‍🔥');
   }
 
   useEffect(() => {
@@ -57,29 +58,7 @@ export default function Heart({
   useEffect(() => {
     const animateEmojiToMusic = () => {
       const beatThreshold = 100;
-      const emojis = [
-        '❤️',
-        '💚',
-        '💛',
-        '💜',
-        '💝',
-        '🧡', // frequent heart emojis
-        '❤️',
-        '💚',
-        '💛',
-        '💜',
-        '💝',
-        '🧡', // duplicate for more frequency
-        '🕺🏻',
-        '💃🏻',
-        '🪩',
-        '❤️‍🔥',
-        '💖',
-        '🫨',
-        '🫠',
-        '🩷',
-        '🐕', // rare dog emoji
-      ];
+
       const bufferLength = audioAnalyserRef.current.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
 
