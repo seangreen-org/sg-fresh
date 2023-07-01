@@ -14,12 +14,14 @@ function getRandomInt(min = Math.ceil(min), max = Math.foor(max)) {
 export default function Heart({
   color: initialColor = Object.keys(rotationColorMap)[0],
   rotation: initialRotation = 0,
-  emoji = '💚',
+  initialEmoji = '💚',
   prefix = '',
 }) {
+  const [emoji, setEmoji] = useState(initialEmoji);
   const [color, setColor] = useState(initialColor);
   const [rotation, setRotation] = useState(initialRotation);
   const [beat, setBeat] = useState(false);
+  const [audioBeatCount, setAudioBeatCount] = useState(0);
   const [scale, setScale] = useState(0);
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef();
@@ -27,6 +29,10 @@ export default function Heart({
   const animationRef = useRef();
 
   const isOrgasm = () => color === 'asm';
+
+  if (isOrgasm() && emoji === initialEmoji) {
+    setEmoji('😘');
+  }
 
   useEffect(() => {
     const historyListener = addEventListener('popstate', (event) => {
@@ -48,6 +54,24 @@ export default function Heart({
 
   useEffect(() => {
     const animateEmojiToMusic = () => {
+      const beatThreshold = 100;
+      const emojis = [
+        '🕺🏻',
+        '💃🏻',
+        '🪩',
+        '❤️‍🔥',
+        '💖',
+        '🐕',
+        '🫨',
+        '🫠',
+        '❤️',
+        '💚',
+        '💛',
+        '💜',
+        '💝',
+        '🧡',
+        '🩷',
+      ];
       const bufferLength = audioAnalyserRef.current.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
 
@@ -58,6 +82,17 @@ export default function Heart({
       const rotation = (averageFrequency / 128) * 360 + 69;
       setRotation(Math.min(rotation, 360));
       setScale(averageFrequency);
+
+      if (averageFrequency > beatThreshold) {
+        setAudioBeatCount((prevBeatCount) => {
+          if (prevBeatCount >= 256) {
+            setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+            return 0;
+          } else {
+            return prevBeatCount + 1;
+          }
+        });
+      }
     };
 
     if (playing && audioRef.current && audioAnalyserRef.current) {
@@ -67,7 +102,7 @@ export default function Heart({
     return () => {
       cancelAnimationFrame(animationRef.current);
     };
-  }, [playing]);
+  }, [playing, audioBeatCount]);
 
   function randomize() {
     const newColor = getRandomColor();
@@ -136,11 +171,11 @@ export default function Heart({
           textShadow: `0 0 2vmin #aaa`,
           filter: `hue-rotate(${rotation || rotationColorMap[color]}deg)`,
           transform: `scale(${1 + scale / 128})`,
-          transition: `filter ${scale ? .2 : 1}s ease-in-out, font-size .5s`,
+          transition: `filter ${scale ? 0.2 : 1}s ease-in-out, font-size .5s`,
         }}
         onClick={isOrgasm() ? toggleSong : randomize}
       >
-        {isOrgasm() ? '😘' : emoji}
+        {emoji}
       </button>
       {isOrgasm() && <LaserWaveform audioAnalyserRef={audioAnalyserRef} />}
     </>
