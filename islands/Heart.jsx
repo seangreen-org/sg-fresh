@@ -15,10 +15,10 @@ function getRandomInt(min = Math.ceil(min), max = Math.foor(max)) {
 export default function Heart({
   color: initialColor = Object.keys(rotationColorMap)[0],
   rotation: initialRotation = 0,
-  initialEmoji = emojis[0],
+  emoji = emojis[0],
   prefix = '',
 }) {
-  const [emoji, setEmoji] = useState(initialEmoji);
+  const [currentEmoji, setCurrentEmoji] = useState(emoji);
   const [color, setColor] = useState(initialColor);
   const [rotation, setRotation] = useState(initialRotation);
   const [shadowHsl, setShadowHsl] = useState();
@@ -33,8 +33,8 @@ export default function Heart({
 
   const isOrgasm = () => color === 'asm';
 
-  if (isOrgasm() && emoji === initialEmoji) {
-    setEmoji('❤️‍🔥');
+  if (isOrgasm() && currentEmoji === emoji) {
+    setCurrentEmoji('❤️‍🔥');
   }
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function Heart({
           const beatCountThreshold = 256 - songProgress * 20;
 
           if (prevBeatCount >= beatCountThreshold) {
-            setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+            setCurrentEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
             return 0;
           } else {
             return prevBeatCount + 1;
@@ -171,7 +171,7 @@ export default function Heart({
         }}
         onClick={isOrgasm() ? toggleSong : randomize}
       >
-        {emoji}
+        {currentEmoji}
       </button>
       {isOrgasm() && <LaserWaveform audioAnalyserRef={audioAnalyserRef} />}
     </>
