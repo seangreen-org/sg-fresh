@@ -10,17 +10,13 @@
     "jsxImportSource": "preact"
   },
   "fmt": {
-    "files": {
-      "exclude": [
-        "node_modules"
-      ]
-    }
+    "exclude": [
+      "node_modules"
+    ]
   },
   "lint": {
-    "files": {
-      "exclude": [
-        "node_modules"
-      ]
-    }
+    "exclude": [
+      "node_modules"
+    ]
   }
 }
