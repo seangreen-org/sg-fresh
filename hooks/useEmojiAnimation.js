@@ -85,9 +85,7 @@ export default function useEmojiAnimation(
 
   function randomize() {
     const newColor = getRandomColor();
-    console.log('randomize', color, newColor)
     if (color === newColor) {
-      console.log('match rerandomize', color, newColor)
       randomize();
     } else {
       setColor(newColor);
