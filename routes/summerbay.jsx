@@ -6,7 +6,10 @@ export default function App(props = { emoji: '💚' }) {
   return (
     <>
       <Header />
-      <BackgroundImage imageUrl='../images/summerbay-min.webp' />
+      <BackgroundImage
+        imageUrl="../images/summerbay-min.webp"
+        backgroundSize="cover"
+      />
       <SummerBay {...props} />
     </>
   );

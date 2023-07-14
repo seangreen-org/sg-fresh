@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
 
-const BackgroundImage = ({ imageUrl = '../images/highover-min.webp' }) => {
+const BackgroundImage = ({
+  imageUrl = '../images/highover-min.webp',
+  backgroundSize = 'contain',
+}) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -8,7 +11,7 @@ const BackgroundImage = ({ imageUrl = '../images/highover-min.webp' }) => {
     img.src = imageUrl;
     img.onload = () => {
       setIsLoaded(true);
-    }
+    };
   }, [imageUrl]);
 
   return (
@@ -20,7 +23,7 @@ const BackgroundImage = ({ imageUrl = '../images/highover-min.webp' }) => {
         height: '100vh',
         width: '100vw',
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'contain',
+        backgroundSize,
         backgroundRepeat: 'no-repeat',
         transition: 'opacity 0.2s',
         opacity: isLoaded ? 1 : 0,
