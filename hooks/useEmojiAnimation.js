@@ -102,18 +102,51 @@ export default function useEmojiAnimation(
   function toggleSong() {
     if (!audioRef.current) {
       const song = new Audio(audioFile);
-      song.play();
       audioRef.current = song;
       audioAnalyserRef.current = createAudioAnalyser(audioRef.current);
+
+      let volume = 0;
+      song.volume = volume;
+      song.play();
       setPlaying(true);
+
+      const interval = setInterval(() => {
+        volume = Math.min(volume + 0.02, 1);
+        song.volume = volume;
+
+        if (volume >= 1) {
+          clearInterval(interval);
+        }
+      }, 5);
     } else if (audioRef.current.paused) {
+      let volume = 0;
+      audioRef.current.volume = volume;
       audioRef.current.play();
       setPlaying(true);
+
+      const interval = setInterval(() => {
+        volume = Math.min(volume + 0.02, 1);
+        audioRef.current.volume = volume;
+
+        if (volume >= 1) {
+          clearInterval(interval);
+        }
+      }, 5);
     } else {
-      audioRef.current.pause();
+      let volume = 1;
+      audioRef.current.volume = volume;
+
+      const interval = setInterval(() => {
+        volume = Math.max(volume - 0.02, 0);
+        audioRef.current.volume = volume;
+
+        if (volume <= 0) {
+          clearInterval(interval);
+          audioRef.current.pause();
+        }
+      }, 5);
       setPlaying(false);
     }
-
     setBeat(!beat);
   }
 
