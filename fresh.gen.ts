@@ -12,9 +12,10 @@ import * as $5 from "./routes/index.jsx";
 import * as $6 from "./routes/robots.txt.jsx";
 import * as $7 from "./routes/rotation/[rotation].jsx";
 import * as $8 from "./routes/wolfe.jsx";
-import * as $$0 from "./islands/Heart.jsx";
-import * as $$1 from "./islands/LaserWaveform.jsx";
-import * as $$2 from "./islands/Wolf.jsx";
+import * as $$0 from "./islands/Background.jsx";
+import * as $$1 from "./islands/Heart.jsx";
+import * as $$2 from "./islands/LaserWaveform.jsx";
+import * as $$3 from "./islands/Wolf.jsx";
 
 const manifest = {
   routes: {
@@ -29,9 +30,10 @@ const manifest = {
     "./routes/wolfe.jsx": $8,
   },
   islands: {
-    "./islands/Heart.jsx": $$0,
-    "./islands/LaserWaveform.jsx": $$1,
-    "./islands/Wolf.jsx": $$2,
+    "./islands/Background.jsx": $$0,
+    "./islands/Heart.jsx": $$1,
+    "./islands/LaserWaveform.jsx": $$2,
+    "./islands/Wolf.jsx": $$3,
   },
   baseUrl: import.meta.url,
   config,
