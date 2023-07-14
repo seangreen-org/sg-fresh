@@ -20,7 +20,7 @@ const BackgroundImage = ({ imageUrl = '../images/highover-min.webp' }) => {
         height: '100vh',
         width: '100vw',
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
+        backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         transition: 'opacity 0.2s',
         opacity: isLoaded ? 1 : 0,
