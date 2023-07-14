@@ -1,10 +1,8 @@
 const getHeartSizeFromFontSize = (fontSize) =>
   parseInt(fontSize.replace(/vw$/));
 
-const getDegreesFromFilter = (style) => {
-  const match = style.match(/hue-rotate\((\d+)deg\)/);
-  return match ? parseInt(match[1]) : 0;
-};
+const getDegreesFromFilter = (style) =>
+  parseInt(style.match(/hue-rotate\((\d+)deg\)/)[1]);
 
 export default {
   launch: (path = '/') => {

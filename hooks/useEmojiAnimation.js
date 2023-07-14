@@ -10,7 +10,13 @@ export function getRandomInt(min = Math.ceil(min), max = Math.foor(max)) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-export default function useEmojiAnimation(emojis, initialColor, initialRotation, prefix, audioFile) {
+export default function useEmojiAnimation(
+  emojis,
+  initialColor = Object.keys(rotationColorMap)[0],
+  initialRotation,
+  prefix,
+  audioFile
+) {
   const [currentEmoji, setCurrentEmoji] = useState(emojis[0]);
   const [color, setColor] = useState(initialColor);
   const [rotation, setRotation] = useState(initialRotation);
@@ -79,7 +85,9 @@ export default function useEmojiAnimation(emojis, initialColor, initialRotation,
 
   function randomize() {
     const newColor = getRandomColor();
+    console.log('randomize', color, newColor)
     if (color === newColor) {
+      console.log('match rerandomize', color, newColor)
       randomize();
     } else {
       setColor(newColor);
