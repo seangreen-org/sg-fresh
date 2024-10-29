@@ -96,7 +96,7 @@ export default function useEmojiAnimation(
 
   function pushHistory(newColor) {
     const url = `/${prefix ? `${prefix}/${newColor}` : newColor}`;
-    window.history.pushState({ color: newColor }, newColor, url);
+    globalThis.history.pushState({ color: newColor }, newColor, url);
   }
 
   function toggleSong() {
@@ -151,7 +151,7 @@ export default function useEmojiAnimation(
   }
 
   function createAudioAnalyser() {
-    const audioContext = new window.AudioContext();
+    const audioContext = new globalThis.AudioContext();
     const analyser = audioContext.createAnalyser();
     analyser.fftSize = 32;
 
