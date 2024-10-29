@@ -3,8 +3,8 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_color_ from "./routes/[color].jsx";
-import * as $api_middleware from "./routes/api/_middleware.js";
-import * as $api_hue from "./routes/api/hue.js";
+import * as $api_middleware from "./routes/api/_middleware.ts";
+import * as $api_hue from "./routes/api/hue.ts";
 import * as $char_color_ from "./routes/char/[color].jsx";
 import * as $char_index from "./routes/char/index.jsx";
 import * as $index from "./routes/index.jsx";
@@ -22,8 +22,8 @@ import type { Manifest } from "$fresh/server.ts";
 const manifest = {
   routes: {
     "./routes/[color].jsx": $_color_,
-    "./routes/api/_middleware.js": $api_middleware,
-    "./routes/api/hue.js": $api_hue,
+    "./routes/api/_middleware.ts": $api_middleware,
+    "./routes/api/hue.ts": $api_hue,
     "./routes/char/[color].jsx": $char_color_,
     "./routes/char/index.jsx": $char_index,
     "./routes/index.jsx": $index,

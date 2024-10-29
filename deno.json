@@ -2,7 +2,7 @@
   "tasks": {
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "test": "npx cypress run",
-    "deploy": "deno run --allow-run ./scripts/deploy.js"
+    "deploy": "deno run --allow-run ./scripts/deploy.ts"
   },
   "importMap": "./import_map.json",
   "compilerOptions": {
