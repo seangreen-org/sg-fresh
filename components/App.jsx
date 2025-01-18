@@ -1,7 +1,6 @@
 import Header from '../components/Header.jsx';
-import AnimatedSVG from "../islands/AnimatedSVG.tsx";
 
-export default function App(props = {}) {
+export default function App() {
   return (
     <>
       <Header />

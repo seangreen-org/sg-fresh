@@ -12,7 +12,6 @@ import * as $char_color_ from "./routes/char/[color].jsx";
 import * as $char_index from "./routes/char/index.jsx";
 import * as $index from "./routes/index.jsx";
 import * as $robots_txt from "./routes/robots.txt.jsx";
-import * as $AnimatedSVG from "./islands/AnimatedSVG.tsx";
 import * as $Background from "./islands/Background.jsx";
 import * as $Heart from "./islands/Heart.jsx";
 import * as $LaserWaveform from "./islands/LaserWaveform.jsx";
@@ -34,7 +33,6 @@ const manifest = {
     "./routes/robots.txt.jsx": $robots_txt,
   },
   islands: {
-    "./islands/AnimatedSVG.tsx": $AnimatedSVG,
     "./islands/Background.jsx": $Background,
     "./islands/Heart.jsx": $Heart,
     "./islands/LaserWaveform.jsx": $LaserWaveform,
