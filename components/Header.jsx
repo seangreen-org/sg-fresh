@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <>
       <Head>
-        <title>Sean Green</title>
+        <title>sg-1981</title>
         <meta name="description" content="Sean Green"/>
         <meta name="theme-color" content="#000000"/>
         <link rel="stylesheet" href={asset('/style.css')} />

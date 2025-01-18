@@ -13,6 +13,7 @@ import * as $robots_txt from "./routes/robots.txt.jsx";
 import * as $rotation_rotation_ from "./routes/rotation/[rotation].jsx";
 import * as $summerbay from "./routes/summerbay.jsx";
 import * as $wolfe from "./routes/wolfe.jsx";
+import * as $AnimatedSVG from "./islands/AnimatedSVG.tsx";
 import * as $Background from "./islands/Background.jsx";
 import * as $Heart from "./islands/Heart.jsx";
 import * as $LaserWaveform from "./islands/LaserWaveform.jsx";
@@ -35,6 +36,7 @@ const manifest = {
     "./routes/wolfe.jsx": $wolfe,
   },
   islands: {
+    "./islands/AnimatedSVG.tsx": $AnimatedSVG,
     "./islands/Background.jsx": $Background,
     "./islands/Heart.jsx": $Heart,
     "./islands/LaserWaveform.jsx": $LaserWaveform,
