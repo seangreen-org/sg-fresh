@@ -1,4 +1,4 @@
-import App from '../components/App.jsx';
+import App from './index.jsx';
 
 export default function Color(props) {
   const color = props.params?.color;

@@ -2,8 +2,10 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_2024_color_ from "./routes/2024/[color].jsx";
 import * as $_2024_index from "./routes/2024/index.jsx";
-import * as $_color_ from "./routes/[color].jsx";
+import * as $_2024_summerbay from "./routes/2024/summerbay.jsx";
+import * as $_2024_wolfe from "./routes/2024/wolfe.jsx";
 import * as $api_middleware from "./routes/api/_middleware.ts";
 import * as $api_hue from "./routes/api/hue.ts";
 import * as $char_color_ from "./routes/char/[color].jsx";
@@ -11,8 +13,6 @@ import * as $char_index from "./routes/char/index.jsx";
 import * as $index from "./routes/index.jsx";
 import * as $robots_txt from "./routes/robots.txt.jsx";
 import * as $rotation_rotation_ from "./routes/rotation/[rotation].jsx";
-import * as $summerbay from "./routes/summerbay.jsx";
-import * as $wolfe from "./routes/wolfe.jsx";
 import * as $AnimatedSVG from "./islands/AnimatedSVG.tsx";
 import * as $Background from "./islands/Background.jsx";
 import * as $Heart from "./islands/Heart.jsx";
@@ -23,8 +23,10 @@ import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/2024/[color].jsx": $_2024_color_,
     "./routes/2024/index.jsx": $_2024_index,
-    "./routes/[color].jsx": $_color_,
+    "./routes/2024/summerbay.jsx": $_2024_summerbay,
+    "./routes/2024/wolfe.jsx": $_2024_wolfe,
     "./routes/api/_middleware.ts": $api_middleware,
     "./routes/api/hue.ts": $api_hue,
     "./routes/char/[color].jsx": $char_color_,
@@ -32,8 +34,6 @@ const manifest = {
     "./routes/index.jsx": $index,
     "./routes/robots.txt.jsx": $robots_txt,
     "./routes/rotation/[rotation].jsx": $rotation_rotation_,
-    "./routes/summerbay.jsx": $summerbay,
-    "./routes/wolfe.jsx": $wolfe,
   },
   islands: {
     "./islands/AnimatedSVG.tsx": $AnimatedSVG,
