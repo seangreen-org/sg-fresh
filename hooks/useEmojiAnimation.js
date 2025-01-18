@@ -95,8 +95,13 @@ export default function useEmojiAnimation(
   }
 
   function pushHistory(newColor) {
-    const url = `/${prefix ? `${prefix}/${newColor}` : newColor}`;
-    globalThis.history.pushState({ color: newColor }, newColor, url);
+    const currentPath = globalThis.location.pathname;
+    const basePath = currentPath.endsWith("/")
+      ? currentPath.slice(0, -1)
+      : currentPath.split("/").slice(0, -1).join("/");
+    const newPath = `${basePath}/${newColor}`;
+
+    globalThis.history.pushState({ color: newColor }, newColor, newPath);
   }
 
   function toggleSong() {
