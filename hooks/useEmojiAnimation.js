@@ -95,11 +95,7 @@ export default function useEmojiAnimation(
   }
 
   function pushHistory(newColor) {
-    const currentPath = globalThis.location.pathname;
-    const basePath = currentPath.endsWith("/")
-      ? currentPath.slice(0, -1)
-      : currentPath.split("/").slice(0, -1).join("/");
-    const newPath = `${basePath}/${newColor}`;
+    const newPath = `/2024/${newColor}`;
 
     globalThis.history.pushState({ color: newColor }, newColor, newPath);
   }
