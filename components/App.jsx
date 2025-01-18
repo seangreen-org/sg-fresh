@@ -5,7 +5,7 @@ export default function App(props = {}) {
   return (
     <>
       <Header />
-      <AnimatedSVG />
+      <img id="sg1981" src="/images/heart.svg" alt="love" />
     </>
   );
 }
