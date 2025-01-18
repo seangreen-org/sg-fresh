@@ -2,6 +2,7 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_2024_index from "./routes/2024/index.jsx";
 import * as $_color_ from "./routes/[color].jsx";
 import * as $api_middleware from "./routes/api/_middleware.ts";
 import * as $api_hue from "./routes/api/hue.ts";
@@ -21,6 +22,7 @@ import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/2024/index.jsx": $_2024_index,
     "./routes/[color].jsx": $_color_,
     "./routes/api/_middleware.ts": $api_middleware,
     "./routes/api/hue.ts": $api_hue,
