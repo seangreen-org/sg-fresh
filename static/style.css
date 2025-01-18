@@ -1,3 +1,4 @@
+/* General body styling */
 body {
   margin: 0;
   padding: 0;
@@ -11,10 +12,40 @@ body {
   height: 100vh;
 }
 
-img#sg1981 {
+/* Apply styles to the heart SVG */
+svg#sg1981 {
   max-width: 79%;
   max-height: 79%;
   margin-left: -3vh;
   margin-top: -3vh;
   display: block;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out; /* Smooth zoom effect */
+}
+
+/* Slight zoom effect when hovering over the SVG */
+svg#sg1981:hover {
+  transform: scale(1.05);
+}
+
+/* Animation for the stripes inside the SVG */
+@keyframes stripeFlow {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px); /* Move stripes slightly down */
+  }
+  100% {
+    transform: translateY(-10px); /* Move stripes slightly up */
+  }
+}
+
+/* Apply the animation to <rect> elements on hover */
+svg#sg1981 rect {
+  transition: transform 0.2s ease-in-out; /* Ensure transform changes are smooth */
+}
+
+svg#sg1981:hover rect {
+  animation: stripeFlow 3s ease-in-out infinite; /* Add flowing animation to the stripes */
 }

@@ -7,7 +7,7 @@ export const handler = {
     try {
       await fetch(
         `http://${
-          isInternal() ? 'localhost' : '86.25.145.140'
+          isInternal() ? 'localhost' : '86.13.194.207'
         }:3000/?color=${color}`
       );
     } catch {
