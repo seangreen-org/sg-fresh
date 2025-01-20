@@ -8,7 +8,7 @@ export default function App() {
         id="sg1981"
         xmlns="http://www.w3.org/2000/svg"
         width="100%" height="100%"
-        viewBox="50 20 400 360"
+        viewBox="50 20 400 362"
       >
   <defs>
     <clipPath id="heartClip">
