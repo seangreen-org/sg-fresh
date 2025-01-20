@@ -5,9 +5,9 @@ const getDegreesFromFilter = (style) =>
   parseInt(style.match(/hue-rotate\((\d+)deg\)/)[1]);
 
 export default {
-  launch: (path = '/') => {
+launch: (path = '/') => {
     cy.intercept('/api/hue').as('hue');
-    cy.visit(path);
+    cy.visit(`/2024/${path}`);
 
     const heart = cy.get('button').contains('💚');
 

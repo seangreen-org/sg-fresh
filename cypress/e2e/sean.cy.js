@@ -56,7 +56,10 @@ describe('Sean', () => {
 
     sean('has a heart that changes the url when touched', async () => {
       const url = await app.launch().touchHeart().getCurrentPathAsync();
-      expect(url.replace(/^\//, '') in rotationColorMap).to.equal(true);
+
+      expect(
+        url.replace(/^\//, '').split('/').pop() in rotationColorMap
+      ).to.equal(true);
     });
   });
 
