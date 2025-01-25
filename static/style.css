@@ -6,25 +6,10 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden; /* Prevent scrollbars */
-  position: relative; /* To ensure the vignette is relative to the viewport */
+  overflow: hidden;
+  position: relative; /* For layering the vignette properly */
 }
 
-.vignette-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Ensure it doesn’t block interactions */
-  z-index: 1000; /* Place this on top of all other elements */
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0) 70%, /* Fully transparent at 70% */
-    rgba(0, 0, 0, 0.9) 90%, /* Almost black at 90% */
-    black 100% /* Fully black at the edges */
-  );
-}
 svg#sg1981 {
   max-width: 79%;
   max-height: 79%;
@@ -32,6 +17,37 @@ svg#sg1981 {
   margin-top: -3vh;
   display: block;
   animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+
+#sg1981 rect {
+  transform-origin: 250px 250px;
+  transform: rotate(var(--rotation));
+  opacity: 0.8;
+  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes rect-flow {
+  0% {
+    transform: scaleY(1); /* Starting point */
+    opacity: 0.8;
+  }
+  25% {
+    transform:tation) + 1deg)) scaleY(1.1); /* Subtle scale up */
+    opacity: 0.9;
+  }
+  50% {
+    transform:tation) + 2deg)) scaleY(1.15); /* Max scale */
+    opacity: 1;
+  }
+  75% {
+    transform:tation) + 1deg)) scaleY(1.1); /* Scale back down */
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleY(1); /* Back to default */
+    opacity: 0.8;
+  }
 }
 
 .clouds-container {
@@ -51,14 +67,14 @@ svg#sg1981 {
     circle,
     rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
     rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-    rgba(0, 255, 255, 0.15) 70%, /* Cyan */
-    rgba(128, 0, 255, 0.1) 90%, /* Purple */
+    rgba(128, 0, 255, 0.15) 70%, /* Purple */
+    rgba(255, 0, 128, 0.1) 90%, /* Magenta */
     transparent 100%
   );
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
-  animation: cloud-move 90s linear infinite; /* Extended duration */
+  animation: cloud-move 90s linear infinite, cloud-color-morph 60s ease-in-out infinite; /* Added color morph animation */
 }
 
 @keyframes cloud-move {
@@ -67,6 +83,49 @@ svg#sg1981 {
   }
   100% {
     transform: translate3d(var(--x-end), var(--y-end), 0) scale(var(--scale));
+  }
+}
+
+@keyframes cloud-color-morph {
+  0% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
+      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
+      rgba(128, 0, 255, 0.15) 70%, /* Purple */
+      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
+      transparent 100%
+    );
+  }
+  33% {
+    background: radial-gradient(
+      circle,
+      rgba(255, 0, 128, 0.25) 0%, /* Magenta */
+      rgba(128, 0, 255, 0.2) 30%, /* Purple */
+      rgba(0, 255, 128, 0.15) 70%, /* Neon green */
+      rgba(0, 128, 192, 0.1) 90%, /* Teal */
+      transparent 100%
+    );
+  }
+  66% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
+      rgba(255, 255, 0, 0.2) 30%, /* Yellow */
+      rgba(255, 0, 128, 0.15) 70%, /* Magenta */
+      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
+      transparent 100%
+    );
+  }
+  100% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
+      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
+      rgba(128, 0, 255, 0.15) 70%, /* Purple */
+      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
+      transparent 100%
+    );
   }
 }
 
@@ -80,14 +139,15 @@ body::before {
   background: radial-gradient(
     circle,
     rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-    rgba(0, 128, 192, 0.25) 30%, /* Teal */
-    rgba(0, 255, 128, 0.2) 60%, /* Neon green */
-    rgba(64, 0, 128, 0.15) 90%, /* Purple tint */
+    rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
+    rgba(0, 255, 128, 0.2) 50%, /* Neon green */
+    rgba(255, 0, 128, 0.15) 75%, /* Magenta */
+    rgba(128, 0, 255, 0.1) 90%, /* Purple */
     transparent 100%
   );
   mix-blend-mode: overlay;
   z-index: -2;
-  animation: background-morph 120s ease-in-out infinite; /* Morphing background */
+  animation: background-morph 120s ease-in-out infinite;
 }
 
 @keyframes background-morph {
@@ -95,19 +155,20 @@ body::before {
     background: radial-gradient(
       circle,
       rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-      rgba(0, 128, 192, 0.25) 30%, /* Teal */
-      rgba(0, 255, 128, 0.2) 60%, /* Neon green */
-      rgba(64, 0, 128, 0.15) 90%, /* Purple tint */
+      rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
+      rgba(0, 255, 128, 0.2) 50%, /* Neon green */
+      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
+      rgba(128, 0, 255, 0.1) 90%, /* Purple */
       transparent 100%
     );
   }
   33% {
     background: radial-gradient(
       circle,
-      rgba(64, 0, 128, 0.3) 0%, /* Purple tint */
-      rgba(0, 64, 255, 0.25) 30%, /* Blue */
-      rgba(0, 128, 255, 0.2) 60%, /* Cyan */
-      rgba(0, 255, 128, 0.15) 90%, /* Green */
+      rgba(255, 0, 128, 0.3) 0%, /* Magenta */
+      rgba(128, 0, 255, 0.25) 25%, /* Purple */
+      rgba(0, 128, 192, 0.2) 50%, /* Teal */
+      rgba(0, 64, 128, 0.15) 75%, /* Deep blue */
       transparent 100%
     );
   }
@@ -115,9 +176,9 @@ body::before {
     background: radial-gradient(
       circle,
       rgba(0, 255, 128, 0.3) 0%, /* Neon green */
-      rgba(0, 128, 255, 0.25) 30%, /* Cyan */
-      rgba(128, 0, 255, 0.2) 60%, /* Purple */
-      rgba(0, 64, 128, 0.15) 90%, /* Deep blue */
+      rgba(255, 0, 128, 0.25) 25%, /* Magenta */
+      rgba(128, 0, 255, 0.2) 50%, /* Purple */
+      rgba(0, 128, 192, 0.15) 75%, /* Teal */
       transparent 100%
     );
   }
@@ -125,19 +186,29 @@ body::before {
     background: radial-gradient(
       circle,
       rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-      rgba(0, 128, 192, 0.25) 30%, /* Teal */
-      rgba(0, 255, 128, 0.2) 60%, /* Neon green */
-      rgba(64, 0, 128, 0.15) 90%, /* Purple tint */
+      rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
+      rgba(0, 255, 128, 0.2) 50%, /* Neon green */
+      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
+      rgba(128, 0, 255, 0.1) 90%, /* Purple */
       transparent 100%
     );
   }
 }
 
-#sg1981 rect {
-  transform-origin: 250px 250px;
-  transform: rotate(var(--rotation));
-  opacity: 0.8;
-  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 75%, /* Fully transparent in the center */
+    rgba(0, 0, 0, 0.8) 95%, /* Dark near the edges */
+    rgba(0, 0, 0, 1) 100% /* Fully black at the corners */
+  );
 }
 
 @media (max-width: 768px) {
@@ -145,7 +216,7 @@ body::before {
     width: 300px;
     height: 300px;
     filter: blur(80px);
-    opacity: 0.25; /* Lower opacity for mobile */
+    opacity: 0.65; /* Lower opacity for mobile */
   }
 
   body::before {
