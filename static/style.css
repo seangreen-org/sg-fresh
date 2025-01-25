@@ -20,6 +20,7 @@ svg#sg1981 {
 }
 
 .clouds-container {
+  z-index: -1; /* Keep it behind the background */
   position: fixed;
   top: 0;
   left: 0;
@@ -29,7 +30,6 @@ svg#sg1981 {
 }
 
 .cloud {
-  z-index: -1; /* Keep it behind the background */
   position: absolute;
   width: 500px;
   height: 500px;
@@ -42,7 +42,7 @@ svg#sg1981 {
   );
   border-radius: 50%;
   filter: blur(100px); /* Glow effect */
-  opacity: 0.7; /* Slightly higher opacity for better visibility */
+  opacity: .7; /* Slightly higher opacity for better visibility */
   animation: cloud-move 45s linear infinite;
 }
 
