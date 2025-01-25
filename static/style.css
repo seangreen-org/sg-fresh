@@ -165,31 +165,31 @@ body::before {
   25% {
     background: radial-gradient(
       circle,
-      rgba(255, 0, 128, 0.3) 0%, /* Magenta */
-      rgba(128, 0, 255, 0.25) 25%, /* Purple */
-      rgba(0, 128, 192, 0.2) 50%, /* Teal */
-      rgba(255, 165, 0, 0.15) 75%, /* Burnt orange */
-      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
+      rgba(128, 0, 255, 0.3) 0%, /* Purple */
+      rgba(0, 255, 128, 0.25) 25%, /* Neon green */
+      rgba(0, 128, 192, 0.2) 50%, /* Bright teal */
+      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
+      rgba(64, 0, 128, 0.1) 90%, /* Deep purple */
       transparent 100%
     );
   }
   50% {
     background: radial-gradient(
       circle,
-      rgba(255, 165, 0, 0.3) 0%, /* Burnt orange */
-      rgba(255, 0, 128, 0.25) 25%, /* Magenta */
+      rgba(0, 255, 128, 0.3) 0%, /* Neon green */
+      rgba(0, 128, 192, 0.25) 25%, /* Teal */
       rgba(128, 0, 255, 0.2) 50%, /* Purple */
-      rgba(0, 128, 192, 0.15) 75%, /* Teal */
+      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
       transparent 100%
     );
   }
   75% {
     background: radial-gradient(
       circle,
-      rgba(0, 255, 128, 0.3) 0%, /* Neon green */
-      rgba(255, 165, 0, 0.25) 25%, /* Burnt orange */
-      rgba(255, 0, 128, 0.2) 50%, /* Magenta */
-      rgba(128, 0, 255, 0.15) 75%, /* Purple */
+      rgba(0, 128, 192, 0.3) 0%, /* Bright teal */
+      rgba(0, 255, 128, 0.25) 25%, /* Neon green */
+      rgba(128, 0, 255, 0.2) 50%, /* Purple */
+      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
       transparent 100%
     );
   }
@@ -206,6 +206,7 @@ body::before {
   }
 }
 
+/* Cloud Color Morph */
 @keyframes cloud-color-morph {
   0% {
     background: radial-gradient(
@@ -220,20 +221,20 @@ body::before {
   33% {
     background: radial-gradient(
       circle,
-      rgba(255, 165, 0, 0.25) 0%, /* Burnt orange */
+      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
       rgba(128, 0, 255, 0.2) 30%, /* Purple */
-      rgba(0, 255, 128, 0.15) 70%, /* Neon green */
-      rgba(0, 128, 192, 0.1) 90%, /* Teal */
+      rgba(0, 128, 192, 0.15) 70%, /* Teal */
+      rgba(64, 0, 128, 0.1) 90%, /* Deep purple */
       transparent 100%
     );
   }
   66% {
     background: radial-gradient(
       circle,
-      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
-      rgba(255, 255, 0, 0.2) 30%, /* Yellow */
-      rgba(255, 165, 0, 0.15) 70%, /* Burnt orange */
-      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
+      rgba(0, 128, 192, 0.25) 0%, /* Bright teal */
+      rgba(0, 255, 128, 0.2) 30%, /* Neon green */
+      rgba(128, 0, 255, 0.15) 70%, /* Purple */
+      rgba(64, 0, 128, 0.1) 90%, /* Deep blue */
       transparent 100%
     );
   }
