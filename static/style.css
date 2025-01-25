@@ -228,7 +228,7 @@ body::before {
       transparent 100%
     );
   }
-  66% {
+  66% {h
     background: radial-gradient(
       circle,
       rgba(0, 128, 192, 0.25) 0%, /* Bright teal */
@@ -290,21 +290,25 @@ svg#sg1981:hover rect {
     transform: rotate(var(--rotation)) scaleY(1);
     fill: url(#greenGrad1); /* Start with green */
   }
-  25% {
+  20% {
+    transform: rotate(calc(var(--rotation) + 1deg)) scaleY(1.05);
+    fill: url(#greenGrad2); /* Subtle green transition */
+  }
+  40% {
     transform: rotate(calc(var(--rotation) + 2deg)) scaleY(1.1);
-    fill: url(#greenGrad2); /* Transition to gradient 2 */
+    fill: url(#blueToGreen); /* Intermediate blue-green */
   }
-  50% {
-    transform: rotate(calc(var(--rotation) + 4deg)) scaleY(1.2);
-    fill: url(#purpleGrad1); /* Shift to purple */
+  60% {
+    transform: rotate(calc(var(--rotation) + 3deg)) scaleY(1.15);
+    fill: url(#purpleToBlue); /* Intermediate purple-blue */
   }
-  75% {
-    transform: rotate(calc(var(--rotation) + 6deg)) scaleY(1.1);
-    fill: url(#purpleGrad2); /* Gradually back to green */
+  80% {
+    transform: rotate(calc(var(--rotation) + 5deg)) scaleY(1.1);
+    fill: url(#purpleGrad1); /* Shift fully into purple */
   }
   100% {
     transform: rotate(var(--rotation)) scaleY(1);
-    fill: url(#greenGrad1); /* Loop back to the original */
+    fill: url(#greenGrad1); /* Return to green */
   }
 }
 
