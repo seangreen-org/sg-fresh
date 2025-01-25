@@ -21,13 +21,13 @@ svg#sg1981 {
 
 
 #sg1981 rect {
-  cursor: pointer;
   transform-origin: 250px 250px;
   transform: rotate(var(--rotation));
   opacity: 0.8;
   transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* !! */
 @keyframes rect-flow {
   0% {
     transform: scaleY(1); /* Starting point */
@@ -333,3 +333,11 @@ svg#sg1981:hover rect {
   }
 }
 
+.interactive-heart:hover ~ g rect {
+  animation: river-flow 5s infinite ease-in-out;
+  opacity: 1; /* Make colors more vibrant */
+}
+
+.interactive-heart:hover {
+  cursor: pointer; /* Visual feedback for the user */
+}

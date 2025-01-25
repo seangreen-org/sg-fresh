@@ -1,25 +1,6 @@
-import { useEffect } from 'preact/hooks';
 import Header from './Header.jsx';
 
-export default function App() {
-  const handleMouseEnter = () => {
-    const rects = document.querySelectorAll<SVGRectElement>('#sg1981 rect');
-    rects.forEach((rect) => rect.classList.remove('animated'));
-  };
-
-  const handleMouseLeave = () => {
-    const rects = document.querySelectorAll<SVGRectElement>('#sg1981 rect');
-    rects.forEach((rect) => {
-      rect.classList.add('animated');
-      setTimeout(() => rect.classList.remove('animated'), 800);
-    });
-  };
-
-  useEffect(() => {
-    const rects = document.querySelectorAll<SVGRectElement>('#sg1981 rect');
-    rects.forEach((rect) => rect.classList.add('animated'));
-  }, []);
-
+export default function Heart() {
   return (
     <>
       <Header />
@@ -28,9 +9,7 @@ export default function App() {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="50 20 400 370"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        viewBox="50 20 400 380"
       >
         <defs>
           <clipPath id="heartClip">
@@ -382,17 +361,19 @@ export default function App() {
         </g>
         <path
           d="
-          M 250,80
-          C 220,20, 140,20, 110,80
-          C 50,180, 150,300, 250,380
-          C 350,300, 450,180, 390,80
-          C 360,20, 280,20, 250,80
-          Z
-        "
-          fill="none"
+    M 250,80
+    C 220,20, 140,20, 110,80
+    C 50,180, 150,300, 250,380
+    C 350,300, 450,180, 390,80
+    C 360,20, 280,20, 250,80
+    Z
+  "
+          className="interactive-heart"
+          fill="transparent"
           stroke="#0EE584"
-          stroke-width="3"
+          strokeWidth="3"
           filter="url(#glow)"
+          style={{ pointerEvents: 'all' }}
         />
       </svg>
     </>
