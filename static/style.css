@@ -162,23 +162,34 @@ body::before {
       transparent 100%
     );
   }
-  33% {
+  25% {
     background: radial-gradient(
       circle,
       rgba(255, 0, 128, 0.3) 0%, /* Magenta */
       rgba(128, 0, 255, 0.25) 25%, /* Purple */
       rgba(0, 128, 192, 0.2) 50%, /* Teal */
-      rgba(0, 64, 128, 0.15) 75%, /* Deep blue */
+      rgba(255, 165, 0, 0.15) 75%, /* Burnt orange */
+      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
       transparent 100%
     );
   }
-  66% {
+  50% {
     background: radial-gradient(
       circle,
-      rgba(0, 255, 128, 0.3) 0%, /* Neon green */
+      rgba(255, 165, 0, 0.3) 0%, /* Burnt orange */
       rgba(255, 0, 128, 0.25) 25%, /* Magenta */
       rgba(128, 0, 255, 0.2) 50%, /* Purple */
       rgba(0, 128, 192, 0.15) 75%, /* Teal */
+      transparent 100%
+    );
+  }
+  75% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 128, 0.3) 0%, /* Neon green */
+      rgba(255, 165, 0, 0.25) 25%, /* Burnt orange */
+      rgba(255, 0, 128, 0.2) 50%, /* Magenta */
+      rgba(128, 0, 255, 0.15) 75%, /* Purple */
       transparent 100%
     );
   }
@@ -190,6 +201,49 @@ body::before {
       rgba(0, 255, 128, 0.2) 50%, /* Neon green */
       rgba(255, 0, 128, 0.15) 75%, /* Magenta */
       rgba(128, 0, 255, 0.1) 90%, /* Purple */
+      transparent 100%
+    );
+  }
+}
+
+@keyframes cloud-color-morph {
+  0% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
+      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
+      rgba(128, 0, 255, 0.15) 70%, /* Purple */
+      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
+      transparent 100%
+    );
+  }
+  33% {
+    background: radial-gradient(
+      circle,
+      rgba(255, 165, 0, 0.25) 0%, /* Burnt orange */
+      rgba(128, 0, 255, 0.2) 30%, /* Purple */
+      rgba(0, 255, 128, 0.15) 70%, /* Neon green */
+      rgba(0, 128, 192, 0.1) 90%, /* Teal */
+      transparent 100%
+    );
+  }
+  66% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
+      rgba(255, 255, 0, 0.2) 30%, /* Yellow */
+      rgba(255, 165, 0, 0.15) 70%, /* Burnt orange */
+      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
+      transparent 100%
+    );
+  }
+  100% {
+    background: radial-gradient(
+      circle,
+      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
+      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
+      rgba(128, 0, 255, 0.15) 70%, /* Purple */
+      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
       transparent 100%
     );
   }
@@ -216,7 +270,7 @@ body::before {
     width: 300px;
     height: 300px;
     filter: blur(80px);
-    opacity: 0.65; /* Lower opacity for mobile */
+    opacity: 0.4; /* Lower opacity for mobile */
   }
 
   body::before {
