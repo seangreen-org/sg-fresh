@@ -33,14 +33,14 @@ svg#sg1981 {
   height: 500px;
   background: radial-gradient(
     circle,
-    rgba(30, 30, 255, 0.2) 0%, /* Soft blue */
-    rgba(128, 0, 255, 0.15) 30%, /* Purple */
-    rgba(0, 255, 255, 0.1) 70%, /* Cyan */
+    rgba(30, 30, 255, 0.15) 0%, /* Reduced opacity */
+    rgba(128, 0, 255, 0.1) 30%, /* Reduced opacity */
+    rgba(0, 255, 255, 0.07) 70%, /* Reduced opacity */
     transparent 100%
   );
   border-radius: 50%;
-  filter: blur(80px); /* Reduced blur for lighter performance */
-  opacity: 0.6;
+  filter: blur(80px); /* Glow effect */
+  opacity: 0.5; /* Slightly lower opacity for clouds */
   animation: cloud-move 60s linear infinite; /* Long duration to reduce frame updates */
 }
 
@@ -62,9 +62,9 @@ body::before {
   height: 100%;
   background: radial-gradient(
     circle,
-    rgba(30, 0, 128, 0.3) 0%, /* Deep blue */
-    rgba(0, 0, 64, 0.3) 30%, /* Navy */
-    rgba(64, 0, 128, 0.2) 70%, /* Purple tint */
+    rgba(30, 0, 128, 0.2) 0%, /* Slightly reduced opacity */
+    rgba(0, 0, 64, 0.2) 30%, /* Slightly reduced opacity */
+    rgba(64, 0, 128, 0.15) 70%, /* Slightly reduced opacity */
     transparent 100%
   );
   mix-blend-mode: overlay; /* Softens colors */
@@ -76,4 +76,21 @@ body::before {
   transform: rotate(var(--rotation)); /* Static rotation */
   opacity: 0.8;
   transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Only animate opacity */
+}
+
+@media (max-width: 768px) {
+  .cloud {
+    filter: blur(100px); /* Keep the blur */
+    opacity: 0.3; /* Lower opacity for mobile */
+  }
+
+  body::before {
+    background: radial-gradient(
+      circle,
+      rgba(30, 0, 128, 0.15) 0%, /* Lower opacity for all colors */
+      rgba(0, 0, 64, 0.15) 30%,
+      rgba(64, 0, 128, 0.1) 70%,
+      transparent 100%
+    );
+  }
 }
