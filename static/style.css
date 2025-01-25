@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden; /* Prevent scrollbars from showing due to animations */
+  overflow: hidden; /* Prevent scrollbars */
 }
 
 svg#sg1981 {
@@ -29,13 +29,20 @@ svg#sg1981 {
 }
 
 .cloud {
+  z-index: -1; /* Keep it behind the background */
   position: absolute;
-  width: 500px; /* Increase cloud size */
+  width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(30, 30, 255, 0.2) 0%, /* Soft blue */
+    rgba(128, 0, 255, 0.15) 30%, /* Purple */
+    rgba(0, 255, 255, 0.1) 70%, /* Cyan */
+    transparent 100%
+  );
   border-radius: 50%;
-  filter: blur(100px); /* Increase blur for a soft glow effect */
-  opacity: .6; /* Make the clouds more visible */
+  filter: blur(100px); /* Glow effect */
+  opacity: 0.7; /* Slightly higher opacity for better visibility */
   animation: cloud-move 45s linear infinite;
 }
 
@@ -46,4 +53,22 @@ svg#sg1981 {
   100% {
     transform: translate3d(var(--x-end), var(--y-end), var(--z-end)) scale(var(--scale));
   }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(30, 0, 128, 0.3) 0%, /* Deep blue */
+    rgba(0, 0, 64, 0.3) 30%, /* Navy */
+    rgba(64, 0, 128, 0.2) 70%, /* Purple tint */
+    transparent 100%
+  );
+  mix-blend-mode: overlay; /* Softens colors */
+  z-index: -2; /* Keep it behind the clouds */
 }
