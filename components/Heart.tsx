@@ -11,12 +11,11 @@ export default function App() {
     const rects = document.querySelectorAll<SVGRectElement>('#sg1981 rect');
     rects.forEach((rect) => {
       rect.classList.add('animated');
-      setTimeout(() => rect.classList.remove('animated'), 800); // Matches transition duration
+      setTimeout(() => rect.classList.remove('animated'), 800);
     });
   };
 
   useEffect(() => {
-    // Optional: Ensure any necessary animations are applied on mount.
     const rects = document.querySelectorAll<SVGRectElement>('#sg1981 rect');
     rects.forEach((rect) => rect.classList.add('animated'));
   }, []);

@@ -17,8 +17,8 @@ svg#sg1981 {
   margin-left: -3vh;
   margin-top: -3vh;
   display: block;
-  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth transition back on unhover */
-  animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1); /* Subtle pulsing effect */
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #sg1981 rect {
@@ -38,15 +38,15 @@ svg#sg1981 {
     opacity: 0.8;
   }
   25% {
-    transform: rotate(var(--rotation)) scaleY(1.15); /* Increased scale for visibility */
+    transform: rotate(var(--rotation)) scaleY(1.15);
     opacity: 0.9;
   }
   50% {
-    transform: rotate(var(--rotation)) scaleY(1.3); /* More dramatic scaling */
-    opacity: 1; /* Full brightness */
+    transform: rotate(var(--rotation)) scaleY(1.3);
+    opacity: 1;
   }
   75% {
-    transform: rotate(var(--rotation)) scaleY(1.15); /* Scale back subtly */
+    transform: rotate(var(--rotation)) scaleY(1.15);
     opacity: 0.9;
   }
   100% {
