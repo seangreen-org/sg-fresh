@@ -18,3 +18,25 @@ svg#sg1981 {
   margin-top: -3vh;
   display: block;
 }
+
+#sg1981 rect {
+  transform-origin: 250px 250px; /* Match heart's center */
+  transform: rotate(var(--rotation)) scaleY(1); /* Initial transform */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#sg1981:hover rect {
+  animation: flow 4s infinite ease-in-out;
+}
+
+@keyframes flow {
+  0%,
+  100% {
+    transform: rotate(var(--rotation)) scaleY(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(var(--rotation)) scaleY(1.1);
+    opacity: 1;
+  }
+}
