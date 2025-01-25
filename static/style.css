@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
 }
 
 svg#sg1981 {
@@ -29,27 +29,27 @@ svg#sg1981 {
 
 .cloud {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   background: radial-gradient(
     circle,
-    rgba(30, 30, 255, 0.15) 0%, /* Reduced opacity */
-    rgba(128, 0, 255, 0.1) 30%, /* Reduced opacity */
-    rgba(0, 255, 255, 0.07) 70%, /* Reduced opacity */
+    rgba(30, 30, 255, 0.2) 0%,
+    rgba(128, 0, 255, 0.15) 30%,
+    rgba(0, 255, 255, 0.1) 70%,
     transparent 100%
   );
   border-radius: 50%;
-  filter: blur(80px); /* Glow effect */
-  opacity: 0.5; /* Slightly lower opacity for clouds */
-  animation: cloud-move 60s linear infinite; /* Long duration to reduce frame updates */
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: cloud-move 90s linear infinite; /* Extended duration */
 }
 
 @keyframes cloud-move {
   0% {
-    transform: translate3d(var(--x-start), var(--y-start), 0px) scale(var(--scale));
+    transform: translate3d(var(--x-start), var(--y-start), 0) scale(var(--scale));
   }
   100% {
-    transform: translate3d(var(--x-end), var(--y-end), 0px) scale(var(--scale));
+    transform: translate3d(var(--x-end), var(--y-end), 0) scale(var(--scale));
   }
 }
 
@@ -62,32 +62,34 @@ body::before {
   height: 100%;
   background: radial-gradient(
     circle,
-    rgba(30, 0, 128, 0.2) 0%, /* Slightly reduced opacity */
-    rgba(0, 0, 64, 0.2) 30%, /* Slightly reduced opacity */
-    rgba(64, 0, 128, 0.15) 70%, /* Slightly reduced opacity */
+    rgba(30, 0, 128, 0.3) 0%,
+    rgba(0, 0, 64, 0.25) 30%,
+    rgba(64, 0, 128, 0.2) 70%,
     transparent 100%
   );
-  mix-blend-mode: overlay; /* Softens colors */
+  mix-blend-mode: overlay;
   z-index: -2;
 }
 
 #sg1981 rect {
-  transform-origin: 250px 250px; /* Keep the origin at the heart center */
-  transform: rotate(var(--rotation)); /* Static rotation */
+  transform-origin: 250px 250px;
+  transform: rotate(var(--rotation));
   opacity: 0.8;
-  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Only animate opacity */
+  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @media (max-width: 768px) {
   .cloud {
-    filter: blur(100px); /* Keep the blur */
-    opacity: 0.3; /* Lower opacity for mobile */
+    width: 300px;
+    height: 300px;
+    filter: blur(80px);
+    opacity: 0.4; /* Lower opacity for mobile */
   }
 
   body::before {
     background: radial-gradient(
       circle,
-      rgba(30, 0, 128, 0.15) 0%, /* Lower opacity for all colors */
+      rgba(30, 0, 128, 0.2) 0%,
       rgba(0, 0, 64, 0.15) 30%,
       rgba(64, 0, 128, 0.1) 70%,
       transparent 100%
