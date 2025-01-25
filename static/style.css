@@ -32,10 +32,6 @@ svg#sg1981 {
   animation: flow 4s infinite ease-in-out;
 }
 
-#sg1981 rect.animated {
-  animation: none; /* Freeze the animation on mouse-out */
-}
-
 @keyframes flow {
   0% {
     transform: rotate(var(--rotation)) scaleY(1);
