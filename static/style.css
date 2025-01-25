@@ -33,14 +33,15 @@ svg#sg1981 {
   height: 400px;
   background: radial-gradient(
     circle,
-    rgba(30, 30, 255, 0.2) 0%,
-    rgba(128, 0, 255, 0.15) 30%,
-    rgba(0, 255, 255, 0.1) 70%,
+    rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
+    rgba(0, 128, 255, 0.2) 30%, /* Light blue */
+    rgba(0, 255, 255, 0.15) 70%, /* Cyan */
+    rgba(128, 0, 255, 0.1) 90%, /* Purple */
     transparent 100%
   );
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.9;
+  opacity: 0.6;
   animation: cloud-move 90s linear infinite; /* Extended duration */
 }
 
@@ -62,9 +63,10 @@ body::before {
   height: 100%;
   background: radial-gradient(
     circle,
-    rgba(30, 0, 128, 0.3) 0%,
-    rgba(0, 0, 64, 0.25) 30%,
-    rgba(64, 0, 128, 0.2) 70%,
+    rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
+    rgba(0, 128, 192, 0.25) 30%, /* Bright teal */
+    rgba(0, 255, 128, 0.2) 60%, /* Neon green */
+    rgba(64, 0, 128, 0.15) 90%, /* Purple tint */
     transparent 100%
   );
   mix-blend-mode: overlay;
@@ -89,9 +91,10 @@ body::before {
   body::before {
     background: radial-gradient(
       circle,
-      rgba(30, 0, 128, 0.2) 0%,
-      rgba(0, 0, 64, 0.15) 30%,
-      rgba(64, 0, 128, 0.1) 70%,
+      rgba(0, 64, 128, 0.2) 0%, /* Deep blue */
+      rgba(0, 128, 192, 0.15) 30%, /* Bright teal */
+      rgba(0, 255, 128, 0.1) 60%, /* Neon green */
+      rgba(64, 0, 128, 0.1) 90%, /* Purple tint */
       transparent 100%
     );
   }
