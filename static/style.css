@@ -20,23 +20,36 @@ svg#sg1981 {
 }
 
 #sg1981 rect {
-  transform-origin: 250px 250px; /* Match heart's center */
+  transform-origin: 250px 250px; /* Rotate from heart's center */
   transform: rotate(var(--rotation)) scaleY(1); /* Initial transform */
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8; /* Match the default opacity */
+  transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out; /* Smooth transition */
 }
 
 #sg1981:hover rect {
   animation: flow 4s infinite ease-in-out;
+  animation-fill-mode: forwards; /* Keep the animation state on mouse-out */
 }
 
 @keyframes flow {
-  0%,
-  100% {
+  0% {
     transform: rotate(var(--rotation)) scaleY(1);
     opacity: 0.8;
+  }
+  25% {
+    transform: rotate(var(--rotation)) scaleY(1.05);
+    opacity: 0.9;
   }
   50% {
     transform: rotate(var(--rotation)) scaleY(1.1);
     opacity: 1;
+  }
+  75% {
+    transform: rotate(var(--rotation)) scaleY(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(var(--rotation)) scaleY(1);
+    opacity: 0.8;
   }
 }
