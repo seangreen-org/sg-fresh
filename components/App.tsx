@@ -37,6 +37,7 @@ export default function App() {
         {renderClouds}
       </div>
       <Heart />
+      <div className="vignette-overlay"></div>
     </>
   );
 }

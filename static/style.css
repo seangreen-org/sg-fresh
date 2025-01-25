@@ -7,8 +7,24 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden; /* Prevent scrollbars */
+  position: relative; /* To ensure the vignette is relative to the viewport */
 }
 
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ensure it doesn’t block interactions */
+  z-index: 1000; /* Place this on top of all other elements */
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 70%, /* Fully transparent at 70% */
+    rgba(0, 0, 0, 0.9) 90%, /* Almost black at 90% */
+    black 100% /* Fully black at the edges */
+  );
+}
 svg#sg1981 {
   max-width: 79%;
   max-height: 79%;
