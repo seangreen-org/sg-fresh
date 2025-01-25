@@ -72,3 +72,31 @@ body::before {
   mix-blend-mode: overlay; /* Softens colors */
   z-index: -2; /* Keep it behind the clouds */
 }
+
+
+#sg1981 rect {
+  transform-origin: 250px 250px; /* Keep the origin at the heart center */
+  transform: rotate(var(--rotation)) scaleY(1); /* Rotation remains constant */
+  opacity: 0.8;
+  transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity; /* Optimize animations using GPU */
+}
+
+#sg1981 rect {
+  animation: flow 8s infinite ease-in-out; /* Smooth flow animation */
+}
+
+@keyframes flow {
+  0% {
+    transform: rotate(var(--rotation)) scaleY(1); /* No rotation change */
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(var(--rotation)) scaleY(1.15); /* Slight scale up */
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--rotation)) scaleY(1); /* Back to default scale */
+    opacity: 0.8;
+  }
+}
