@@ -145,7 +145,7 @@ body::before {
     width: 300px;
     height: 300px;
     filter: blur(80px);
-    opacity: 0.4; /* Lower opacity for mobile */
+    opacity: 0.25; /* Lower opacity for mobile */
   }
 
   body::before {
