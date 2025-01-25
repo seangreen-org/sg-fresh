@@ -26,13 +26,13 @@ svg#sg1981 {
   left: 0;
   width: 100%;
   height: 100%;
-  perspective: 1000px; /* Add perspective for a 3D effect */
+  perspective: 800px; /* Reduce perspective for better performance */
 }
 
 .cloud {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 600px; /* Larger clouds */
+  height: 600px;
   background: radial-gradient(
     circle,
     rgba(30, 30, 255, 0.2) 0%, /* Soft blue */
@@ -41,17 +41,23 @@ svg#sg1981 {
     transparent 100%
   );
   border-radius: 50%;
-  filter: blur(100px); /* Glow effect */
-  opacity: .7; /* Slightly higher opacity for better visibility */
-  animation: cloud-move 45s linear infinite;
+  filter: blur(150px); /* Larger blur to cover more space with fewer elements */
+  opacity: 0.6; /* Slightly reduced opacity */
+  animation: cloud-move 90s linear infinite; /* Slower animation for better performance */
 }
 
 @keyframes cloud-move {
   0% {
-    transform: translate3d(var(--x-start), var(--y-start), var(--z-start)) scale(var(--scale));
+    transform: translate3d(var(--x-start), var(--y-start), 0) scale(var(--scale));
+    opacity: 0.6; /* Clouds start visible */
+  }
+  50% {
+    transform: translate3d(calc(var(--x-start) + 20vw), calc(var(--y-start) + 20vh), 0) scale(var(--scale));
+    opacity: 0.4; /* Clouds fade slightly mid-animation */
   }
   100% {
-    transform: translate3d(var(--x-end), var(--y-end), var(--z-end)) scale(var(--scale));
+    transform: translate3d(var(--x-end), var(--y-end), 0) scale(var(--scale));
+    opacity: 0.6; /* Clouds fade back in */
   }
 }
 
@@ -63,27 +69,26 @@ body::before {
   width: 100%;
   height: 100%;
   background: radial-gradient(
-    circle,
-    rgba(30, 0, 128, 0.3) 0%, /* Deep blue */
+    circle at 50% 50%,
+    rgba(30, 0, 128, 0.4) 0%, /* Deep blue */
     rgba(0, 0, 64, 0.3) 30%, /* Navy */
     rgba(64, 0, 128, 0.2) 70%, /* Purple tint */
-    transparent 100%
+    rgba(255, 255, 255, 0.1) 100% /* Slight white glow at edges */
   );
-  mix-blend-mode: overlay; /* Softens colors */
+  mix-blend-mode: overlay; /* Soften colors */
   z-index: -2; /* Keep it behind the clouds */
 }
 
-
 #sg1981 rect {
   transform-origin: 250px 250px; /* Keep the origin at the heart center */
-  transform: rotate(var(--rotation)) scaleY(1); /* Rotation remains constant */
+  transform: rotate(var(--rotation)) scaleY(1); /* No additional rotation */
   opacity: 0.8;
-  transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1), opacity 4s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform, opacity; /* Optimize animations using GPU */
 }
 
 #sg1981 rect {
-  animation: flow 8s infinite ease-in-out; /* Smooth flow animation */
+  animation: flow 16s infinite ease-in-out; /* Slow animation for reduced CPU cycles */
 }
 
 @keyframes flow {

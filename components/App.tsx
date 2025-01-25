@@ -4,7 +4,7 @@ import Heart from './Heart.tsx';
 
 export default function App() {
   const renderClouds = useMemo(() => {
-    const cloudCount = 20; // Number of clouds
+    const cloudCount = 25; // Slightly more clouds
     const clouds = [];
     for (let i = 0; i < cloudCount; i++) {
       const xStart = Math.random() * 300 - 150; // Random X start (-150vw to 150vw)
@@ -12,7 +12,7 @@ export default function App() {
       const zStart = Math.random() * 400 - 200; // Random Z depth start (-200px to 200px)
       const xEnd = Math.random() * 300 - 150; // Random X end (-150vw to 150vw)
       const yEnd = Math.random() * 300 - 150; // Random Y end (-150vh to 150vh)
-      const scale = Math.random() * 1.5 + 0.8; // Random scale (0.8 to 2.3)
+      const scale = Math.random() * 2 + 0.8; // Random scale (0.8 to 2.8)
 
       clouds.push(
         <div
