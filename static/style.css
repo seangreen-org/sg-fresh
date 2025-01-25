@@ -2,13 +2,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: black;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 1%),
-                    radial-gradient(circle, rgba(255, 255, 255, 0.05) 1%, transparent 1%);
-  background-size: 3px 3px, 7px 7px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden; /* Prevent scrollbars from showing due to animations */
 }
 
 svg#sg1981 {
@@ -19,40 +17,6 @@ svg#sg1981 {
   display: block;
   transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
   animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-#sg1981 rect {
-  transform-origin: 250px 250px;
-  transform: rotate(var(--rotation)) scaleY(1);
-  opacity: 0.8;
-  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-#sg1981 rect {
-  animation: flow 4s infinite ease-in-out;
-}
-
-@keyframes flow {
-  0% {
-    transform: rotate(var(--rotation)) scaleY(1);
-    opacity: 0.8;
-  }
-  25% {
-    transform: rotate(var(--rotation)) scaleY(1.15);
-    opacity: 0.9;
-  }
-  50% {
-    transform: rotate(var(--rotation)) scaleY(1.3);
-    opacity: 1;
-  }
-  75% {
-    transform: rotate(var(--rotation)) scaleY(1.15);
-    opacity: 0.9;
-  }
-  100% {
-    transform: rotate(var(--rotation)) scaleY(1);
-    opacity: 0.8;
-  }
 }
 
 .clouds-container {
@@ -66,12 +30,13 @@ svg#sg1981 {
 
 .cloud {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  width: 500px; /* Increase cloud size */
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(50px);
-  animation: cloud-move 60s linear infinite;
+  filter: blur(100px); /* Increase blur for a soft glow effect */
+  opacity: .6; /* Make the clouds more visible */
+  animation: cloud-move 45s linear infinite;
 }
 
 @keyframes cloud-move {
