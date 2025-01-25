@@ -21,6 +21,7 @@ svg#sg1981 {
 
 
 #sg1981 rect {
+  cursor: pointer;
   transform-origin: 250px 250px;
   transform: rotate(var(--rotation));
   opacity: 0.8;
