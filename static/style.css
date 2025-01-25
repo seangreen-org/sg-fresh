@@ -265,6 +265,48 @@ body::before {
   );
 }
 
+svg#sg1981:hover {
+  transform: scale(1.1); /* Heart swells */
+  animation: heart-beat 1.5s infinite cubic-bezier(0.25, 1, 0.5, 1); /* Add subtle pulsing on hover */
+}
+
+svg#sg1981:hover rect {
+  animation: river-flow 2s infinite ease-in-out; /* Flowing animation for rects */
+  opacity: 1; /* Brighter colors on hover */
+}
+
+@keyframes heart-beat {
+  0%, 100% {
+    transform: scale(1.05); /* Subtle swell */
+  }
+  50% {
+    transform: scale(1.1); /* Maximum swell */
+  }
+}
+
+@keyframes river-flow {
+  0% {
+    transform: rotate(var(--rotation)) scaleY(1);
+    fill: url(#greenGrad1); /* Start with green */
+  }
+  25% {
+    transform: rotate(calc(var(--rotation) + 2deg)) scaleY(1.1);
+    fill: url(#greenGrad2); /* Transition to gradient 2 */
+  }
+  50% {
+    transform: rotate(calc(var(--rotation) + 4deg)) scaleY(1.2);
+    fill: url(#purpleGrad1); /* Shift to purple */
+  }
+  75% {
+    transform: rotate(calc(var(--rotation) + 6deg)) scaleY(1.1);
+    fill: url(#purpleGrad2); /* Gradually back to green */
+  }
+  100% {
+    transform: rotate(var(--rotation)) scaleY(1);
+    fill: url(#greenGrad1); /* Loop back to the original */
+  }
+}
+
 @media (max-width: 768px) {
   .cloud {
     width: 300px;
@@ -284,3 +326,4 @@ body::before {
     );
   }
 }
+
