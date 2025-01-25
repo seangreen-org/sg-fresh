@@ -1,6 +1,19 @@
 import Header from '../components/Header.jsx';
 
 export default function App() {
+  const handleMouseEnter = () => {
+    const rects = document.querySelectorAll('#sg1981 rect');
+    rects.forEach((rect) => rect.classList.remove('animated'));
+  };
+
+  const handleMouseLeave = () => {
+    const rects = document.querySelectorAll('#sg1981 rect');
+    rects.forEach((rect) => {
+      rect.classList.add('animated'); // Freeze animation
+      setTimeout(() => rect.classList.remove('animated'), 800); // Matches transition duration
+    });
+  };
+
   return (
     <>
       <Header />
@@ -9,7 +22,9 @@ export default function App() {
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        viewBox="50 20 400 362"
+        viewBox="50 20 400 370"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <defs>
           <clipPath id="heartClip">
