@@ -68,17 +68,15 @@ export default function App() {
             <stop offset="100%" stop-color="#622B7E" />
           </linearGradient>
 
-
           <linearGradient id="blueToGreen" x1="0%" y1="0%" x2="0%" y2="100%">
-  <stop offset="0%" stop-color="#1AA66E" />
-  <stop offset="100%" stop-color="#0E8BA0" />
-</linearGradient>
+            <stop offset="0%" stop-color="#1AA66E" />
+            <stop offset="100%" stop-color="#0E8BA0" />
+          </linearGradient>
 
-<linearGradient id="purpleToBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-  <stop offset="0%" stop-color="#4B0082" />
-  <stop offset="100%" stop-color="#0E8BA0" />
-</linearGradient>
-
+          <linearGradient id="purpleToBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#4B0082" />
+            <stop offset="100%" stop-color="#0E8BA0" />
+          </linearGradient>
 
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow
