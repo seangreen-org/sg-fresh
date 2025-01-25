@@ -6,7 +6,78 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
+}
+
+.clouds-container {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.clouds-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(30, 30, 255, 0.2) 0%, /* Soft blue */
+    rgba(128, 0, 255, 0.15) 30%, /* Purple */
+    rgba(0, 255, 255, 0.1) 70%, /* Cyan */
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: cloud-drift 90s linear infinite;
+}
+
+.clouds-container::after {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%, /* Highlight */
+    rgba(30, 30, 255, 0.05) 50%, /* Soft blue */
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(150px);
+  animation: cloud-drift-reverse 120s linear infinite;
+}
+
+@keyframes cloud-drift {
+  0% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(10%, 10%) scale(1.2);
+  }
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+}
+
+@keyframes cloud-drift-reverse {
+  0% {
+    transform: translate(0, 0) scale(1.2);
+  }
+  50% {
+    transform: translate(-10%, -10%) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1.2);
+  }
 }
 
 svg#sg1981 {
@@ -17,91 +88,4 @@ svg#sg1981 {
   display: block;
   transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
   animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.clouds-container {
-  z-index: -1; /* Keep it behind the background */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  perspective: 800px; /* Reduce perspective for better performance */
-}
-
-.cloud {
-  position: absolute;
-  width: 600px; /* Larger clouds */
-  height: 600px;
-  background: radial-gradient(
-    circle,
-    rgba(30, 30, 255, 0.2) 0%, /* Soft blue */
-    rgba(128, 0, 255, 0.15) 30%, /* Purple */
-    rgba(0, 255, 255, 0.1) 70%, /* Cyan */
-    transparent 100%
-  );
-  border-radius: 50%;
-  filter: blur(150px); /* Larger blur to cover more space with fewer elements */
-  opacity: 0.6; /* Slightly reduced opacity */
-  animation: cloud-move 90s linear infinite; /* Slower animation for better performance */
-}
-
-@keyframes cloud-move {
-  0% {
-    transform: translate3d(var(--x-start), var(--y-start), 0) scale(var(--scale));
-    opacity: 0.6; /* Clouds start visible */
-  }
-  50% {
-    transform: translate3d(calc(var(--x-start) + 20vw), calc(var(--y-start) + 20vh), 0) scale(var(--scale));
-    opacity: 0.4; /* Clouds fade slightly mid-animation */
-  }
-  100% {
-    transform: translate3d(var(--x-end), var(--y-end), 0) scale(var(--scale));
-    opacity: 0.6; /* Clouds fade back in */
-  }
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(30, 0, 128, 0.4) 0%, /* Deep blue */
-    rgba(0, 0, 64, 0.3) 30%, /* Navy */
-    rgba(64, 0, 128, 0.2) 70%, /* Purple tint */
-    rgba(255, 255, 255, 0.1) 100% /* Slight white glow at edges */
-  );
-  mix-blend-mode: overlay; /* Soften colors */
-  z-index: -2; /* Keep it behind the clouds */
-}
-
-#sg1981 rect {
-  transform-origin: 250px 250px; /* Keep the origin at the heart center */
-  transform: rotate(var(--rotation)) scaleY(1); /* No additional rotation */
-  opacity: 0.8;
-  transition: transform 4s cubic-bezier(0.25, 1, 0.5, 1), opacity 4s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: transform, opacity; /* Optimize animations using GPU */
-}
-
-#sg1981 rect {
-  animation: flow 16s infinite ease-in-out; /* Slow animation for reduced CPU cycles */
-}
-
-@keyframes flow {
-  0% {
-    transform: rotate(var(--rotation)) scaleY(1); /* No rotation change */
-    opacity: 0.8;
-  }
-  50% {
-    transform: rotate(var(--rotation)) scaleY(1.15); /* Slight scale up */
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(var(--rotation)) scaleY(1); /* Back to default scale */
-    opacity: 0.8;
-  }
 }
