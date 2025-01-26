@@ -25,8 +25,8 @@ const manifest = {
     "./routes/2024/wolfe.jsx": $_2024_wolfe,
     "./routes/api/_middleware.ts": $api_middleware,
     "./routes/api/hue.ts": $api_hue,
-    "./routes/index.jsx": $index,
-    "./routes/robots.txt.jsx": $robots_txt,
+    "./routes/index.tsx": $index,
+    "./routes/robots.txt.tsx": $robots_txt,
   },
   islands: {
     "./islands/Background.jsx": $Background,

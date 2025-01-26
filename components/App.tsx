@@ -34,8 +34,8 @@ export default function App() {
     <>
       <Header />
       <div className="clouds-container">{renderClouds}</div>
-      <Heart />
       <div className="vignette-overlay"></div>
+      <Heart />
     </>
   );
 }
