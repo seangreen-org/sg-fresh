@@ -12,6 +12,24 @@ export default function Heart() {
         viewBox="50 20 400 380"
       >
         <defs>
+        <linearGradient id="magicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%">
+      <animate
+        attributeName="stop-color"
+        values="#169B62;#1AA66E;#0E8BA0;#4B0082;#169B62"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+    </stop>
+    <stop offset="100%">
+      <animate
+        attributeName="stop-color"
+        values="#0C5A38;#0F5D3B;#622B7E;#4B0082;#0C5A38"
+        dur="3s"
+        repeatCount="indefinite"
+      />
+    </stop>
+  </linearGradient>
           <clipPath id="heartClip">
             <path
               d="

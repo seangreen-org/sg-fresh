@@ -11,6 +11,7 @@ body {
 }
 
 svg#sg1981 {
+  transform-origin: center center;
   max-width: 79%;
   max-height: 79%;
   margin-left: -3vh;
@@ -25,30 +26,6 @@ svg#sg1981 {
   transform: rotate(var(--rotation));
   opacity: 0.8;
   transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* !! */
-@keyframes rect-flow {
-  0% {
-    transform: scaleY(1); /* Starting point */
-    opacity: 0.8;
-  }
-  25% {
-    transform:tation) + 1deg)) scaleY(1.1); /* Subtle scale up */
-    opacity: 0.9;
-  }
-  50% {
-    transform:tation) + 2deg)) scaleY(1.15); /* Max scale */
-    opacity: 1;
-  }
-  75% {
-    transform:tation) + 1deg)) scaleY(1.1); /* Scale back down */
-    opacity: 0.9;
-  }
-  100% {
-    transform: scaleY(1); /* Back to default */
-    opacity: 0.8;
-  }
 }
 
 .clouds-container {
@@ -229,7 +206,7 @@ body::before {
       transparent 100%
     );
   }
-  66% {h
+  66% {
     background: radial-gradient(
       circle,
       rgba(0, 128, 192, 0.25) 0%, /* Bright teal */
@@ -272,11 +249,6 @@ svg#sg1981:hover {
   animation: heart-beat 1.5s infinite cubic-bezier(0.25, 1, 0.5, 1); /* Add subtle pulsing on hover */
 }
 
-svg#sg1981:hover rect {
-  animation: river-flow 2s infinite ease-in-out; /* Flowing animation for rects */
-  opacity: 1; /* Brighter colors on hover */
-}
-
 @keyframes heart-beat {
   0%, 100% {
     transform: scale(1.05); /* Subtle swell */
@@ -286,30 +258,35 @@ svg#sg1981:hover rect {
   }
 }
 
+svg#sg1981:hover rect {
+  animation: river-flow 2s infinite ease-in-out; /* Flowing animation for rects */
+  opacity: 1; /* Brighter colors on hover */
+}
+
 @keyframes river-flow {
   0% {
     transform: rotate(var(--rotation)) scaleY(1);
-    fill: url(#greenGrad1); /* Start with green */
+    fill: url(#magicGrad); /* Start with green */
   }
   20% {
     transform: rotate(calc(var(--rotation) + 1deg)) scaleY(1.05);
-    fill: url(#greenGrad2); /* Subtle green transition */
+    fill: url(#magicGrad); /* Subtle green transition */
   }
   40% {
     transform: rotate(calc(var(--rotation) + 2deg)) scaleY(1.1);
-    fill: url(#blueToGreen); /* Intermediate blue-green */
+    fill: url(#magicGrad); /* Intermediate blue-green */
   }
   60% {
     transform: rotate(calc(var(--rotation) + 3deg)) scaleY(1.15);
-    fill: url(#purpleToBlue); /* Intermediate purple-blue */
+    fill: url(#magicGrad); /* Intermediate purple-blue */
   }
   80% {
     transform: rotate(calc(var(--rotation) + 5deg)) scaleY(1.1);
-    fill: url(#purpleGrad1); /* Shift fully into purple */
+    fill: url(#magicGrad); /* Shift fully into purple */
   }
   100% {
     transform: rotate(var(--rotation)) scaleY(1);
-    fill: url(#greenGrad1); /* Return to green */
+    fill: url(#magicGrad); /* Return to green */
   }
 }
 
@@ -340,4 +317,62 @@ svg#sg1981:hover rect {
 
 .interactive-heart:hover {
   cursor: pointer; /* Visual feedback for the user */
+}
+
+
+/* Zoom effect for heart */
+#sg1981.zooming-forest {
+  animation: heart-zoom 15s linear infinite;
+}
+
+@keyframes heart-zoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(15); /* Larger scale for a dramatic zoom */
+  }
+}
+
+#sg1981 .tree {
+  transform-origin: center bottom;
+  animation: tree-sway 5s ease-in-out infinite, tree-zoom 15s linear infinite;
+}
+
+@keyframes tree-sway {
+  0%, 100% {
+    transform: rotate(var(--rotation));
+  }
+  50% {
+    transform: rotate(calc(var(--rotation) + 2deg));
+  }
+}
+
+@keyframes tree-zoom {
+  from {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-200%) scaleY(1.5); /* Move upward as they grow */
+    opacity: 0; /* Fade out for a continuous journey */
+  }
+}
+
+#sg1981:hover rect {
+  opacity: 1; /* Trees get more vibrant on hover */
+  animation-play-state: running; /* Ensure the animation plays on hover */
+}
+
+#sg1981.zooming-forest .tree {
+  animation: tree-zoom 10s linear infinite, tree-sway 5s ease-in-out infinite;
+}
+
+#sg1981:not(.zooming-forest) .tree {
+  animation-play-state: paused;
+}
+
+/* Interactive heart behavior */
+.interactive-heart:hover {
+  cursor: pointer;
 }
