@@ -376,3 +376,16 @@ svg#sg1981:hover rect {
 .interactive-heart:hover {
   cursor: pointer;
 }
+
+.forest-group {
+  /* We start "zoomed out" so you see the entire forest.
+     Adjust scale/translate to your preference. */
+  transform: scale(1) translate(0,0);
+  transform-origin: 250px 250px; /* Pivot around the heart center if you want. */
+  transition: transform 6s ease; /* Slow "journey" in or out */
+}
+
+/* On hover of the entire SVG, zoom in and move through the forest */
+#sg1981:hover .forest-group {
+  transform: scale(3) translate(-100px, -80px);
+}

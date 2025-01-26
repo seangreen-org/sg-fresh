@@ -87,6 +87,7 @@ export default function Heart() {
         </defs>
 
         <g clip-path="url(#heartClip)" filter="url(#glow)">
+          <g className="forest-group">
           <rect
             x="120"
             y="0"
@@ -376,6 +377,7 @@ export default function Heart() {
             style="--rotation: -14deg;"
             opacity="0.8"
           />
+        </g>
         </g>
         <path
           d="
