@@ -13,6 +13,7 @@ import * as $robots_txt from "./routes/robots.txt.tsx";
 import * as $Background from "./islands/Background.jsx";
 import * as $Heart from "./islands/Heart.jsx";
 import * as $LaserWaveform from "./islands/LaserWaveform.jsx";
+import * as $NewHeart from "./islands/NewHeart.tsx";
 import * as $SummerBay from "./islands/SummerBay.jsx";
 import * as $Wolf from "./islands/Wolf.jsx";
 import type { Manifest } from "$fresh/server.ts";
@@ -32,6 +33,7 @@ const manifest = {
     "./islands/Background.jsx": $Background,
     "./islands/Heart.jsx": $Heart,
     "./islands/LaserWaveform.jsx": $LaserWaveform,
+    "./islands/NewHeart.tsx": $NewHeart,
     "./islands/SummerBay.jsx": $SummerBay,
     "./islands/Wolf.jsx": $Wolf,
   },

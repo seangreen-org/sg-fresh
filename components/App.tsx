@@ -1,6 +1,6 @@
 import { useMemo } from 'preact/hooks';
 import Header from './Header.jsx';
-import Heart from './Heart.tsx';
+import Heart from '../islands/NewHeart.tsx';
 
 export default function App() {
   const renderClouds = useMemo(() => {

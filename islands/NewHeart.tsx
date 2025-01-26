@@ -1,4 +1,5 @@
-import Header from './Header.jsx';
+import { useState } from 'preact/hooks'; // or from 'react'
+import Header from '../components/Header.jsx';
 
 interface Tree {
   x: number;
@@ -6,13 +7,12 @@ interface Tree {
   width: number;
   height: number;
   fill: string;
-  /** Rotation in degrees (used in the --rotation CSS var) */
-  rotation: number;
-  /** Opacity value, e.g. 0.8 */
+  rotation: number; // in degrees
   opacity: number;
 }
 
-const trees: Tree[] = [
+// 1) The original, sparse set of trees (no duplicates).
+const baseTrees: Tree[] = [
   { x: 120, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad1)', rotation: -14, opacity: 0.8 },
   { x: 138, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad2)', rotation: -10, opacity: 0.8 },
   { x: 155, y: 0, width: 3,  height: 500, fill: 'url(#purpleGrad1)', rotation: -5,  opacity: 0.8 },
@@ -48,10 +48,54 @@ const trees: Tree[] = [
   { x: 435, y: 0, width: 15, height: 500, fill: 'url(#greenGrad2)',  rotation: -14, opacity: 0.8 },
 ];
 
+// 2) A denser forest: double or triple the array, or spawn random offsets
+const denseTrees: Tree[] = [
+  ...baseTrees,
+  ...baseTrees.map((t) => ({
+    ...t,
+    x: t.x + (Math.random() * 100 - 50), // random shift left/right
+    opacity: t.opacity * (0.7 + Math.random() * 0.6), // vary opacity
+  })),
+  // add more layering if you wish
+];
+
 export default function Heart() {
+  // Track whether the user is hovering → start the journey
+  const [journeyStarted, setJourneyStarted] = useState(false);
+
+  // If not hovering, use the original base forest. Hovering → use the denser forest.
+  const displayedTrees = journeyStarted ? denseTrees : baseTrees;
+
   return (
     <>
       <Header />
+
+      {/* Inline style block: ideally move to external CSS */}
+      <style>{`
+        .forest-group {
+          transform-origin: 250px 250px;
+          /* No transform by default => no weaving */
+        }
+
+        /* Once we add the .journey class, it triggers the weaving. */
+        .forest-group.journey {
+          animation: forestWeave 6s linear infinite alternate;
+        }
+
+        @keyframes forestWeave {
+          0%   { transform: scale(1)   translate(0, 0); }
+          25%  { transform: scale(1.4) translate(-40px, -50px); }
+          50%  { transform: scale(2)   translate( 50px, -100px); }
+          75%  { transform: scale(2.6) translate(-70px, -140px); }
+          100% { transform: scale(3)   translate( 40px, -180px); }
+        }
+
+        /* The interactive heart outline */
+        .interactive-heart:hover {
+          cursor: pointer;
+        }
+      `}</style>
+
       <svg
         id="sg1981"
         xmlns="http://www.w3.org/2000/svg"
@@ -60,24 +104,26 @@ export default function Heart() {
         viewBox="50 20 400 380"
       >
         <defs>
-        <linearGradient id="magicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%">
-      <animate
-        attributeName="stop-color"
-        values="#169B62;#1AA66E;#0E8BA0;#4B0082;#169B62"
-        dur="3s"
-        repeatCount="indefinite"
-      />
-    </stop>
-    <stop offset="100%">
-      <animate
-        attributeName="stop-color"
-        values="#0C5A38;#0F5D3B;#622B7E;#4B0082;#0C5A38"
-        dur="3s"
-        repeatCount="indefinite"
-      />
-    </stop>
-  </linearGradient>
+          {/* Morphing gradient + your other gradients */}
+          <linearGradient id="magicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%">
+              <animate
+                attributeName="stop-color"
+                values="#169B62;#1AA66E;#0E8BA0;#4B0082;#169B62"
+                dur="3s"
+                repeatCount="indefinite"
+              />
+            </stop>
+            <stop offset="100%">
+              <animate
+                attributeName="stop-color"
+                values="#0C5A38;#0F5D3B;#622B7E;#4B0082;#0C5A38"
+                dur="3s"
+                repeatCount="indefinite"
+              />
+            </stop>
+          </linearGradient>
+
           <clipPath id="heartClip">
             <path
               d="
@@ -103,7 +149,6 @@ export default function Heart() {
             <stop offset="0%" stop-color="#1AA66E" />
             <stop offset="100%" stop-color="#0F5D3B" />
           </linearGradient>
-
           <linearGradient id="purpleGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#9A00FF" />
             <stop offset="100%" stop-color="#4B0082" />
@@ -112,12 +157,10 @@ export default function Heart() {
             <stop offset="0%" stop-color="#8A00D4" />
             <stop offset="100%" stop-color="#622B7E" />
           </linearGradient>
-
           <linearGradient id="blueToGreen" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#1AA66E" />
             <stop offset="100%" stop-color="#0E8BA0" />
           </linearGradient>
-
           <linearGradient id="purpleToBlue" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#4B0082" />
             <stop offset="100%" stop-color="#0E8BA0" />
@@ -134,9 +177,11 @@ export default function Heart() {
           </filter>
         </defs>
 
+        {/* The forest is clipped inside the heart shape and glows */}
         <g clip-path="url(#heartClip)" filter="url(#glow)">
-        <g className="forest-group">
-            {trees.map((tree, index) => (
+          {/* Add .journey class if user is hovering => weaving animation */}
+          <g className={`forest-group ${journeyStarted ? 'journey' : ''}`}>
+            {displayedTrees.map((tree, index) => (
               <rect
                 key={index}
                 x={tree.x}
@@ -145,27 +190,30 @@ export default function Heart() {
                 height={tree.height}
                 fill={tree.fill}
                 opacity={tree.opacity}
-                /* Convert rotation into a CSS var for your existing transformations */
-                style={{ '--rotation': `${tree.rotation}deg` } as any}
+                style={{ '--rotation': `${tree.rotation}deg` }}
               />
             ))}
           </g>
         </g>
+
+        {/* Heart outline, controlling the hover logic */}
         <path
           d="
-    M 250,80
-    C 220,20, 140,20, 110,80
-    C 50,180, 150,300, 250,380
-    C 350,300, 450,180, 390,80
-    C 360,20, 280,20, 250,80
-    Z
-  "
+            M 250,80
+            C 220,20, 140,20, 110,80
+            C 50,180, 150,300, 250,380
+            C 350,300, 450,180, 390,80
+            C 360,20, 280,20, 250,80
+            Z
+          "
           className="interactive-heart"
           fill="transparent"
           stroke="#0EE584"
           strokeWidth="3"
           filter="url(#glow)"
           style={{ pointerEvents: 'all' }}
+          onMouseEnter={() => setJourneyStarted(true)}
+          onMouseLeave={() => setJourneyStarted(false)}
         />
       </svg>
     </>
