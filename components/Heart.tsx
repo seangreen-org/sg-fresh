@@ -1,5 +1,53 @@
 import Header from './Header.jsx';
 
+interface Tree {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: string;
+  /** Rotation in degrees (used in the --rotation CSS var) */
+  rotation: number;
+  /** Opacity value, e.g. 0.8 */
+  opacity: number;
+}
+
+const trees: Tree[] = [
+  { x: 120, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad1)', rotation: -14, opacity: 0.8 },
+  { x: 138, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad2)', rotation: -10, opacity: 0.8 },
+  { x: 155, y: 0, width: 3,  height: 500, fill: 'url(#purpleGrad1)', rotation: -5,  opacity: 0.8 },
+  { x: 172, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad2)', rotation: -2,  opacity: 0.8 },
+  { x: 200, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad1)', rotation: 3,   opacity: 0.8 },
+  { x: 218, y: 0, width: 6,  height: 500, fill: 'url(#purpleGrad2)', rotation: 6,   opacity: 0.8 },
+  { x: 235, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad1)', rotation: 9,   opacity: 0.8 },
+  { x: 260, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad2)', rotation: 12,  opacity: 0.8 },
+  { x: 280, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad1)', rotation: 10,  opacity: 0.8 },
+  { x: 300, y: 0, width: 4,  height: 500, fill: 'url(#purpleGrad2)', rotation: 7,   opacity: 0.8 },
+  { x: 320, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad1)', rotation: 4,   opacity: 0.8 },
+  { x: 345, y: 0, width: 3,  height: 500, fill: 'url(#purpleGrad2)', rotation: 0,   opacity: 0.8 },
+
+  { x: 105, y: 0, width: 18, height: 500, fill: 'url(#greenGrad1)',  rotation: -13, opacity: 0.9 },
+  { x: 130, y: 0, width: 20, height: 500, fill: 'url(#greenGrad2)',  rotation: -11, opacity: 0.9 },
+  { x: 150, y: 0, width: 25, height: 500, fill: 'url(#greenGrad3)',  rotation: -8,  opacity: 0.88 },
+  { x: 170, y: 0, width: 16, height: 500, fill: 'url(#greenGrad1)',  rotation: -6,  opacity: 0.9 },
+  { x: 185, y: 0, width: 20, height: 500, fill: 'url(#greenGrad2)',  rotation: -3,  opacity: 0.9 },
+  { x: 195, y: 0, width: 24, height: 500, fill: 'url(#greenGrad3)',  rotation: -1,  opacity: 0.92 },
+  { x: 210, y: 0, width: 18, height: 500, fill: 'url(#greenGrad1)',  rotation: 1,   opacity: 0.88 },
+  { x: 225, y: 0, width: 22, height: 500, fill: 'url(#greenGrad2)',  rotation: 4,   opacity: 0.9 },
+  { x: 243, y: 0, width: 20, height: 500, fill: 'url(#greenGrad3)',  rotation: 6,   opacity: 0.85 },
+  { x: 255, y: 0, width: 14, height: 500, fill: 'url(#greenGrad1)',  rotation: 8,   opacity: 0.88 },
+  { x: 275, y: 0, width: 24, height: 500, fill: 'url(#greenGrad2)',  rotation: 11,  opacity: 0.85 },
+  { x: 290, y: 0, width: 16, height: 500, fill: 'url(#greenGrad3)',  rotation: 9,   opacity: 0.8 },
+  { x: 310, y: 0, width: 20, height: 500, fill: 'url(#greenGrad1)',  rotation: 6,   opacity: 0.82 },
+  { x: 330, y: 0, width: 18, height: 500, fill: 'url(#greenGrad2)',  rotation: 2,   opacity: 0.85 },
+  { x: 350, y: 0, width: 22, height: 500, fill: 'url(#greenGrad3)',  rotation: -1,  opacity: 0.8 },
+  { x: 370, y: 0, width: 15, height: 500, fill: 'url(#greenGrad1)',  rotation: -4,  opacity: 0.8 },
+  { x: 388, y: 0, width: 20, height: 500, fill: 'url(#greenGrad2)',  rotation: -7,  opacity: 0.78 },
+  { x: 405, y: 0, width: 16, height: 500, fill: 'url(#greenGrad3)',  rotation: -9,  opacity: 0.8 },
+  { x: 420, y: 0, width: 22, height: 500, fill: 'url(#greenGrad1)',  rotation: -12, opacity: 0.8 },
+  { x: 435, y: 0, width: 15, height: 500, fill: 'url(#greenGrad2)',  rotation: -14, opacity: 0.8 },
+];
+
 export default function Heart() {
   return (
     <>
@@ -87,297 +135,21 @@ export default function Heart() {
         </defs>
 
         <g clip-path="url(#heartClip)" filter="url(#glow)">
-          <g className="forest-group">
-          <rect
-            x="120"
-            y="0"
-            width="5"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: -14deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="138"
-            y="0"
-            width="4"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: -10deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="155"
-            y="0"
-            width="3"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: -5deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="172"
-            y="0"
-            width="5"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: -2deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="200"
-            y="0"
-            width="4"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: 3deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="218"
-            y="0"
-            width="6"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: 6deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="235"
-            y="0"
-            width="4"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: 9deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="260"
-            y="0"
-            width="4"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: 12deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="280"
-            y="0"
-            width="5"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: 10deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="300"
-            y="0"
-            width="4"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: 7deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="320"
-            y="0"
-            width="5"
-            height="500"
-            fill="url(#purpleGrad1)"
-            style="--rotation: 4deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="345"
-            y="0"
-            width="3"
-            height="500"
-            fill="url(#purpleGrad2)"
-            style="--rotation: 0deg;"
-            opacity="0.8"
-          />
-
-          <rect
-            x="105"
-            y="0"
-            width="18"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: -13deg;"
-            opacity="0.9"
-          />
-          <rect
-            x="130"
-            y="0"
-            width="20"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: -11deg;"
-            opacity="0.9"
-          />
-          <rect
-            x="150"
-            y="0"
-            width="25"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: -8deg;"
-            opacity="0.88"
-          />
-          <rect
-            x="170"
-            y="0"
-            width="16"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: -6deg;"
-            opacity="0.9"
-          />
-          <rect
-            x="185"
-            y="0"
-            width="20"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: -3deg;"
-            opacity="0.9"
-          />
-          <rect
-            x="195"
-            y="0"
-            width="24"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: -1deg;"
-            opacity="0.92"
-          />
-          <rect
-            x="210"
-            y="0"
-            width="18"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: 1deg;"
-            opacity="0.88"
-          />
-          <rect
-            x="225"
-            y="0"
-            width="22"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: 4deg;"
-            opacity="0.9"
-          />
-          <rect
-            x="243"
-            y="0"
-            width="20"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: 6deg;"
-            opacity="0.85"
-          />
-          <rect
-            x="255"
-            y="0"
-            width="14"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: 8deg;"
-            opacity="0.88"
-          />
-          <rect
-            x="275"
-            y="0"
-            width="24"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: 11deg;"
-            opacity="0.85"
-          />
-          <rect
-            x="290"
-            y="0"
-            width="16"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: 9deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="310"
-            y="0"
-            width="20"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: 6deg;"
-            opacity="0.82"
-          />
-          <rect
-            x="330"
-            y="0"
-            width="18"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: 2deg;"
-            opacity="0.85"
-          />
-          <rect
-            x="350"
-            y="0"
-            width="22"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: -1deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="370"
-            y="0"
-            width="15"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: -4deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="388"
-            y="0"
-            width="20"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: -7deg;"
-            opacity="0.78"
-          />
-          <rect
-            x="405"
-            y="0"
-            width="16"
-            height="500"
-            fill="url(#greenGrad3)"
-            style="--rotation: -9deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="420"
-            y="0"
-            width="22"
-            height="500"
-            fill="url(#greenGrad1)"
-            style="--rotation: -12deg;"
-            opacity="0.8"
-          />
-          <rect
-            x="435"
-            y="0"
-            width="15"
-            height="500"
-            fill="url(#greenGrad2)"
-            style="--rotation: -14deg;"
-            opacity="0.8"
-          />
-        </g>
+        <g className="forest-group">
+            {trees.map((tree, index) => (
+              <rect
+                key={index}
+                x={tree.x}
+                y={tree.y}
+                width={tree.width}
+                height={tree.height}
+                fill={tree.fill}
+                opacity={tree.opacity}
+                /* Convert rotation into a CSS var for your existing transformations */
+                style={{ '--rotation': `${tree.rotation}deg` } as any}
+              />
+            ))}
+          </g>
         </g>
         <path
           d="
