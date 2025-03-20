@@ -1,6 +1,6 @@
-import useEmojiAnimation, { getRandomInt } from '../hooks/useEmojiAnimation.js';
+import useEmojiAnimation, { getRandomInt } from '../../hooks/useEmojiAnimation.js';
 import LaserWaveform from './LaserWaveform.jsx';
-import rotationColorMap from '../support/rotationColorMap.js';
+import rotationColorMap from '../../support/rotationColorMap.js';
 
 const emojis = [
   '🐺',

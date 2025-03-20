@@ -10,12 +10,12 @@ import * as $api_middleware from "./routes/api/_middleware.ts";
 import * as $api_hue from "./routes/api/hue.ts";
 import * as $index from "./routes/index.tsx";
 import * as $robots_txt from "./routes/robots.txt.tsx";
-import * as $Background from "./islands/Background.jsx";
-import * as $Heart from "./islands/Heart.jsx";
-import * as $LaserWaveform from "./islands/LaserWaveform.jsx";
+import * as $_2024_Background from "./islands/2024/Background.jsx";
+import * as $_2024_Heart from "./islands/2024/Heart.jsx";
+import * as $_2024_LaserWaveform from "./islands/2024/LaserWaveform.jsx";
+import * as $_2024_SummerBay from "./islands/2024/SummerBay.jsx";
+import * as $_2024_Wolf from "./islands/2024/Wolf.jsx";
 import * as $NewHeart from "./islands/NewHeart.tsx";
-import * as $SummerBay from "./islands/SummerBay.jsx";
-import * as $Wolf from "./islands/Wolf.jsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -30,12 +30,12 @@ const manifest = {
     "./routes/robots.txt.tsx": $robots_txt,
   },
   islands: {
-    "./islands/Background.jsx": $Background,
-    "./islands/Heart.jsx": $Heart,
-    "./islands/LaserWaveform.jsx": $LaserWaveform,
+    "./islands/2024/Background.jsx": $_2024_Background,
+    "./islands/2024/Heart.jsx": $_2024_Heart,
+    "./islands/2024/LaserWaveform.jsx": $_2024_LaserWaveform,
+    "./islands/2024/SummerBay.jsx": $_2024_SummerBay,
+    "./islands/2024/Wolf.jsx": $_2024_Wolf,
     "./islands/NewHeart.tsx": $NewHeart,
-    "./islands/SummerBay.jsx": $SummerBay,
-    "./islands/Wolf.jsx": $Wolf,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

@@ -25,7 +25,7 @@ const BackgroundImage = ({ imageUrl = '../images/highover-min.webp' }) => {
         backgroundRepeat: 'no-repeat',
         transition: 'opacity 0.2s',
         opacity: isLoaded ? 1 : 0,
-        zIndex: -1,
+        zIndex: 0,
       }}
     />
   );

@@ -1,13 +1,38 @@
-import { useEffect } from 'preact/hooks';
-import useEmojiAnimation, { getRandomInt } from '../hooks/useEmojiAnimation.js';
+import useEmojiAnimation, { getRandomInt } from '../../hooks/useEmojiAnimation.js';
 import LaserWaveform from './LaserWaveform.jsx';
-import rotationColorMap from '../support/rotationColorMap.js';
-import emojis from '../support/emojis.js';
+import rotationColorMap from '../../support/rotationColorMap.js';
 
-export default function Heart(props) {
+const emojis = [
+  '🏄',
+  '🏄‍♂️',
+  '🏄‍♀️',
+  '🌊',
+  '🏖️',
+  '🏝️',
+  '🏞️',
+  '🐨',
+  '🦘',
+  '🐚',
+  '🦈',
+  '🐠',
+  '🦐',
+  '🦀',
+  '🐙',
+  '🌅',
+  '🌄',
+  '🌞',
+  '🏡',
+  '🇦🇺',
+  '🤷‍♀️',
+  '💁‍♀️',
+  '🙋‍♀️',
+  '👩‍❤️‍👨',
+  '🙍‍♀️',
+];
+
+export default function Wolf(props) {
   const {
     currentEmoji,
-    setCurrentEmoji,
     color,
     rotation,
     shadowHsl,
@@ -15,33 +40,14 @@ export default function Heart(props) {
     beat,
     scale,
     audioAnalyserRef,
-    randomize,
     toggleSong,
   } = useEmojiAnimation(
     emojis,
     props.color,
     props.rotation,
     props.prefix,
-    '/music/inside-my-love.mp3'
+    '/music/home-and-away.mp3'
   );
-
-  useEffect(() => {
-    fetch('/api/hue', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ color }),
-    });
-  }, [color]);
-
-  function isOrgasm() {
-    return color === 'asm';
-  }
-
-  if (isOrgasm() && currentEmoji === emojis[0]) {
-    setCurrentEmoji('❤️‍🔥');
-  } else if (props.emoji) {
-    setCurrentEmoji(props.emoji)
-  }
 
   return (
     <>
@@ -62,11 +68,11 @@ export default function Heart(props) {
           transform: `scale(${1 + scale / 128})`,
           transition: `filter ${scale ? 0.2 : 1}s ease-in-out, font-size .5s`,
         }}
-        onClick={isOrgasm() ? toggleSong : randomize}
+        onClick={toggleSong}
       >
         {currentEmoji}
       </button>
-      {isOrgasm() && <LaserWaveform audioAnalyserRef={audioAnalyserRef} />}
+      <LaserWaveform audioAnalyserRef={audioAnalyserRef} />
     </>
   );
 }

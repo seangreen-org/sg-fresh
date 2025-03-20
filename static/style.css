@@ -1,15 +1,18 @@
-body {
+/* == Global Resets & Layout == */
+html, body {
   margin: 0;
   padding: 0;
   background-color: black;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  position: relative; /* For layering the vignette properly */
 }
 
+/* == The Heart SVG == */
 svg#sg1981 {
   transform-origin: center center;
   max-width: 79%;
@@ -17,17 +20,16 @@ svg#sg1981 {
   margin-left: -3vh;
   margin-top: -3vh;
   display: block;
-  animation: pulse 2s infinite cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-
+/* Rect "trees" inside the heart: static transform, no animation */
 #sg1981 rect {
   transform-origin: 250px 250px;
   transform: rotate(var(--rotation));
   opacity: 0.8;
-  transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* == Clouds == */
 .clouds-container {
   z-index: -1;
   position: fixed;
@@ -37,76 +39,29 @@ svg#sg1981 {
   height: 100%;
 }
 
+/*
+   Each cloud is a blurred radial gradient circle.
+   No animations. We'll set position/scale in JS for randomness.
+*/
 .cloud {
   position: absolute;
   width: 400px;
   height: 400px;
   background: radial-gradient(
     circle,
-    rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
-    rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-    rgba(128, 0, 255, 0.15) 70%, /* Purple */
-    rgba(255, 0, 128, 0.1) 90%, /* Magenta */
+    rgba(0, 64, 128, 0.25) 0%,
+    rgba(0, 128, 255, 0.2) 30%,
+    rgba(128, 0, 255, 0.15) 70%,
+    rgba(255, 0, 128, 0.1) 90%,
     transparent 100%
   );
   border-radius: 50%;
   filter: blur(60px);
   opacity: 0.6;
-  animation: cloud-move 90s linear infinite, cloud-color-morph 60s ease-in-out infinite; /* Added color morph animation */
+  /* No animation here */
 }
 
-@keyframes cloud-move {
-  0% {
-    transform: translate3d(var(--x-start), var(--y-start), 0) scale(var(--scale));
-  }
-  100% {
-    transform: translate3d(var(--x-end), var(--y-end), 0) scale(var(--scale));
-  }
-}
-
-@keyframes cloud-color-morph {
-  0% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
-      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-      rgba(128, 0, 255, 0.15) 70%, /* Purple */
-      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
-      transparent 100%
-    );
-  }
-  33% {
-    background: radial-gradient(
-      circle,
-      rgba(255, 0, 128, 0.25) 0%, /* Magenta */
-      rgba(128, 0, 255, 0.2) 30%, /* Purple */
-      rgba(0, 255, 128, 0.15) 70%, /* Neon green */
-      rgba(0, 128, 192, 0.1) 90%, /* Teal */
-      transparent 100%
-    );
-  }
-  66% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
-      rgba(255, 255, 0, 0.2) 30%, /* Yellow */
-      rgba(255, 0, 128, 0.15) 70%, /* Magenta */
-      rgba(0, 64, 128, 0.1) 90%, /* Deep blue */
-      transparent 100%
-    );
-  }
-  100% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
-      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-      rgba(128, 0, 255, 0.15) 70%, /* Purple */
-      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
-      transparent 100%
-    );
-  }
-}
-
+/* == Static Background (first frame style) == */
 body::before {
   content: '';
   position: fixed;
@@ -114,120 +69,22 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
+  /* Single-frame radial gradient */
   background: radial-gradient(
     circle,
-    rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-    rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
-    rgba(0, 255, 128, 0.2) 50%, /* Neon green */
-    rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-    rgba(128, 0, 255, 0.1) 90%, /* Purple */
+    rgba(0, 64, 128, 0.3) 0%,
+    rgba(0, 128, 192, 0.25) 25%,
+    rgba(0, 255, 128, 0.2) 50%,
+    rgba(255, 0, 128, 0.15) 75%,
+    rgba(128, 0, 255, 0.1) 90%,
     transparent 100%
   );
   mix-blend-mode: overlay;
   z-index: -2;
-  animation: background-morph 120s ease-in-out infinite;
+  /* No animation => no CPU usage */
 }
 
-@keyframes background-morph {
-  0% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-      rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
-      rgba(0, 255, 128, 0.2) 50%, /* Neon green */
-      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-      rgba(128, 0, 255, 0.1) 90%, /* Purple */
-      transparent 100%
-    );
-  }
-  25% {
-    background: radial-gradient(
-      circle,
-      rgba(128, 0, 255, 0.3) 0%, /* Purple */
-      rgba(0, 255, 128, 0.25) 25%, /* Neon green */
-      rgba(0, 128, 192, 0.2) 50%, /* Bright teal */
-      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-      rgba(64, 0, 128, 0.1) 90%, /* Deep purple */
-      transparent 100%
-    );
-  }
-  50% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 255, 128, 0.3) 0%, /* Neon green */
-      rgba(0, 128, 192, 0.25) 25%, /* Teal */
-      rgba(128, 0, 255, 0.2) 50%, /* Purple */
-      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-      transparent 100%
-    );
-  }
-  75% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 128, 192, 0.3) 0%, /* Bright teal */
-      rgba(0, 255, 128, 0.25) 25%, /* Neon green */
-      rgba(128, 0, 255, 0.2) 50%, /* Purple */
-      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-      transparent 100%
-    );
-  }
-  100% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.3) 0%, /* Deep blue */
-      rgba(0, 128, 192, 0.25) 25%, /* Bright teal */
-      rgba(0, 255, 128, 0.2) 50%, /* Neon green */
-      rgba(255, 0, 128, 0.15) 75%, /* Magenta */
-      rgba(128, 0, 255, 0.1) 90%, /* Purple */
-      transparent 100%
-    );
-  }
-}
-
-/* Cloud Color Morph */
-@keyframes cloud-color-morph {
-  0% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
-      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-      rgba(128, 0, 255, 0.15) 70%, /* Purple */
-      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
-      transparent 100%
-    );
-  }
-  33% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 255, 128, 0.25) 0%, /* Neon green */
-      rgba(128, 0, 255, 0.2) 30%, /* Purple */
-      rgba(0, 128, 192, 0.15) 70%, /* Teal */
-      rgba(64, 0, 128, 0.1) 90%, /* Deep purple */
-      transparent 100%
-    );
-  }
-  66% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 128, 192, 0.25) 0%, /* Bright teal */
-      rgba(0, 255, 128, 0.2) 30%, /* Neon green */
-      rgba(128, 0, 255, 0.15) 70%, /* Purple */
-      rgba(64, 0, 128, 0.1) 90%, /* Deep blue */
-      transparent 100%
-    );
-  }
-  100% {
-    background: radial-gradient(
-      circle,
-      rgba(0, 64, 128, 0.25) 0%, /* Deep blue */
-      rgba(0, 128, 255, 0.2) 30%, /* Light blue */
-      rgba(128, 0, 255, 0.15) 70%, /* Purple */
-      rgba(255, 0, 128, 0.1) 90%, /* Magenta */
-      transparent 100%
-    );
-  }
-}
-
+/* == Optional Vignette Overlay == */
 .vignette-overlay {
   position: fixed;
   top: 0;
@@ -238,196 +95,35 @@ body::before {
   z-index: 1000;
   background: radial-gradient(
     circle,
-    rgba(0, 0, 0, 0) 75%, /* Fully transparent in the center */
-    rgba(0, 0, 0, 0.8) 95%, /* Dark near the edges */
-    rgba(0, 0, 0, 1) 100% /* Fully black at the corners */
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.8) 95%,
+    rgba(0, 0, 0, 1) 100%
   );
 }
 
-svg#sg1981:hover {
-  transform: scale(1.1); /* Heart swells */
-  animation: heart-beat 1.5s infinite cubic-bezier(0.25, 1, 0.5, 1); /* Add subtle pulsing on hover */
-}
-
-@keyframes heart-beat {
-  0%, 100% {
-    transform: scale(1.05); /* Subtle swell */
-  }
-  50% {
-    transform: scale(1.1); /* Maximum swell */
-  }
-}
-
-svg#sg1981:hover rect {
-  animation: river-flow 2s infinite ease-in-out; /* Flowing animation for rects */
-  opacity: 1; /* Brighter colors on hover */
-}
-
-@keyframes river-flow {
-  0% {
-    transform: rotate(var(--rotation)) scaleY(1);
-    fill: url(#magicGrad); /* Start with green */
-  }
-  20% {
-    transform: rotate(calc(var(--rotation) + 1deg)) scaleY(1.05);
-    fill: url(#magicGrad); /* Subtle green transition */
-  }
-  40% {
-    transform: rotate(calc(var(--rotation) + 2deg)) scaleY(1.1);
-    fill: url(#magicGrad); /* Intermediate blue-green */
-  }
-  60% {
-    transform: rotate(calc(var(--rotation) + 3deg)) scaleY(1.15);
-    fill: url(#magicGrad); /* Intermediate purple-blue */
-  }
-  80% {
-    transform: rotate(calc(var(--rotation) + 5deg)) scaleY(1.1);
-    fill: url(#magicGrad); /* Shift fully into purple */
-  }
-  100% {
-    transform: rotate(var(--rotation)) scaleY(1);
-    fill: url(#magicGrad); /* Return to green */
-  }
-}
-
+/* == Smaller devices: smaller clouds, same static background == */
 @media (max-width: 768px) {
   .cloud {
     width: 300px;
     height: 300px;
     filter: blur(80px);
-    opacity: 0.5; /* Lower opacity for mobile */
+    opacity: 0.5;
   }
 
   body::before {
     background: radial-gradient(
       circle,
-      rgba(0, 64, 128, 0.2) 0%, /* Deep blue */
-      rgba(0, 128, 192, 0.15) 30%, /* Bright teal */
-      rgba(0, 255, 128, 0.1) 60%, /* Neon green */
-      rgba(64, 0, 128, 0.1) 90%, /* Purple tint */
+      rgba(0, 64, 128, 0.2) 0%,
+      rgba(0, 128, 192, 0.15) 30%,
+      rgba(0, 255, 128, 0.1) 60%,
+      rgba(64, 0, 128, 0.1) 90%,
       transparent 100%
     );
   }
 }
 
-.interactive-heart:hover ~ g rect {
-  animation: river-flow 5s infinite ease-in-out;
-  opacity: 1; /* Make colors more vibrant */
-}
-
-.interactive-heart:hover {
-  cursor: pointer; /* Visual feedback for the user */
-}
-
-
-/* Zoom effect for heart */
-#sg1981.zooming-forest {
-  animation: heart-zoom 15s linear infinite;
-}
-
-@keyframes heart-zoom {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(15); /* Larger scale for a dramatic zoom */
-  }
-}
-
-#sg1981 .tree {
-  transform-origin: center bottom;
-  animation: tree-sway 5s ease-in-out infinite, tree-zoom 15s linear infinite;
-}
-
-@keyframes tree-sway {
-  0%, 100% {
-    transform: rotate(var(--rotation));
-  }
-  50% {
-    transform: rotate(calc(var(--rotation) + 2deg));
-  }
-}
-
-@keyframes tree-zoom {
-  from {
-    transform: translateY(0) scaleY(1);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-200%) scaleY(1.5); /* Move upward as they grow */
-    opacity: 0; /* Fade out for a continuous journey */
-  }
-}
-
-#sg1981:hover rect {
-  opacity: 1; /* Trees get more vibrant on hover */
-  animation-play-state: running; /* Ensure the animation plays on hover */
-}
-
-#sg1981.zooming-forest .tree {
-  animation: tree-zoom 10s linear infinite, tree-sway 5s ease-in-out infinite;
-}
-
-#sg1981:not(.zooming-forest) .tree {
-  animation-play-state: paused;
-}
-
-/* Interactive heart behavior */
-.interactive-heart:hover {
-  cursor: pointer;
-}
-
-/* No default scale in the static state */
+/* == Forest Group (if you need it) == */
 .forest-group {
-  transform-origin: 250px 250px; /* pivot around the heart's center in the SVG */
+  transform-origin: 250px 250px;
   transform: scale(1) translate(0, 0);
-}
-
-/* On hover, start the infinite weaving jog. 21s for a 30% faster run than 30s. */
-#sg1981:hover .forest-group {
-  animation: forestJog 21s linear infinite alternate;
-}
-
-/* Start state (still) */
-.forest-group {
-  transform-origin: 250px 250px; /* pivot around the heart center */
-  transform: scale(1) translate(0, 0);
-}
-
-/* Keyframes define the forward path from 0% → 100%.
-   'alternate' then runs it backward 100% → 0%, repeatedly. */
-@keyframes forestJog {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  10% {
-    transform: scale(1.2) translate(40px, -10px);
-  }
-  20% {
-    transform: scale(1.4) translate(-30px, -40px);
-  }
-  30% {
-    transform: scale(1.6) translate(-10px, -70px);
-  }
-  40% {
-    transform: scale(1.8) translate(30px, -90px);
-  }
-  50% {
-    transform: scale(2) translate(-40px, -110px);
-  }
-  60% {
-    transform: scale(2.3) translate(-10px, -140px);
-  }
-  70% {
-    transform: scale(2.6) translate(40px, -160px);
-  }
-  80% {
-    transform: scale(3) translate(-50px, -180px);
-  }
-  90% {
-    transform: scale(3.5) translate(-20px, -200px);
-  }
-  100% {
-    transform: scale(4) translate(-70px, -230px);
-  }
 }
