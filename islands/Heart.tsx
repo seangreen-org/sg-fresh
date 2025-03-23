@@ -1,3 +1,5 @@
+import { useState } from 'preact/hooks';
+
 interface Tree {
   x: number;
   y: number;
@@ -7,6 +9,18 @@ interface Tree {
   rotation: number;
   opacity: number;
 }
+
+const rotationColorMap = {
+  green: 0,
+  blue: 100,
+  purple: 130,
+  pink: 200,
+  red: 250,
+  orange: 300,
+};
+
+type ColorName = keyof typeof rotationColorMap;
+const colorNames = Object.keys(rotationColorMap) as ColorName[];
 
 const baseTrees: Tree[] = [
   { x: 120, y: 0, width: 5,  height: 500, fill: 'url(#purpleGrad1)', rotation: -14, opacity: 0.8 },
@@ -44,6 +58,25 @@ const baseTrees: Tree[] = [
 ];
 
 export default function Heart() {
+  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+
+  const handleClick = async () => {
+    const nextIndex = (currentColorIndex + 1) % colorNames.length;
+    setCurrentColorIndex(nextIndex);
+
+    const colorName = colorNames[nextIndex];
+
+    try {
+      await fetch('/api/hue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ color: colorName }),
+      });
+    } catch (error) {
+      console.error('Failed to update color:', error);
+    }
+  };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -54,8 +87,14 @@ export default function Heart() {
         transformOrigin: "center center",
         maxWidth: "75%",
         maxHeight: "75%",
-        display: "block"
+        display: "block",
+        filter: `hue-rotate(${rotationColorMap[colorNames[currentColorIndex]]}deg)`,
+        transition: 'filter 1s ease-in-out',
+        cursor: 'pointer'
       }}
+      onClick={handleClick}
+      role="button"
+      aria-label="Interactive heart that changes color when clicked"
     >
       <defs>
         <linearGradient id="magicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
