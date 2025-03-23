@@ -1,7 +1,7 @@
-import App from '../components/App.tsx';
+import Heart from '../islands/Heart.tsx';
 
-export default function Index() {
+export default function Home() {
   return (
-    <App />
+    <Heart />
   );
 }
