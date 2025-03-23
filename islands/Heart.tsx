@@ -105,9 +105,6 @@ export default function Heart() {
           animation: isHovered ? 'heartbeat 1.5s ease-in-out infinite' : 'none',
           transition: 'all 0.3s ease-out'
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={handleClick}
         role="button"
         aria-label="Interactive heart that changes color when clicked"
       >
@@ -216,6 +213,9 @@ export default function Heart() {
           strokeWidth="3"
           filter="url(#glow)"
           style={{ pointerEvents: 'all' }}
+          onClick={handleClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         />
       </svg>
     </>
