@@ -145,10 +145,6 @@ export default function Heart() {
           <stop offset="0%" stop-color="#9A00FF" />
           <stop offset="100%" stop-color="#4B0082" />
         </linearGradient>
-        <linearGradient id="purpleGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#8A00D4" />
-          <stop offset="100%" stop-color="#622B7E" />
-        </linearGradient>
         <linearGradient id="blueToGreen" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#1AA66E" />
           <stop offset="100%" stop-color="#0E8BA0" />
