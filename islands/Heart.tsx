@@ -12,11 +12,10 @@ interface Tree {
 
 const rotationColorMap = {
   green: 0,
-  blue: 100,
-  purple: 130,
-  pink: 200,
-  red: 250,
-  orange: 300,
+  blue: 70,
+  pink: 150,
+  red: 230,
+  orange: 260,
 };
 
 type ColorName = keyof typeof rotationColorMap;
@@ -65,6 +64,7 @@ export default function Heart() {
     setCurrentColorIndex(nextIndex);
 
     const colorName = colorNames[nextIndex];
+    console.log('Updating color to:', colorName, rotationColorMap[colorNames[nextIndex]]);
 
     try {
       await fetch('/api/hue', {
