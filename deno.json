@@ -9,13 +9,35 @@
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": true
+  },
   "lint": {
     "rules": {
       "tags": [
         "fresh",
         "recommended"
+      ],
+      "include": [
+        "ban-untagged-todo",
+        "camelcase",
+        "eqeqeq",
+        "explicit-function-return-type",
+        "no-empty-interface",
+        "no-explicit-any",
+        "no-inferrable-types",
+        "no-non-null-assertion",
+        "no-throw-literal",
+        "no-unused-vars",
+        "prefer-const",
+        "triple-slash-reference"
       ]
-    }
+    },
+    "exclude": [
+      "./*.ts",
+      "./*.tsx"
+    ]
   },
   "exclude": [
     "**/_fresh/*"
@@ -26,7 +48,11 @@
     "preact/": "https://esm.sh/preact@10.22.0/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
-    "$std/": "https://deno.land/std@0.216.0/"
+    "$std/": "https://deno.land/std@0.216.0/",
+    "@/": "./",
+    "@routes/": "./routes/",
+    "@islands/": "./islands/",
+    "@components/": "./components/"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
