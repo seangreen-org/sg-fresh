@@ -9,16 +9,10 @@
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
-  "fmt": {
-    "singleQuote": true,
-    "semiColons": true
-  },
+  "fmt": { "singleQuote": true, "semiColons": true },
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ],
+      "tags": ["fresh", "recommended"],
       "include": [
         "ban-untagged-todo",
         "camelcase",
@@ -34,14 +28,9 @@
         "triple-slash-reference"
       ]
     },
-    "exclude": [
-      "./*.ts",
-      "./*.tsx"
-    ]
+    "exclude": ["./*.ts", "./*.tsx"]
   },
-  "exclude": [
-    "**/_fresh/*"
-  ],
+  "exclude": ["**/_fresh/*"],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
     "preact": "https://esm.sh/preact@10.22.0",
@@ -54,8 +43,5 @@
     "@islands/": "./islands/",
     "@components/": "./components/"
   },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
-  }
+  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" }
 }

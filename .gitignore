@@ -2,3 +2,6 @@
 cypress/videos
 cypress/screenshots
 node_modules/
+
+# Fresh build directory
+_fresh/
