@@ -65,7 +65,7 @@ export default function Heart() {
     setCurrentColorIndex(nextIndex);
 
     const colorName = colorNames[nextIndex];
-    console.log('Updating color to:', colorName, rotationColorMap[colorNames[nextIndex]]);
+    globalThis.umami.track('heart-click', { color: colorName });
 
     try {
       await fetch('/api/hue', {
