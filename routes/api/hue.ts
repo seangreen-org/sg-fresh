@@ -44,8 +44,11 @@ export const handler = {
       console.error('hue proxy call failed');
     }
 
+    console.log('!! tracking color change event', color);
     queueMicrotask(async () => {
+      console.log('!! queueMicrotask', color);
       await trackColorChangeEvent(request, color);
+      console.log('!! queueMicrotask done', color);
     });
 
     return new Response();
