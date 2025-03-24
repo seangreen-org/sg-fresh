@@ -27,6 +27,23 @@ const trackColorChangeEvent = async (request: Request, color: string) => {
       }),
     });
 
+    console.log('!! sent', JSON.stringify({
+      payload: {
+        hostname: request.headers.get('host'),
+        language: request.headers.get('accept-language'),
+        referrer: request.headers.get('referer'),
+        screen: `0x0`,
+        title: 'Server',
+        url: request.url,
+        website: '192417e2-392b-4ac0-bbbe-f1d0c25fb369',
+        name: 'color-change',
+        data: {
+          color,
+        }
+      },
+      type: 'event',
+    }))
+
     const responseText = await response.text();
     console.log('Umami API response:', {
       status: response.status,
