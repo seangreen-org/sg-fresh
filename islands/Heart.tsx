@@ -210,7 +210,6 @@ export default function Heart() {
           className="interactive-heart"
           fill="transparent"
           stroke="#0EE584"
-          strokeWidth="3"
           filter="url(#glow)"
           style={{ pointerEvents: 'all' }}
           onClick={handleClick}
