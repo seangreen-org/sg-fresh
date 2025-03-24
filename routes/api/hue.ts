@@ -4,7 +4,7 @@ const isInternal = () =>
 const trackColorChangeEvent = async (request: Request, color: string) => {
 
   try {
-    const response = await fetch('https://cloud.umami.is/api/send', {
+    const response = await fetch('https://cloud.umami.is/api/collect', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
