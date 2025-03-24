@@ -2,8 +2,9 @@ const isInternal = () =>
   JSON.stringify(Deno.env.get('SG_NETWORK')) === JSON.stringify('internal');
 
 const trackColorChangeEvent = async (request: Request, color: string) => {
+
   try {
-    await fetch('https://cloud.umami.is/api/send', {
+    const response = await fetch('https://cloud.umami.is/api/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,6 +25,13 @@ const trackColorChangeEvent = async (request: Request, color: string) => {
         },
         type: 'event',
       }),
+    });
+
+    const responseText = await response.text();
+    console.log('Umami API response:', {
+      status: response.status,
+      statusText: response.statusText,
+      body: responseText
     });
   } catch {
     console.error('tracking color change event failed');
