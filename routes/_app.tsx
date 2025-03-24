@@ -5,7 +5,7 @@ export default function App({ Component }: PageProps): JSX.Element {
   return (
     <html lang='zxx'>
       <head>
-        <title>sg-1981 TEST</title>
+        <title>sg-1981 TEST2</title>
         <meta name='description' content='Sean Green' />
         <meta name='theme-color' content='#000000' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
