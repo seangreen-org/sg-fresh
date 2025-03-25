@@ -1,6 +1,7 @@
 # SG FRESH 💚
 
-A personal website built with Fresh, featuring an interactive heart visualization and dynamic UI elements.
+A personal website built with Fresh, featuring an interactive heart
+visualization and dynamic UI elements.
 
 ## 🛠️ Tech Stack
 
@@ -25,6 +26,7 @@ A personal website built with Fresh, featuring an interactive heart visualizatio
 ### Prerequisites
 
 1. Install Deno
+
 ```sh
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
@@ -32,6 +34,7 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 ### Running Locally
 
 1. Start the development server:
+
 ```sh
 deno task start
 ```
@@ -43,8 +46,7 @@ The application will be available at `http://localhost:8000`
 - `deno task start` - Start the development server
 - `deno task check` - Run format, link and type check
 - `deno task build` - Builds assets in `./_fresh`
-- `deno task preview` - Serve built assets in `./_fresh` to mimic
-production
+- `deno task preview` - Serve built assets in `./_fresh` to mimic production
 - `deno task test` - Run Playwright tests
 
 - `deno lint` - Run linter
@@ -66,8 +68,10 @@ sg-fresh/
 
 ## Deployment
 
-This project is automatically deployed to Deno Deploy when changes are pushed to the main branch.
+This project is automatically deployed to Deno Deploy when changes are pushed to
+the main branch.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.

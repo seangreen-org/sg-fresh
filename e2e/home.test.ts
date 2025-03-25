@@ -1,5 +1,5 @@
 import { expect } from 'https://deno.land/std@0.216.0/expect/mod.ts';
-import { chromium, type Browser, type Page } from 'npm:@playwright/test';
+import { type Browser, chromium, type Page } from 'npm:@playwright/test';
 
 let browser: Browser;
 let page: Page;
@@ -25,4 +25,3 @@ Deno.test({
   sanitizeResources: false,
   sanitizeOps: false,
 });
-
