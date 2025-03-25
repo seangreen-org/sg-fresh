@@ -8,9 +8,8 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "test": "deno task start & deno task wait && deno test -A e2e/",
-    "test:ci": "deno run -A dev.ts & deno task wait && deno test -A e2e/ && pkill -f 'deno.*dev.ts'",
-    "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "wait": "deno run --allow-net scripts/wait-for-server.ts"
+    "test:ci": "bash scripts/test-ci.sh",
+    "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "fmt": { "singleQuote": true, "semiColons": true },
   "lint": {
