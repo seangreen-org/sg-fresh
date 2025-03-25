@@ -1,5 +1,5 @@
-import { type PageProps } from '$fresh/server.ts';
-import { JSX } from 'preact/jsx-runtime';
+import type { PageProps } from '$fresh/server.ts';
+import type { JSX } from 'preact/jsx-runtime';
 
 export default function App({ Component }: PageProps): JSX.Element {
   return (

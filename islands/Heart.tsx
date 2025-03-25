@@ -1,5 +1,5 @@
-import { useState } from 'preact/hooks'
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
+import { useState } from 'preact/hooks';
 
 interface Tree {
   x: number;

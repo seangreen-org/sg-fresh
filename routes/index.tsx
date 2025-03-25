@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 import Header from '@components/Header.tsx';
 import GalaxyBackground from '@components/GalaxyBackground.tsx';
 import Heart from '@islands/Heart.tsx';

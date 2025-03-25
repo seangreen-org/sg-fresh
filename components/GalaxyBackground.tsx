@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 
 export default function GalaxyBackground(): JSX.Element {
   const GalaxyCircle = (
