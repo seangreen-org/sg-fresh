@@ -30,7 +30,7 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Start server
-        run: deno task start
+        run: deno task start > server.log 2>&1 &
         env:
           DENO_SERVER_PID: $!
         timeout-minutes: 5
