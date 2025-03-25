@@ -26,11 +26,11 @@ jobs:
       - name: Run checks
         run: deno task check
 
-      - name: Install Playwright
-        run: npx playwright install --with-deps
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
 
       - name: Run tests
-        run: deno task test:ci
+        run: deno task test
 
       - name: Build step
         run: 'deno task build'
