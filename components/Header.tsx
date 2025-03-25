@@ -1,4 +1,4 @@
-import { JSX } from 'preact/jsx-runtime'
+import { JSX } from 'preact/jsx-runtime';
 
 export default function Header(): JSX.Element {
   const angle = (() => {
