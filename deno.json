@@ -7,7 +7,7 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
-    "test": "deno task start & deno task wait && deno test -A e2e/ ; EXIT_CODE=$? ; pkill -f 'deno.*dev.ts' || true ; exit $EXIT_CODE",
+    "test": "deno task start & PID=$! && deno task wait && deno test -A e2e/ ; TEST_EXIT=$? ; kill $PID 2>/dev/null || true ; wait $PID 2>/dev/null || true ; exit $TEST_EXIT",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
     "wait": "deno run --allow-net scripts/wait-for-server.ts"
   },
