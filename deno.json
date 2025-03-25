@@ -7,8 +7,9 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
+    "test": "deno task start & deno task wait && deno test -A e2e/ ; EC=$? ; pkill -f 'deno.*dev.ts' ; exit $EC",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "test:e2e": "deno test -A e2e/"
+    "wait": "deno run --allow-net scripts/wait-for-server.ts"
   },
   "fmt": { "singleQuote": true, "semiColons": true },
   "lint": {

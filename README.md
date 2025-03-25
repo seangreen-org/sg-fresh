@@ -43,7 +43,10 @@ The application will be available at `http://localhost:8000`
 - `deno task start` - Start the development server
 - `deno task check` - Run format, link and type check
 - `deno task build` - Builds assets in `./_fresh`
-- `deno task preview` - Serve built assets in `./_fresh` to mimic production
+- `deno task preview` - Serve built assets in `./_fresh` to mimic
+production
+- `deno task test` - Run Playwright tests
+
 - `deno lint` - Run linter
 - `deno fmt` - Run formatter
 
