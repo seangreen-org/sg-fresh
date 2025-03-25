@@ -1,20 +1,31 @@
 import { JSX } from 'preact/jsx-runtime';
 
 export default function Header(): JSX.Element {
-  const nameStyle = {
-    background: 'linear-gradient(90deg, #00cc7a, #00aadd, #ddaa00, #dd2277)',
+  const angle = (() => {
+    const randomAngle = Math.floor(Math.random() * 360);
+    const isNearStraightAngle = [0, 90, 180, 270, 360].some(
+      straightAngle => Math.abs(randomAngle - straightAngle) < 15
+    );
+    return `${isNearStraightAngle ? randomAngle + 15 : randomAngle}deg`;
+  })();
+
+  const baseGradientStyle = {
     backgroundSize: '200% 200%',
+    animation: 'text-animation 60s ease infinite',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    animation: 'text-animation 60s ease infinite',
+  };
+
+  const nameStyle = {
+    opacity: 0.6,
+    background: `linear-gradient(${angle}, #00cc7a, #00aadd, #ddaa00, #dd2277)`,
+    ...baseGradientStyle,
   };
 
   const yearStyle = {
-    background: 'linear-gradient(90deg,#AAAAAA, #606060, #BBBBBB, #AAAAAA)',
-    backgroundSize: '200% 200%',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    animation: 'text-animation 60s ease infinite',
+    opacity: 1,
+    background: `linear-gradient(${angle}, #aaaaaa, #606060, #bbbbbb, #aaaaaa)`,
+    ...baseGradientStyle,
   };
 
   return (
