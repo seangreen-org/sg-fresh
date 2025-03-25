@@ -1,6 +1,5 @@
-import type { Browser, Page } from 'npm:@playwright/test/types';
-import { expect } from 'https://deno.land/std@0.216.0/expect/mod.ts';
-import { chromium } from 'npm:@playwright/test';
+import { expect } from '$std/expect/mod.ts';
+import { chromium, type Browser, type Page } from 'playwright';
 
 let browser: Browser;
 let page: Page;
