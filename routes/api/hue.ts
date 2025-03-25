@@ -4,6 +4,7 @@ const isInternal = () =>
 export const handler = {
   async POST(request: Request): Promise<Response> {
     const color = (await request.json()).color;
+
     try {
       await fetch(
         `http://${
@@ -14,6 +15,7 @@ export const handler = {
       console.error('hue proxy call failed');
     }
 
+    console.log('api/hue', 'changed color to', color);
     return new Response();
   },
 };
