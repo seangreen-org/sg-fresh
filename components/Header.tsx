@@ -17,13 +17,13 @@ export default function Header(): JSX.Element {
   };
 
   const nameStyle = {
-    opacity: 0.6,
+    opacity: 1,
     background: `linear-gradient(${angle}, #00cc7a, #00aadd, #ddaa00, #dd2277)`,
     ...baseGradientStyle,
   };
 
   const yearStyle = {
-    opacity: 1,
+    opacity: 0.8,
     background: `linear-gradient(${angle}, #aaaaaa, #606060, #bbbbbb, #aaaaaa)`,
     ...baseGradientStyle,
   };
@@ -47,12 +47,13 @@ export default function Header(): JSX.Element {
           margin: 30,
           zIndex: 1,
           fontFamily: 'Inter, sans-serif',
-          fontSize: '1.5rem',
+          fontSize: '1rem',
           fontWeight: 400,
+          textShadow: '0 0 15px rgba(0, 255, 128, 0.4)',
         }}
       >
         <span style={nameStyle}>Sean Green</span>
-        <span style={{ color: '#303030' }}>/</span>
+        <span style={{ color: '#303030', margin: 8 }}>/</span>
         <span style={yearStyle}>2025</span>
       </h1>
     </>
