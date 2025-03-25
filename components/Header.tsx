@@ -4,7 +4,7 @@ export default function Header(): JSX.Element {
   const angle = (() => {
     const randomAngle = Math.floor(Math.random() * 360);
     const isNearStraightAngle = [0, 90, 180, 270, 360].some(
-      straightAngle => Math.abs(randomAngle - straightAngle) < 15
+      (straightAngle) => Math.abs(randomAngle - straightAngle) < 15,
     );
     return `${isNearStraightAngle ? randomAngle + 15 : randomAngle}deg`;
   })();
@@ -52,7 +52,7 @@ export default function Header(): JSX.Element {
         }}
       >
         <span style={nameStyle}>Sean Green</span>
-        <span style={{ color: '#303030' }}> / </span>
+        <span style={{ color: '#303030' }}>/</span>
         <span style={yearStyle}>2025</span>
       </h1>
     </>
