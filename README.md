@@ -1,4 +1,4 @@
-# SG FRESH 🌟
+# SG FRESH 💚
 
 A personal website built with Fresh, featuring an interactive heart visualization and dynamic UI elements.
 

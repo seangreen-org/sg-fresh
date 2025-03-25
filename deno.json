@@ -7,7 +7,8 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
-    "update": "deno run -A -r https://fresh.deno.dev/update ."
+    "update": "deno run -A -r https://fresh.deno.dev/update .",
+    "test:e2e": "deno test -A e2e/"
   },
   "fmt": { "singleQuote": true, "semiColons": true },
   "lint": {
@@ -38,6 +39,7 @@
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
     "$std/": "https://deno.land/std@0.216.0/",
+    "playwright": "npm:playwright@1.42.1",
     "@/": "./",
     "@routes/": "./routes/",
     "@islands/": "./islands/",
