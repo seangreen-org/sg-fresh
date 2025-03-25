@@ -1,5 +1,5 @@
 import { expect } from '$std/expect/mod.ts';
-import { type Browser, chromium, type Page } from 'playwright';
+import { chromium, type Browser, type Page } from 'npm:@playwright/test';
 
 let browser: Browser;
 let page: Page;
