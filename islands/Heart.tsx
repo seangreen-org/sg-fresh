@@ -1,5 +1,5 @@
 import type { JSX } from 'preact/jsx-runtime';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import trees from '@/data/trees.ts';
 
 const rotationColorMap = {
@@ -13,27 +13,39 @@ const rotationColorMap = {
 type ColorName = keyof typeof rotationColorMap;
 const colorNames = Object.keys(rotationColorMap) as ColorName[];
 
+const sendHueRequest = async (colorName: string) => {
+  try {
+    await fetch('/api/hue', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ color: colorName }),
+    });
+  } catch (error) {
+    console.error('Failed to update color:', error);
+  }
+}
+
 export default function Heart(): JSX.Element {
   const [currentColorIndex, setCurrentColorIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const sendDefaultColorHueRequest = async () => {
+      const colorName = colorNames[currentColorIndex];
+      await sendHueRequest(colorName);
+    }
+    sendDefaultColorHueRequest();
+  }, []);
 
   const handleClick = async () => {
     const nextIndex = (currentColorIndex + 1) % colorNames.length;
     setCurrentColorIndex(nextIndex);
 
     const colorName = colorNames[nextIndex];
+    sendHueRequest(colorName);
+
     // @ts-ignore: umami analytics global object
     globalThis.umami.track(`heart-click-${colorName}`);
-
-    try {
-      await fetch('/api/hue', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ color: colorName }),
-      });
-    } catch (error) {
-      console.error('Failed to update color:', error);
-    }
   };
 
   return (
