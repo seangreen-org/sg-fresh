@@ -15,7 +15,7 @@ Deno.test({
     await t.step('page loads with correct title', async () => {
       await page.goto('http://localhost:8000');
       const title = await page.title();
-      expect(title).toBe('SG1981x');
+      expect(title).toBe('SG1981');
     });
 
     await t.step('cleanup', async () => {
