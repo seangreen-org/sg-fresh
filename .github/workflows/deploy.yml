@@ -6,14 +6,9 @@ on:
     branches: main
 
 jobs:
-  deploy:
-    name: Deploy
+  test:
+    name: Test
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: read
-
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
@@ -26,8 +21,49 @@ jobs:
       - name: Run checks
         run: deno task check
 
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium --with-deps
+
+      - name: Start server
+        run: deno task start > server.log 2>&1 &
+        env:
+          DENO_SERVER_PID: $!
+        timeout-minutes: 5
+
+      - name: Wait for server to start
+        run: sleep 5
+
+      - name: Run tests
+        run: deno test --allow-all
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -n "$DENO_SERVER_PID" ]; then
+            kill $DENO_SERVER_PID
+            echo "Deno server (PID: $DENO_SERVER_PID) has been killed."
+          else
+            echo "No Deno server process found."
+          fi
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
       - name: Build step
-        run: 'deno task build'
+        run: deno task build
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
