@@ -470,7 +470,7 @@ export default function Heart(): JSX.Element {
           filter='url(#glow)'
           style={{
             pointerEvents: 'all',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
           onClick={handleClick}
           onMouseEnter={() => setIsHovered(true)}
