@@ -68,7 +68,15 @@
       "**/scripts",
       "**/e2e"
     ],
-    "include": [],
+    "include": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.json",
+      "static/**",
+      "fresh.gen.ts"
+    ],
     "entrypoint": "main.ts"
   }
 }
