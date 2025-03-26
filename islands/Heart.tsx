@@ -13,6 +13,10 @@ const rotationColorMap = {
 type ColorName = keyof typeof rotationColorMap;
 const colorNames = Object.keys(rotationColorMap) as ColorName[];
 
+interface HeartProps {
+  initialColor?: string
+}
+
 const sendHueRequest = async (colorName: string) => {
   try {
     await fetch('/api/hue', {
@@ -25,8 +29,11 @@ const sendHueRequest = async (colorName: string) => {
   }
 }
 
-export default function Heart(): JSX.Element {
-  const [currentColorIndex, setCurrentColorIndex] = useState(0);
+export default function Heart({ initialColor = 'green'}: HeartProps): JSX.Element {
+  const [currentColorIndex, setCurrentColorIndex] = useState(() => {
+    const index = colorNames.indexOf(initialColor as ColorName);
+    return index >= 0 ? index : 0;
+  });
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
@@ -42,7 +49,7 @@ export default function Heart(): JSX.Element {
     setCurrentColorIndex(nextIndex);
 
     const colorName = colorNames[nextIndex];
-    sendHueRequest(colorName);
+    await sendHueRequest(colorName);
 
     // @ts-ignore: umami analytics global object
     globalThis.umami.track(`heart-click-${colorName}`);
