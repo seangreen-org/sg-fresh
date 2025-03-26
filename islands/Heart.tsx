@@ -360,7 +360,6 @@ export default function Heart(): JSX.Element {
           filter: `hue-rotate(${
             rotationColorMap[colorNames[currentColorIndex]]
           }deg)`,
-          cursor: 'pointer',
           transform: 'scale(1)',
           animation: isHovered ? 'heartbeat 1.5s ease-in-out infinite' : 'none',
           transition: 'all 0.3s ease-out',
@@ -469,7 +468,10 @@ export default function Heart(): JSX.Element {
           fill='transparent'
           stroke='#0EE584'
           filter='url(#glow)'
-          style={{ pointerEvents: 'all' }}
+          style={{
+            pointerEvents: 'all',
+            cursor: 'pointer'
+          }}
           onClick={handleClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

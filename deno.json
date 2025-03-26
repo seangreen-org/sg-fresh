@@ -11,10 +11,16 @@
     "test": "deno test -A e2e/",
     "test:ci": "bash scripts/test-ci.sh"
   },
-  "fmt": { "singleQuote": true, "semiColons": true },
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": true
+  },
   "lint": {
     "rules": {
-      "tags": ["fresh", "recommended"],
+      "tags": [
+        "fresh",
+        "recommended"
+      ],
       "include": [
         "ban-untagged-todo",
         "camelcase",
@@ -30,9 +36,14 @@
         "triple-slash-reference"
       ]
     },
-    "exclude": ["./*.ts", "./*.tsx"]
+    "exclude": [
+      "./*.ts",
+      "./*.tsx"
+    ]
   },
-  "exclude": ["**/_fresh/*"],
+  "exclude": [
+    "**/_fresh/*"
+  ],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
     "preact": "https://esm.sh/preact@10.22.0",
@@ -46,5 +57,16 @@
     "@islands/": "./islands/",
     "@components/": "./components/"
   },
-  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" }
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "deploy": {
+    "project": "afeeceac-2dff-4b62-be42-a3ded87ced32",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "main.ts"
+  }
 }
