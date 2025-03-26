@@ -59,4 +59,5 @@ jobs:
         with:
           project: 'seangreen'
           entrypoint: 'main.ts'
+          import-map: './deno.json'
           root: '.'
