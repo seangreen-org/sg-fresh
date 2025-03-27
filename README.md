@@ -60,10 +60,10 @@ sg-fresh/
 ├── islands/        # Interactive components
 ├── routes/         # Page components and API routes
 ├── static/         # Static assets
-├── fresh.gen.ts   # Auto-generated routes
-├── dev.ts         # Development entry point
-├── main.ts        # Production entry point
-└── deno.json      # Project configuration
+├── fresh.gen.ts    # Auto-generated routes
+├── dev.ts          # Development entry point
+├── main.ts         # Production entry point
+└── deno.json       # Project configuration
 ```
 
 ## Deployment
