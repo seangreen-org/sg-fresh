@@ -1,33 +1,16 @@
 import type { JSX } from 'preact/jsx-runtime';
 import { useEffect, useState } from 'preact/hooks';
+import sendHueRequest from '@serivces/sendHueRequest.ts';
+import {
+  type ColorName,
+  colorNames,
+  rotationColorMap,
+} from '../data/colors.ts';
 import trees from '@/data/trees.ts';
-
-const rotationColorMap = {
-  green: 0,
-  blue: 70,
-  pink: 150,
-  red: 230,
-  orange: 260,
-};
-
-type ColorName = keyof typeof rotationColorMap;
-const colorNames = Object.keys(rotationColorMap) as ColorName[];
 
 interface HeartProps {
   initialColor?: string;
 }
-
-const sendHueRequest = async (colorName: string) => {
-  try {
-    await fetch('/api/hue', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ color: colorName }),
-    });
-  } catch (error) {
-    console.error('Failed to update color:', error);
-  }
-};
 
 export default function Heart({
   initialColor = Object.keys(rotationColorMap)[0],
