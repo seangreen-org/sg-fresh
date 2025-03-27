@@ -68,6 +68,6 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: 'seangreen'
-          entrypoint: 'main.ts'
-          root: '.'
+          project: "seangreen"
+          entrypoint: "main.ts"
+          root: "."

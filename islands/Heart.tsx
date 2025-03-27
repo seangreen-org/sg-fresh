@@ -1,12 +1,12 @@
-import type { JSX } from 'preact/jsx-runtime';
-import { useEffect, useState } from 'preact/hooks';
-import sendHueRequest from '@serivces/sendHueRequest.ts';
+import type { JSX } from "preact/jsx-runtime";
+import { useEffect, useState } from "preact/hooks";
+import sendHueRequest from "@serivces/sendHueRequest.ts";
 import {
   type ColorName,
   colorNames,
   rotationColorMap,
-} from '../data/colors.ts';
-import trees from '@/data/trees.ts';
+} from "../data/colors.ts";
+import trees from "@/data/trees.ts";
 
 interface HeartProps {
   initialColor?: string;
@@ -30,10 +30,9 @@ export default function Heart({
   }, []);
 
   const handleClick = async () => {
-    const nextIndex =
-      (currentColorIndex +
-        Math.floor(Math.random() * (colorNames.length - 1)) +
-        1) %
+    const nextIndex = (currentColorIndex +
+      Math.floor(Math.random() * (colorNames.length - 1)) +
+      1) %
       colorNames.length;
     setCurrentColorIndex(nextIndex);
 
@@ -42,7 +41,7 @@ export default function Heart({
 
     // @ts-ignore: umami analytics global object
     globalThis.umami.track(`heart-click-${colorName}`);
-    globalThis.history.replaceState(null, '', `/${colorName}`);
+    globalThis.history.replaceState(null, "", `/${colorName}`);
   };
 
   return (
@@ -62,16 +61,16 @@ export default function Heart({
         height="100%"
         viewBox="50 20 400 380"
         style={{
-          transformOrigin: 'center center',
-          maxWidth: '75%',
-          maxHeight: '75%',
-          display: 'block',
+          transformOrigin: "center center",
+          maxWidth: "75%",
+          maxHeight: "75%",
+          display: "block",
           filter: `hue-rotate(${
             rotationColorMap[colorNames[currentColorIndex]]
           }deg)`,
-          transform: 'scale(1)',
-          animation: isHovered ? 'heartbeat 1.5s ease-in-out infinite' : 'none',
-          transition: 'all 0.3s ease-out',
+          transform: "scale(1)",
+          animation: isHovered ? "heartbeat 1.5s ease-in-out infinite" : "none",
+          transition: "all 0.3s ease-out",
         }}
         role="button"
         aria-label="Interactive heart that changes color when clicked"
@@ -97,16 +96,14 @@ export default function Heart({
           </linearGradient>
 
           <clipPath id="heartClip">
-            <path
-              d="
+            <path d="
                 M 250,80
                 C 220,20, 140,20, 110,80
                 C 50,180, 150,300, 250,380
                 C 350,300, 450,180, 390,80
                 C 360,20, 280,20, 250,80
                 Z
-              "
-            />
+              " />
           </clipPath>
 
           <linearGradient id="greenGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -157,9 +154,9 @@ export default function Heart({
                 fill={tree.fill}
                 opacity={tree.opacity}
                 style={{
-                  transformOrigin: '250px 250px',
-                  transform: 'rotate(var(--rotation))',
-                  '--rotation': `${tree.rotation}deg`,
+                  transformOrigin: "250px 250px",
+                  transform: "rotate(var(--rotation))",
+                  "--rotation": `${tree.rotation}deg`,
                 }}
               />
             ))}
@@ -180,8 +177,8 @@ export default function Heart({
           stroke="#0EE584"
           filter="url(#glow)"
           style={{
-            pointerEvents: 'all',
-            cursor: 'pointer',
+            pointerEvents: "all",
+            cursor: "pointer",
           }}
           onClick={handleClick}
           onMouseEnter={() => setIsHovered(true)}

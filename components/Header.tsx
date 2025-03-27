@@ -1,4 +1,4 @@
-import type { JSX } from 'preact/jsx-runtime';
+import type { JSX } from "preact/jsx-runtime";
 
 export default function Header(): JSX.Element {
   const angle = (() => {
@@ -10,10 +10,10 @@ export default function Header(): JSX.Element {
   })();
 
   const baseGradientStyle = {
-    backgroundSize: '200% 200%',
-    animation: 'text-animation 60s ease infinite',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    backgroundSize: "200% 200%",
+    animation: "text-animation 60s ease infinite",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
   };
 
   const nameStyle = {
@@ -41,19 +41,19 @@ export default function Header(): JSX.Element {
       </style>
       <h1
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: -10,
           right: 0,
           margin: 30,
           zIndex: 1,
-          fontFamily: 'Inter, sans-serif',
-          fontSize: '1rem',
+          fontFamily: "Inter, sans-serif",
+          fontSize: "1rem",
           fontWeight: 400,
-          textShadow: '0 0 15px rgba(0, 255, 128, 0.4)',
+          textShadow: "0 0 15px rgba(0, 255, 128, 0.4)",
         }}
       >
         <span style={nameStyle}>Sean Green</span>
-        <span style={{ color: '#303030', margin: 8 }}>/</span>
+        <span style={{ color: "#303030", margin: 8 }}>/</span>
         <span style={yearStyle}>2025</span>
       </h1>
     </>
