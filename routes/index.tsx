@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
-import Layout from '@components/Layout.tsx';
+import Heart from '@islands/Heart.tsx';
 
 export default function Home(): JSX.Element {
-  return <Layout />;
+  return <Heart />;
 }

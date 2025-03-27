@@ -14,7 +14,7 @@ type ColorName = keyof typeof rotationColorMap;
 const colorNames = Object.keys(rotationColorMap) as ColorName[];
 
 interface HeartProps {
-  initialColor: ColorName;
+  initialColor?: string;
 }
 
 const sendHueRequest = async (colorName: string) => {
@@ -30,7 +30,7 @@ const sendHueRequest = async (colorName: string) => {
 };
 
 export default function Heart({
-  initialColor = 'green',
+  initialColor = Object.keys(rotationColorMap)[0],
 }: HeartProps): JSX.Element {
   const [currentColorIndex, setCurrentColorIndex] = useState(() => {
     const index = colorNames.indexOf(initialColor as ColorName);
