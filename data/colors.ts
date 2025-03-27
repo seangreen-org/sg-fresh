@@ -1,10 +1,17 @@
-export const rotationColorMap = {
-  green: 0,
-  blue: 70,
-  pink: 150,
-  red: 230,
-  orange: 260,
-};
+export enum ColorName {
+  Green = "green",
+  Blue = "blue",
+  Pink = "pink",
+  Red = "red",
+  Orange = "orange",
+}
 
-export type ColorName = keyof typeof rotationColorMap;
-export const colorNames = Object.keys(rotationColorMap) as ColorName[];
+export const rotationColorMap: Record<ColorName, number> = {
+  [ColorName.Green]: 0,
+  [ColorName.Blue]: 70,
+  [ColorName.Pink]: 150,
+  [ColorName.Red]: 230,
+  [ColorName.Orange]: 260,
+} as const;
+
+export const colorNames = Object.values(ColorName);

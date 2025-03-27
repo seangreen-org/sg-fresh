@@ -1,3 +1,4 @@
+// TODO(tests): create tests with page objects
 import { expect } from "$std/expect/mod.ts";
 import { type Browser, chromium, type Page } from "npm:@playwright/test";
 
