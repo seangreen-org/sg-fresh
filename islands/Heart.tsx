@@ -55,6 +55,7 @@ export default function Heart({
 
     // @ts-ignore: umami analytics global object
     globalThis.umami.track(`heart-click-${colorName}`);
+    globalThis.history.replaceState(null, '', `/${colorName}`);
   };
 
   return (
