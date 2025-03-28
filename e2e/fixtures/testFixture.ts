@@ -1,5 +1,5 @@
 import { type Browser, chromium, type Page } from "npm:@playwright/test";
-import { HeartPage } from "./pages/HeartPage.ts";
+import { HeartPage } from "../pages/HeartPage.ts";
 
 export class TestFixture {
   browser!: Browser;
