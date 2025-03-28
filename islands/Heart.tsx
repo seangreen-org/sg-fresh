@@ -2,8 +2,8 @@ import type { JSX } from "preact/jsx-runtime";
 import { useEffect, useState } from "preact/hooks";
 import sendHueRequest from "@serivces/sendHueRequest.ts";
 import {
-  type ColorName,
   colorNames,
+  type HeartColor,
   rotationColorMap,
 } from "../data/colors.ts";
 import trees from "@/data/trees.ts";
@@ -16,7 +16,7 @@ export default function Heart({
   initialColor = Object.keys(rotationColorMap)[0],
 }: HeartProps): JSX.Element {
   const [currentColorIndex, setCurrentColorIndex] = useState(() => {
-    const index = colorNames.indexOf(initialColor as ColorName);
+    const index = colorNames.indexOf(initialColor as HeartColor);
     return index >= 0 ? index : 0;
   });
   const [isHovered, setIsHovered] = useState(false);
@@ -55,7 +55,8 @@ export default function Heart({
           }
         `}
       </style>
-      <svg data-testid="heart"
+      <svg
+        data-testid="heart"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"

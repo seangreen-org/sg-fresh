@@ -1,4 +1,4 @@
-export enum ColorName {
+export enum HeartColor {
   Green = "green",
   Blue = "blue",
   Pink = "pink",
@@ -6,12 +6,12 @@ export enum ColorName {
   Orange = "orange",
 }
 
-export const rotationColorMap: Record<ColorName, number> = {
-  [ColorName.Green]: 0,
-  [ColorName.Blue]: 70,
-  [ColorName.Pink]: 150,
-  [ColorName.Red]: 230,
-  [ColorName.Orange]: 260,
+export const rotationColorMap: Record<HeartColor, number> = {
+  [HeartColor.Green]: 0,
+  [HeartColor.Blue]: 70,
+  [HeartColor.Pink]: 150,
+  [HeartColor.Red]: 230,
+  [HeartColor.Orange]: 260,
 } as const;
 
-export const colorNames = Object.values(ColorName);
+export const colorNames = Object.values(HeartColor);
