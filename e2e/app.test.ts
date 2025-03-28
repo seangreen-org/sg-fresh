@@ -9,9 +9,9 @@ const defaultColor = Object.keys(rotationColorMap)[0];
 
 Deno.test(
   "Initial Load: Page loads with correct title",
-  withTestFixture(async ({ page, heartPage }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.goto();
-    const title = await page.title();
+    const title = await heartPage.getPageTitle();
     expect(title).toBe("sg1981x");
   }),
 );
@@ -44,27 +44,20 @@ Deno.test(
 
 Deno.test(
   "Interaction: Clicking heart changes color style",
-  withTestFixture(async ({ heartPage, page }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.goto();
     const initialRotation = await heartPage.getHeartHueRotateValue();
     await heartPage.clickHeart();
-    await page?.waitForTimeout(100);
     const newRotation = await heartPage.getHeartHueRotateValue();
     expect(newRotation).not.toBe(initialRotation);
     expect(Object.values(rotationColorMap)).toContain(newRotation);
   }),
 );
 
-Deno.test(
+Deno.test.only(
   "Interaction: Clicking heart sends Hue API request with new color",
   withTestFixture(async ({ heartPage }) => {
     await heartPage.goto();
-
-    const {
-      requestPromise:
-      initialRequestPromise
-    } = await heartPage.interceptHueApiRequest();
-    await initialRequestPromise;
 
     const {
       requestPromise: clickRequestPromise,

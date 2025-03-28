@@ -26,6 +26,10 @@ export class HeartPage {
     await this.interactivePath.hover();
   }
 
+  async getPageTitle(): Promise<string> {
+    return await this.page.title();
+  }
+
   async getHeartHueRotateValue(): Promise<number | null> {
     const style = await this.heartSvg.getAttribute('style');
     if (!style) return null;
