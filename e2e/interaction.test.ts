@@ -1,78 +1,63 @@
 import { expect } from "$std/expect/mod.ts";
-import { withTestFixture } from "./utils/testHelper.ts";
+import { defaultColor, withTestFixture } from "./utils/testHelper.ts";
 import { type ColorName, colorNames, rotationColorMap } from "@/data/colors.ts";
 
-const defaultColor = Object.keys(rotationColorMap)[0];  // !! duplicated
-
 Deno.test(
-  "Clicking heart changes color style",
+  "heart changes colour when touched",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
     const initialRotation = await heartPage.getHeartHueRotateValue();
 
-    await heartPage.clickHeart();
-
+    await heartPage.touchHeart();
     const newRotation = await heartPage.getHeartHueRotateValue();
+
     expect(newRotation).not.toBe(initialRotation);
     expect(Object.values(rotationColorMap)).toContain(newRotation);
   }),
 );
 
 Deno.test(
-  "Clicking heart sends Hue API request with new color",
+  "heart changes colour of light when touched",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
 
     const {
       requestPromise: clickRequestPromise,
       requestData: clickRequestData
     } = await heartPage.interceptHueApiRequest();
 
-    await heartPage.clickHeart();
+    await heartPage.touchHeart();
     await clickRequestPromise;
 
-    expect(clickRequestData.color).not.toBe(null);
     expect(clickRequestData.color).not.toBe(defaultColor);
     expect(colorNames).toContain(clickRequestData.color as ColorName);
   }),
 );
 
 Deno.test(
-  "Clicking heart updates URL",
+  "heart updates browser URL when touched",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
 
     const { requestPromise: clickRequestPromise, requestData: clickRequestData } =
       await heartPage.interceptHueApiRequest();
 
-    await heartPage.clickHeart();
+    await heartPage.touchHeart();
     await clickRequestPromise;
 
     const expectedColor = clickRequestData.color;
-    expect(expectedColor).not.toBe(null);
     await heartPage.expectPageUrlToContain(`/${expectedColor}`);
   }),
 );
 
 Deno.test(
-  "Hovering heart applies animation",
+  "heart beats when touched",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
+    await heartPage.expectHeartBeatingState(false);
     await heartPage.hoverHeart();
     await heartPage.expectHeartBeatingState(true);
-  }),
-);
-
-Deno.test(
-  "Moving mouse off heart removes animation",
-  withTestFixture(async ({ heartPage, page }) => {
-    await heartPage.goto();
-    await heartPage.hoverHeart();
-    await page?.waitForTimeout(100);
-
-    await page?.mouse.move(0, 0);
-    await page?.waitForTimeout(100);
-
+    await heartPage.hoverOffHeart();
     await heartPage.expectHeartBeatingState(false);
   }),
 );

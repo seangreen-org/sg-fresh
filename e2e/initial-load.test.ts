@@ -1,42 +1,37 @@
 // !! direct url tests
-// !! remove timeouts and direct page access
-
 import { expect } from "$std/expect/mod.ts";
-import { withTestFixture } from "./utils/testHelper.ts";
-import { rotationColorMap } from "@/data/colors.ts";
-
-const defaultColor = Object.keys(rotationColorMap)[0];
+import { defaultColor, withTestFixture } from "./utils/testHelper.ts";
 
 Deno.test(
-  "Page loads with correct title",
+  "page loads with correct title",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
     const title = await heartPage.getPageTitle();
     expect(title).toBe("sg1981x");
   }),
 );
 
 Deno.test(
-  "Heart SVG is visible",
+  "page shows heart",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
+    await heartPage.open();
     await heartPage.expectHeartToBeVisible();
   }),
 );
 
 Deno.test(
-  "Heart has default color style",
+  "heart is green by default",
   withTestFixture(async ({ heartPage }) => {
-    await heartPage.goto();
-    await heartPage.expectHeartToHaveColor(defaultColor);
+    await heartPage.open();
+    await heartPage.expectHeartColorToBe(defaultColor);
   }),
 );
 
 Deno.test(
-  "Sends initial Hue API request",
+  "page sends initial Hue API request",
   withTestFixture(async ({ heartPage }) => {
   const { requestPromise, requestData } = await heartPage.interceptHueApiRequest();
-    await heartPage.goto();
+    await heartPage.open();
     await requestPromise;
     expect(requestData.color).toBe(defaultColor);
   }),

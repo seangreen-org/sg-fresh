@@ -1,6 +1,6 @@
 import { type Page, type Locator, type Request } from "npm:playwright";
 import { expect } from "npm:playwright/test";
-import { rotationColorMap } from '../../data/colors.ts';
+import { ColorName, rotationColorMap } from "@/data/colors.ts";
 
 export class HeartPage {
   readonly page: Page;
@@ -13,12 +13,16 @@ export class HeartPage {
     this.interactivePath = page.locator('path.interactive-heart');
   }
 
-  async goto(color?: string): Promise<void> {
+  async open(color?: string): Promise<void> {
     const url = color ? `/${color}` : '/';
     await this.page.goto(`http://localhost:8000${url}`);
   }
 
-  async clickHeart(): Promise<void> {
+  async getPageTitle(): Promise<string> {
+    return await this.page.title();
+  }
+
+  async touchHeart(): Promise<void> {
     await this.interactivePath.click();
   }
 
@@ -26,8 +30,8 @@ export class HeartPage {
     await this.interactivePath.hover();
   }
 
-  async getPageTitle(): Promise<string> {
-    return await this.page.title();
+  async hoverOffHeart(): Promise<void> {
+    await this.page.mouse.move(0, 0);
   }
 
   async getHeartHueRotateValue(): Promise<number | null> {
@@ -48,7 +52,7 @@ export class HeartPage {
     await expect(this.heartSvg).toBeVisible();
   }
 
-  async expectHeartToHaveColor(colorName: string): Promise<void> {
+  async expectHeartColorToBe(colorName: ColorName): Promise<void> {
     const expectedRotation =
       rotationColorMap[colorName as keyof typeof rotationColorMap];
     await expect(this.getHeartHueRotateValue()).resolves.toBe(expectedRotation);
@@ -69,7 +73,7 @@ export class HeartPage {
     expect(this.page.url()).toContain(path);
   }
 
-  async interceptHueApiRequest(): Promise<{
+  interceptHueApiRequest(): Promise<{
     requestPromise: Promise<Request>;
     requestData: { color: string | null };
   }> {
@@ -89,8 +93,6 @@ export class HeartPage {
       return false;
     });
 
-    await this.page.route('**/api/hue', (route) => route.continue());
-
-    return { requestPromise, requestData };
+    return Promise.resolve({ requestPromise, requestData });
   }
 }
