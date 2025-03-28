@@ -29,7 +29,7 @@ Deno.test(
 );
 
 Deno.test(
-  "page sends initial Hue API request",
+  "page sets colour of hue light to green initially",
   withTestFixture(async ({ heartPage }) => {
     await heartPage.openAsync();
     expect(heartPage.heart.getLastHueColorChange()).toBe(HeartColor.Green);
