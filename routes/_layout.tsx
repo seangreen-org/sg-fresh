@@ -1,5 +1,5 @@
 import type { JSX } from "preact/jsx-runtime";
-import Header from "@components/Header.tsx";
+import Footnote from "../components/Footnote.tsx";
 import GalaxyBackground from "@components/GalaxyBackground.tsx";
 
 interface LayoutProps {
@@ -9,7 +9,7 @@ interface LayoutProps {
 export default function Layout({ Component }: LayoutProps): JSX.Element {
   return (
     <main>
-      <Header />
+      <Footnote />
       <GalaxyBackground />
       <Component />
     </main>

@@ -1,6 +1,6 @@
 import type { JSX } from "preact/jsx-runtime";
 
-export default function Header(): JSX.Element {
+export default function Footnote(): JSX.Element {
   const angle = (() => {
     const randomAngle = Math.floor(Math.random() * 360);
     const isNearStraightAngle = [0, 90, 180, 270, 360].some(
