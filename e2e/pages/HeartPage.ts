@@ -54,11 +54,15 @@ export class HeartPage {
     await expect(this.getHeartHueRotateValue()).resolves.toBe(expectedRotation);
   }
 
-  async expectHeartAnimation(expectedAnimation: string | null): Promise<void> {
-    await expect(this.getHeartAnimationValue()).resolves.toBe(
-      expectedAnimation
-    );
-  }
+  async expectHeartBeatingState(isBeating: boolean): Promise<void> {
+    const beatingAnimationName = 'heartbeat';
+    const animation = await this.getHeartAnimationValue();
+    if (isBeating) {
+        expect(animation).toContain(beatingAnimationName);
+    } else {
+        expect(animation).not.toContain(beatingAnimationName);
+    }
+}
 
   async expectPageUrlToContain(path: string): Promise<void> {
     await this.page.waitForURL(`**${path}`);
