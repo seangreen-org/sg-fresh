@@ -1,10 +1,9 @@
 import { type Page, type Locator, type Request } from "npm:playwright";
-import { expect } from "npm:playwright/test";
 import { ColorName, rotationColorMap } from "@/data/colors.ts";
 
 export class HeartPage {
-  readonly page: Page;
-  readonly heartSvg: Locator;
+  private readonly page: Page;
+  private readonly heartSvg: Locator;
   readonly interactivePath: Locator;
 
   constructor(page: Page) {
@@ -18,59 +17,55 @@ export class HeartPage {
     await this.page.goto(`http://localhost:8000${url}`);
   }
 
+  async touch(): Promise<void> {
+    await this.interactivePath.click();
+  }
+
+  async hover(): Promise<void> {
+    await this.interactivePath.hover();
+  }
+
+  async leave(): Promise<void> {
+    await this.page.mouse.move(0, 0);
+  }
+
   async getPageTitle(): Promise<string> {
     return await this.page.title();
   }
 
-  async touchHeart(): Promise<void> {
-    await this.interactivePath.click();
-  }
-
-  async hoverHeart(): Promise<void> {
-    await this.interactivePath.hover();
-  }
-
-  async hoverOffHeart(): Promise<void> {
-    await this.page.mouse.move(0, 0);
-  }
-
-  async getHeartHueRotateValue(): Promise<number | null> {
+  async getHeartColor(): Promise<ColorName | null> {
     const style = await this.heartSvg.getAttribute('style');
     if (!style) return null;
+
     const match = style.match(/hue-rotate\((\d+)deg\)/);
-    return match ? parseInt(match[1], 10) : null;
+    if (!match) return ColorName.Green;
+
+    const rotation = parseInt(match[1], 10);
+    const color = Object.entries(rotationColorMap)
+      .find(([_, degrees]) => degrees === rotation)?.[0] as ColorName;
+
+    return color ?? ColorName.Green;
   }
 
-  async getHeartAnimationValue(): Promise<string | null> {
-    const style = await this.heartSvg.getAttribute('style');
-    if (!style) return null;
-    const match = style.match(/animation:\s*([^;]+);/);
-    return match ? match[1].trim().replace(/\s+/g, ' ') : null;
+  async isHeartVisible(): Promise<boolean> {
+    return await this.heartSvg.isVisible();
   }
 
-  async expectHeartToBeVisible(): Promise<void> {
-    await expect(this.heartSvg).toBeVisible();
-  }
-
-  async expectHeartColorToBe(colorName: ColorName): Promise<void> {
-    const expectedRotation =
-      rotationColorMap[colorName as keyof typeof rotationColorMap];
-    await expect(this.getHeartHueRotateValue()).resolves.toBe(expectedRotation);
-  }
-
-  async expectHeartBeatingState(isBeating: boolean): Promise<void> {
+  async isHeartBeating(): Promise<boolean> {
     const beatingAnimationName = 'heartbeat';
-    const animation = await this.getHeartAnimationValue();
-    if (isBeating) {
-        expect(animation).toContain(beatingAnimationName);
-    } else {
-        expect(animation).not.toContain(beatingAnimationName);
-    }
-}
+    const style = await this.heartSvg.getAttribute('style') ?? '';
+    const match = style.match(/animation:\s*([^;]+);/);
+    const animation = match ? match[1].trim().replace(/\s+/g, ' ') : null;
+    return animation?.includes(beatingAnimationName) ?? false;
+  }
 
-  async expectPageUrlToContain(path: string): Promise<void> {
-    await this.page.waitForURL(`**${path}`);
-    expect(this.page.url()).toContain(path);
+  async waitForUrlToMatch(expectedPath: string): Promise<boolean> {
+    try {
+      await this.page.waitForURL((url) => url.pathname.includes(expectedPath));
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   interceptHueApiRequest(): Promise<{
