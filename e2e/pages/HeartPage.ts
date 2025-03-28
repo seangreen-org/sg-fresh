@@ -4,7 +4,7 @@ import { ColorName, rotationColorMap } from "@/data/colors.ts";
 export class HeartPage {
   private readonly page: Page;
   private readonly heartSvg: Locator;
-  readonly interactivePath: Locator;
+  private readonly interactivePath: Locator;
 
   constructor(page: Page) {
     this.page = page;

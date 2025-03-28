@@ -4,7 +4,7 @@ import { ColorName, colorNames } from "@/data/colors.ts";
 
 Deno.test(
   "heart changes colour when touched",
-  withTestFixture(async ({ heart: heartPage }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.open();
     const initialColor = await heartPage.getHeartColor();
 
@@ -17,7 +17,7 @@ Deno.test(
 
 Deno.test(
   "heart changes colour of light when touched",
-  withTestFixture(async ({ heart: heartPage }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.open();
 
     const {
@@ -35,7 +35,7 @@ Deno.test(
 
 Deno.test(
   "heart updates browser URL when touched",
-  withTestFixture(async ({ heart: heartPage }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.open();
 
     const { requestPromise: clickRequestPromise, requestData: clickRequestData } =
@@ -51,7 +51,7 @@ Deno.test(
 
 Deno.test(
   "heart beats when hovered",
-  withTestFixture(async ({ heart: heartPage }) => {
+  withTestFixture(async ({ heartPage }) => {
     await heartPage.open();
     expect(await heartPage.isHeartBeating()).toBe(false);
 

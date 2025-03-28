@@ -4,13 +4,13 @@ import { HeartPage } from "../pages/HeartPage.ts";
 export class TestFixture {
   private browser!: Browser;
   private page!: Page;
-  heart!: HeartPage;
+  heartPage!: HeartPage;
 
   async setup(): Promise<void> {
     this.browser = await chromium.launch();
     this.page = await this.browser.newPage();
     if (this.page) {
-      this.heart = new HeartPage(this.page);
+      this.heartPage = new HeartPage(this.page);
     } else {
       throw new Error("Failed to create Playwright page.");
     }
