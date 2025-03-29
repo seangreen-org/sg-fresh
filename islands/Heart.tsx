@@ -64,6 +64,10 @@ export default function Heart({
               colorNames.length)
           ]
         }`}
+        onClick={(e) => {
+          e.preventDefault();
+          handleClick();
+        }}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -201,7 +205,6 @@ export default function Heart({
               pointerEvents: "all",
               cursor: "pointer",
             }}
-            onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           />
