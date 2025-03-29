@@ -58,10 +58,10 @@ export default function Heart({
       <a
         href={`/${
           colorNames[
-            ((currentColorIndex +
+            (currentColorIndex +
               Math.floor(Math.random() * (colorNames.length - 1)) +
               1) %
-              colorNames.length)
+            colorNames.length
           ]
         }`}
         onClick={(e) => {
@@ -69,14 +69,14 @@ export default function Heart({
           handleClick();
         }}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
           top: 0,
-          left: 0
+          left: 0,
         }}
       >
         <svg
@@ -94,7 +94,9 @@ export default function Heart({
               rotationColorMap[colorNames[currentColorIndex]]
             }deg)`,
             transform: "scale(1)",
-            animation: isHovered ? "heartbeat 1.5s ease-in-out infinite" : "none",
+            animation: isHovered
+              ? "heartbeat 1.5s ease-in-out infinite"
+              : "none",
             transition: "all 0.3s ease-out",
           }}
           role="button"
