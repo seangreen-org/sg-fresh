@@ -52,7 +52,7 @@ export default function Footnote(): JSX.Element {
           textShadow: "0 0 15px rgba(0, 255, 128, 0.4)",
         }}
       >
-        <span style={nameStyle}>Sean Green</span>
+        <a href="https://github.com/seangreen-org/sg-fresh" style={nameStyle}>Sean Green</a>
         <span style={{ color: "#303030", margin: 8 }}>/</span>
         <span style={yearStyle}>2025</span>
       </h1>

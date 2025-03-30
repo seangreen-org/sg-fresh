@@ -15,8 +15,6 @@ visualization and dynamic UI elements.
 - Interactive color-changing heart visualization
 - Dynamic galaxy background with SVG animations
 - Integration with Philips Hue lights via API
-- Mobile-responsive design
-- PWA support with web manifest
 
 ## Development
 
