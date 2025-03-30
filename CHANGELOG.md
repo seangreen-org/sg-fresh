@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/seangreen-org/sg-fresh/compare/v1.4.0...v1.4.1) (2025-03-30)
+
+
+### Bug Fixes
+
+* remove underline on GitHub link for iOS ([0341f5e](https://github.com/seangreen-org/sg-fresh/commit/0341f5ee84ac74bab7547c16e2867094b6e3e9ea))
+
 # [1.4.0](https://github.com/seangreen-org/sg-fresh/compare/v1.3.0...v1.4.0) (2025-03-30)
 
 
