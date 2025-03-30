@@ -69,15 +69,18 @@ export default function Heart({
           handleClick();
         }}
         style={{
-          display: "flex",
-          position: "absolute",
           top: 0,
           left: 0,
+          display: "flex",
           width: "100%",
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
+          filter: isHovered ? "saturate(1.7)" : "saturate(1.2)",
+          transition: "filter 0.5s ease-out",
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <svg
           data-testid="heart"
