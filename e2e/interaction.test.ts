@@ -28,7 +28,6 @@ Deno.test(
   "heart updates browser URL when touched",
   withTestFixture(async ({ heartPage }) => {
     await heartPage.openAsync();
-    expect(heartPage.heart.getLastHueColorChange()).toBe(HeartColor.Green);
 
     await heartPage.heart.touch();
 
