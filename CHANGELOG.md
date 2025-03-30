@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/seangreen-org/sg-fresh/compare/v1.4.1...v1.5.0) (2025-03-30)
+
+
+### Features
+
+* vibe coding (WIP) - add comment API and integrate LetterBox component in Footnote ([425ae82](https://github.com/seangreen-org/sg-fresh/commit/425ae8264b21d697cc3ac58d7868b5b559190b6a))
+
 ## [1.4.1](https://github.com/seangreen-org/sg-fresh/compare/v1.4.0...v1.4.1) (2025-03-30)
 
 
