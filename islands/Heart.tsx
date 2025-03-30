@@ -23,8 +23,7 @@ export default function Heart({
 
   useEffect(() => {
     const sendDefaultColorHueRequest = async () => {
-      const colorName = colorNames[currentColorIndex];
-      await sendHueRequest(colorName);
+      await sendHueRequest(colorNames[currentColorIndex]);
     };
     sendDefaultColorHueRequest();
   }, []);
@@ -55,19 +54,7 @@ export default function Heart({
           }
         `}
       </style>
-      <a
-        href={`/${
-          colorNames[
-            (currentColorIndex +
-              Math.floor(Math.random() * (colorNames.length - 1)) +
-              1) %
-            colorNames.length
-          ]
-        }`}
-        onClick={(e) => {
-          e.preventDefault();
-          handleClick();
-        }}
+      <div
         style={{
           top: 0,
           left: 0,
@@ -76,11 +63,7 @@ export default function Heart({
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          filter: isHovered ? "saturate(1.7)" : "saturate(1.2)",
-          transition: "filter 0.5s ease-out",
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <svg
           data-testid="heart"
@@ -94,16 +77,14 @@ export default function Heart({
             maxHeight: "75%",
             display: "block",
             filter: `hue-rotate(${
-              rotationColorMap[colorNames[currentColorIndex]]
-            }deg)`,
+              rotationColorMap[colorNames[currentColorIndex]] ?? 0
+            }deg) ${isHovered ? "saturate(1.7)" : "saturate(1.2)"}`,
             transform: "scale(1)",
             animation: isHovered
               ? "heartbeat 1.5s ease-in-out infinite"
               : "none",
             transition: "all 0.3s ease-out",
           }}
-          role="button"
-          aria-label="Interactive heart that changes color when clicked"
         >
           <defs>
             <linearGradient id="magicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -126,14 +107,7 @@ export default function Heart({
             </linearGradient>
 
             <clipPath id="heartClip">
-              <path d="
-                  M 250,80
-                  C 220,20, 140,20, 110,80
-                  C 50,180, 150,300, 250,380
-                  C 350,300, 450,180, 390,80
-                  C 360,20, 280,20, 250,80
-                  Z
-                " />
+              <path d=" M 250,80 C 220,20, 140,20, 110,80 C 50,180, 150,300, 250,380 C 350,300, 450,180, 390,80 C 360,20, 280,20, 250,80 Z " />
             </clipPath>
 
             <linearGradient id="greenGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -185,23 +159,16 @@ export default function Heart({
                   opacity={tree.opacity}
                   style={{
                     transformOrigin: "250px 250px",
-                    transform: "rotate(var(--rotation))",
-                    "--rotation": `${tree.rotation}deg`,
+                    transform: `rotate(${tree.rotation}deg)`,
                   }}
                 />
               ))}
             </g>
           </g>
-
           <path
-            d="
-              M 250,80
-              C 220,20, 140,20, 110,80
-              C 50,180, 150,300, 250,380
-              C 350,300, 450,180, 390,80
-              C 360,20, 280,20, 250,80
-              Z
-            "
+            role="button"
+            aria-label="Interactive heart that changes color when clicked"
+            d=" M 250,80 C 220,20, 140,20, 110,80 C 50,180, 150,300, 250,380 C 350,300, 450,180, 390,80 C 360,20, 280,20, 250,80 Z "
             className="interactive-heart"
             fill="transparent"
             stroke="#0EE584"
@@ -210,11 +177,12 @@ export default function Heart({
               pointerEvents: "all",
               cursor: "pointer",
             }}
+            onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           />
         </svg>
-      </a>
+      </div>
     </>
   );
 }
