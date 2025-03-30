@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/seangreen-org/sg-fresh/compare/v1.3.0...v1.4.0) (2025-03-30)
+
+
+### Features
+
+* bounds on heart interactive area ([da18177](https://github.com/seangreen-org/sg-fresh/commit/da18177725e20ae3f30c5d807e44109b3c843a03))
+
 # [1.3.0](https://github.com/seangreen-org/sg-fresh/compare/v1.2.0...v1.3.0) (2025-03-30)
 
 
