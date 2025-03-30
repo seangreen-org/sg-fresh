@@ -6,11 +6,8 @@ visualization and dynamic UI elements.
 ## 🛠️ Tech Stack
 
 - 🦕 **[Deno](https://deno.com/)**: Modern runtime for JavaScript and TypeScript
-
 - 🍋 **[Fresh](https://fresh.deno.dev/)**: Next-gen web framework for Deno
-
 - ⚛️ **[Preact](https://preactjs.com/)**: Fast 3kB alternative to React
-
 - 💡 **[Hue API](https://developers.meethue.com)**: Real world impact
 
 ## Features
