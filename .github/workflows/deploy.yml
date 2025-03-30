@@ -1,4 +1,4 @@
-name: Deploy
+name: Pipeline
 on:
   push:
     branches: main
@@ -55,6 +55,9 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+    outputs:
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -70,15 +73,25 @@ jobs:
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog
 
       - name: Semantic Release
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+        run: |
+          RELEASE_OUTPUT=$(npx semantic-release --dry-run)
+          if echo "$RELEASE_OUTPUT" | grep -q "The next release version is"; then
+            echo "new_release_published=true" >> $GITHUB_OUTPUT
+            VERSION=$(echo "$RELEASE_OUTPUT" | grep -o "The next release version is [0-9]\+\.[0-9]\+\.[0-9]\+" | awk '{print $6}')
+            echo "new_release_version=$VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "new_release_published=false" >> $GITHUB_OUTPUT
+          fi
+          npx semantic-release
 
   deploy:
     name: Deploy
     needs: [test, release]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: needs.release.outputs.new_release_published == 'true'
     permissions:
       id-token: write
       contents: read
