@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/seangreen-org/sg-fresh/compare/v1.0.0...v1.1.0) (2025-03-30)
+
+
+### Bug Fixes
+
+* update check task to ignore CHANGELOG.md during linting and formatting ([1c9b3f4](https://github.com/seangreen-org/sg-fresh/commit/1c9b3f4e859255939ecf958ed9312c5fda903ef0))
+* update check task to remove CHANGELOG.md ignore from linting ([fe8308f](https://github.com/seangreen-org/sg-fresh/commit/fe8308fc3ba2c0390320626bf734afcd2715609b))
+
+
+### Features
+
+* update deployment pipeline to include release version outputs ([316b3f5](https://github.com/seangreen-org/sg-fresh/commit/316b3f5c58248900b3780b23bd2f978e5288981e))
+
 # 1.0.0 (2025-03-30)
 
 
