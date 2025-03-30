@@ -1,4 +1,5 @@
 import type { JSX } from "preact/jsx-runtime";
+import LetterBox from "@islands/LetterBox.tsx";
 
 export default function Footnote(): JSX.Element {
   const angle = (() => {
@@ -38,6 +39,10 @@ export default function Footnote(): JSX.Element {
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
           }
+          .footnote-name-link:hover {
+            filter: brightness(1.2);
+            transition: filter 0.2s ease-in-out;
+          }
         `}
       </style>
       <h1
@@ -53,9 +58,18 @@ export default function Footnote(): JSX.Element {
           textShadow: "0 0 15px rgba(0, 255, 128, 0.4)",
         }}
       >
-        <a href="https://github.com/seangreen-org/sg-fresh" style={nameStyle}>
-          Sean Green
-        </a>
+        <LetterBox>
+          <a
+            href="https://github.com/seangreen-org/sg-fresh"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={nameStyle}
+            class="footnote-name-link"
+            onClick={(e) => e.preventDefault()}
+          >
+            Sean Green
+          </a>
+        </LetterBox>
         <span style={{ color: "#303030", margin: 8 }}>/</span>
         <span style={yearStyle}>2025</span>
       </h1>
