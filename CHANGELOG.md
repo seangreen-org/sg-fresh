@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/seangreen-org/sg-fresh/compare/v1.1.0...v1.2.0) (2025-03-30)
+
+
+### Bug Fixes
+
+* deno fmt vscode integration not great ([0bb0181](https://github.com/seangreen-org/sg-fresh/commit/0bb0181a56b4bbf8e7da71c3a5f4efe256883ced))
+* formatting and add vscode formatOnSave ([bdf5d7e](https://github.com/seangreen-org/sg-fresh/commit/bdf5d7e713ee79b7ac9ea3c06a45b3fb06fe0b7e))
+* remove unnecessary expectation in heart updates test ([bf4f74d](https://github.com/seangreen-org/sg-fresh/commit/bf4f74d0e5168e7e7ee0e768e34cf4edd128319c))
+
+
+### Features
+
+* add GitHub link ([419d274](https://github.com/seangreen-org/sg-fresh/commit/419d2743e79248e98a4948d16fd89dd3035217ac))
+
 # [1.1.0](https://github.com/seangreen-org/sg-fresh/compare/v1.0.0...v1.1.0) (2025-03-30)
 
 ### Bug Fixes
