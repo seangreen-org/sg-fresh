@@ -57,6 +57,7 @@ Deno.test(
   withTestFixture(async ({ heartPage }) => {
     for (const color of colorNames) {
       await heartPage.openAsync(color.toLowerCase());
+      await heartPage.waitForUrlToMatchAsync(`/${color}`);
       expect(await heartPage.heart.getColorAsync()).toBe(color);
     }
   }),
