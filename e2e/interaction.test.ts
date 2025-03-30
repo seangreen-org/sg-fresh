@@ -1,6 +1,6 @@
 import { expect } from "$std/expect/mod.ts";
+import { colorNames, HeartColor } from "@/data/colors.ts";
 import { withTestFixture } from "./utils/testHelper.ts";
-import { HeartColor } from "@/data/colors.ts";
 
 Deno.test(
   "heart changes colour when touched",
@@ -49,5 +49,15 @@ Deno.test(
 
     await heartPage.heart.leave();
     expect(await heartPage.isHeartBeatingAsync()).toBe(false);
+  }),
+);
+
+Deno.test(
+  "directly accessing color urls sets heart to correct color",
+  withTestFixture(async ({ heartPage }) => {
+    for (const color of colorNames) {
+      await heartPage.openAsync(color.toLowerCase());
+      expect(await heartPage.heart.getColorAsync()).toBe(color);
+    }
   }),
 );
