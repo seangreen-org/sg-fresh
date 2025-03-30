@@ -19,6 +19,7 @@ export default function Footnote(): JSX.Element {
   const nameStyle = {
     opacity: 1,
     background: `linear-gradient(${angle}, #00cc7a, #00aadd, #ddaa00, #dd2277)`,
+    textDecoration: "none",
     ...baseGradientStyle,
   };
 
