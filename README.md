@@ -68,7 +68,7 @@ sg-fresh/
 
 ## Deployment
 
-This project is automatically deployed to Deno Deploy when changes are pushed to
+This project uses semantic versioning powered by [conventional commits](https://www.conventionalcommits.org/). The project is automatically deployed to Deno Deploy when releasable changes are pushed to
 the main branch.
 
 ## License
