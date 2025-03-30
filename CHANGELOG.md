@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/seangreen-org/sg-fresh/compare/v1.2.0...v1.3.0) (2025-03-30)
+
+
+### Features
+
+* enhance heart component with hover effect and transition ([f437d6d](https://github.com/seangreen-org/sg-fresh/commit/f437d6d5740b0199752230485013fef8b5754289))
+
 # [1.2.0](https://github.com/seangreen-org/sg-fresh/compare/v1.1.0...v1.2.0) (2025-03-30)
 
 
