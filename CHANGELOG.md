@@ -1,3 +1,11 @@
+## [1.6.2](https://github.com/seangreen-org/sg-fresh/compare/v1.6.1...v1.6.2) (2025-03-31)
+
+
+### Bug Fixes
+
+* more fmt issues. vscode save on format why? ([8f46817](https://github.com/seangreen-org/sg-fresh/commit/8f4681711cc62c0e0ee841b6df9c327915a85314))
+* update import paths to use correct aliases for data and components ([db5c253](https://github.com/seangreen-org/sg-fresh/commit/db5c253c38b92dd781a170410830a6bb5d79ff16))
+
 ## [1.6.1](https://github.com/seangreen-org/sg-fresh/compare/v1.6.0...v1.6.1) (2025-03-31)
 
 
