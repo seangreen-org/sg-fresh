@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/seangreen-org/sg-fresh/compare/v1.5.0...v1.6.0) (2025-03-31)
+
+
+### Features
+
+* improved LetterBox ([bc94166](https://github.com/seangreen-org/sg-fresh/commit/bc94166496ea99cf05a790310a527dc936336658))
+
 # [1.5.0](https://github.com/seangreen-org/sg-fresh/compare/v1.4.1...v1.5.0) (2025-03-30)
 
 
