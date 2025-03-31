@@ -1,11 +1,7 @@
 import type { JSX } from "preact/jsx-runtime";
 import { useEffect, useState } from "preact/hooks";
 import sendHueRequest from "@serivces/sendHueRequest.ts";
-import {
-  colorNames,
-  type HeartColor,
-  rotationColorMap,
-} from "@data/colors.ts";
+import { colorNames, type HeartColor, rotationColorMap } from "@data/colors.ts";
 import trees from "@data/trees.ts";
 
 interface HeartProps {
