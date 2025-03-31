@@ -1,10 +1,10 @@
-// vibe code component 😋
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { JSX } from "preact/jsx-runtime";
 
 let hideTimeout: number | undefined;
 const FADE_OUT_DELAY = 2000;
-const TRANSITION_DURATION = 200;
+const TRANSITION_DURATION = 200; // ms
+const SWIPE_DISMISS_THRESHOLD = 80; // pixels to drag down to dismiss
 
 interface CommentPopoverTriggerProps {
   children: JSX.Element;
@@ -49,37 +49,57 @@ export default function CommentPopoverTrigger(
   const [message, setMessage] = useState("");
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const [modifierKeySymbol, setModifierKeySymbol] = useState("Ctrl");
+  const [showKeyboardHint, setShowKeyboardHint] = useState(true); // Default true
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const fadeOutTimeoutRef = useRef<number | undefined>();
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [startY, setStartY] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+
   useEffect(() => {
-    if (
-      typeof navigator !== "undefined" &&
-      /Mac|iPod|iPhone|iPad/.test(navigator.platform)
-    ) {
-      setModifierKeySymbol("⌘");
-    } else {
-      setModifierKeySymbol("Ctrl");
+    // Run detection once on mount
+    if (typeof navigator !== "undefined") {
+      const platform = navigator.platform ?? "";
+      const userAgent = navigator.userAgent ?? "";
+      const isTouchMobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+      setShowKeyboardHint(!isTouchMobile);
+      if (/Mac/i.test(platform)) {
+        setModifierKeySymbol("⌘");
+      } else {
+        setModifierKeySymbol("Ctrl");
+      }
     }
   }, []);
 
-  useEffect(() => {
-    if (isPopoverVisible && !isSubmittedSuccessfully && textareaRef.current) {
-      setTimeout(() => textareaRef.current?.focus(), 50);
+  const showPopover = () => {
+    clearTimeout(fadeOutTimeoutRef.current);
+    fadeOutTimeoutRef.current = undefined;
+    setIsSubmittedSuccessfully(false);
+    setDragOffset(0);
+    if (!isPopoverVisible) {
+      setIsPopoverVisible(true);
+      setMessage("");
+      requestAnimationFrame(() => {
+        textareaRef.current?.focus();
+      });
     }
-  }, [isPopoverVisible, isSubmittedSuccessfully]);
+  };
 
   const closePopover = () => {
     clearTimeout(fadeOutTimeoutRef.current);
     fadeOutTimeoutRef.current = undefined;
-    clearTimeout(hideTimeout);
-    hideTimeout = undefined;
     setIsPopoverVisible(false);
+    setIsDragging(false);
+    setStartY(0);
+    setDragOffset(0);
     setTimeout(() => {
       if (!isPopoverVisible) {
         setIsSubmittedSuccessfully(false);
+        setComment("");
+        setMessage("");
       }
     }, TRANSITION_DURATION);
   };
@@ -88,26 +108,29 @@ export default function CommentPopoverTrigger(
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isPopoverVisible &&
+        !isDragging &&
         popoverRef.current &&
         !popoverRef.current.contains(event.target as Node)
       ) {
-        const triggerElement = popoverRef.current.previousElementSibling;
-        if (
-          triggerElement && !triggerElement.contains(event.target as Node)
-        ) {
+        const triggerElement = popoverRef.current.closest(
+          ".popover-trigger-wrapper",
+        );
+        const isClickOnTrigger = triggerElement &&
+          triggerElement.contains(event.target as Node);
+        if (!isClickOnTrigger) {
           closePopover();
         }
       }
     };
     if (isPopoverVisible) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("click", handleClickOutside, true);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside, true);
     }
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [isPopoverVisible]);
+  }, [isPopoverVisible, isDragging]);
 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
@@ -127,34 +150,9 @@ export default function CommentPopoverTrigger(
 
   useEffect(() => {
     return () => {
-      clearTimeout(hideTimeout);
       clearTimeout(fadeOutTimeoutRef.current);
     };
   }, []);
-
-  const showPopover = () => {
-    clearTimeout(hideTimeout);
-    clearTimeout(fadeOutTimeoutRef.current);
-    fadeOutTimeoutRef.current = undefined;
-    setIsSubmittedSuccessfully(false);
-    if (!isPopoverVisible) {
-      setIsPopoverVisible(true);
-      setMessage("");
-    }
-  };
-
-  const startHideTimer = () => {
-    clearTimeout(hideTimeout);
-    if (isSubmittedSuccessfully || fadeOutTimeoutRef.current) {
-      return;
-    }
-    if (comment.trim() === "") {
-      hideTimeout = setTimeout(() => {
-        closePopover();
-        setComment("");
-      }, 300);
-    }
-  };
 
   const handleSubmit = async (
     e?: JSX.TargetedEvent<HTMLFormElement, Event>,
@@ -205,259 +203,349 @@ export default function CommentPopoverTrigger(
     }
   };
 
-  const popoverBaseStyle: JSX.CSSProperties = {
-    position: "fixed",
-    bottom: "55px",
-    right: "20px",
-    padding: "15px",
-    background: "rgba(30, 30, 30, 0.85)",
-    backdropFilter: "blur(5px)",
-    WebkitBackdropFilter: "blur(5px)",
-    border: "1px solid rgba(80, 80, 80, 0.7)",
-    borderRadius: "8px",
-    boxShadow: "0 5px 20px rgba(0, 0, 0, 0.5)",
-    width: "250px",
-    minHeight: "120px",
-    zIndex: 50,
-    color: "#e0e0e0",
-    fontSize: "0.9rem",
-    fontFamily: "Inter, sans-serif",
-    transition:
-      `opacity ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out`,
-    opacity: isPopoverVisible ? 1 : 0,
-    transform: isPopoverVisible ? "translateY(0)" : "translateY(10px)",
-    pointerEvents: isPopoverVisible ? "auto" : "none",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    ...(isSubmittedSuccessfully && {
-      justifyContent: "center",
-      alignItems: "center",
-    }),
-    gap: "10px",
+  const handleTouchStart = (e: JSX.TargetedTouchEvent<HTMLDivElement>) => {
+    if (isLoading || isSubmittedSuccessfully) return;
+    const target = e.target as HTMLElement;
+    if (
+      target.closest(
+        "textarea, button, a, .popover-form, .popover-github-link",
+      )
+    ) {
+      return;
+    }
+    setIsDragging(true);
+    setStartY(e.touches[0].clientY);
+    setDragOffset(0);
   };
 
-  const textareaContainerStyle: JSX.CSSProperties = {
-    position: "relative",
-    width: "100%",
+  const handleTouchMove = (e: JSX.TargetedTouchEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    let offset = currentY - startY;
+    offset = Math.max(0, offset);
+    setDragOffset(offset);
   };
 
-  const textareaStyle: JSX.CSSProperties = {
-    width: "100%",
-    padding: "10px",
-    paddingBottom: "28px",
-    borderRadius: "4px",
-    border: "1px solid #555",
-    background: "rgba(0, 0, 0, 0.3)",
-    color: "#eee",
-    boxSizing: "border-box",
-    resize: "none",
-    fontSize: "0.9rem",
-    fontFamily: "inherit",
-    minHeight: "60px",
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    setStartY(0);
+    if (dragOffset > SWIPE_DISMISS_THRESHOLD) {
+      closePopover();
+    } else {
+      setDragOffset(0);
+    }
   };
 
-  const inlineHintStyle: JSX.CSSProperties = {
-    position: "absolute",
-    bottom: "8px",
-    right: "10px",
-    fontSize: "0.75rem",
-    color: "#666",
-    pointerEvents: "none",
-    zIndex: 1,
-    opacity: comment.trim() !== "" ? 1 : 0,
-    transition: "opacity 0.2s ease-in-out",
-  };
-
-  const bottomRowStyle: JSX.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    marginTop: "5px",
-    gap: "10px",
-    minHeight: "24px",
-  };
-
-  const githubLinkStyle: JSX.CSSProperties = {
-    display: "inline-block",
-    color: "#cccccc",
-    transition: "color 0.2s ease",
-    flexShrink: 0,
-  };
-
-  const githubLinkHoverStyle: JSX.CSSProperties = {
-    color: "#ffffff",
-  };
-
-  const formStyle: JSX.CSSProperties = {
-    margin: 0,
-    padding: 0,
-    marginLeft: "auto",
-    flexShrink: 0,
-  };
-
-  const submitButtonBaseColor = "hsl(210, 75%, 50%)";
-  const submitButtonHoverColor = "hsl(210, 75%, 55%)";
-  const submitButtonDisabledColor = "hsl(210, 15%, 40%)";
-
-  const submitButtonBaseStyle: JSX.CSSProperties = {
-    padding: "8px 12px",
-    borderRadius: "4px",
-    border: "none",
-    background: submitButtonBaseColor,
-    color: "#fff",
-    cursor: "pointer",
-    fontWeight: 500,
-    fontSize: "0.85rem",
-    transition:
-      "background-color 0.2s ease, transform 0.1s ease, color 0.2s ease",
-    transform: "scale(1)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: "40px",
-    minHeight: "32px",
-  };
-
-  const submitButtonLoadingStyle: JSX.CSSProperties = {
-    ...submitButtonBaseStyle,
-    background: "#555",
-    color: "#aaa",
-    cursor: "wait",
-    transform: "scale(1)",
-  };
-
-  const submitButtonDisabledStyle: JSX.CSSProperties = {
-    ...submitButtonBaseStyle,
-    background: submitButtonDisabledColor,
-    color: "#aaa",
-    cursor: "not-allowed",
-    transform: "scale(1)",
-  };
-
-  const submitButtonHoverStyle: JSX.CSSProperties = {
-    background: submitButtonHoverColor,
-    transform: "scale(1.02)",
-  };
-
+  const popoverVisibilityClass = isPopoverVisible ? "visible" : "hidden";
+  const popoverSuccessClass = isSubmittedSuccessfully ? "success-mode" : "";
   const isButtonDisabled = isLoading || comment.trim() === "";
-  const currentSubmitButtonStyle = isLoading
-    ? submitButtonLoadingStyle
-    : isButtonDisabled
-    ? submitButtonDisabledStyle
-    : submitButtonBaseStyle;
+  const draggingClass = isDragging ? "is-dragging" : "";
 
-  const successHeartStyle: JSX.CSSProperties = {
-    fontSize: "3rem",
-    textAlign: "center",
-    color: "#39d353",
-    textShadow: `
-      0 0 8px rgba(57, 211, 83, 0.7),
-      0 0 12px rgba(57, 211, 83, 0.5),
-      0 0 18px rgba(57, 211, 83, 0.3)
-    `,
-    margin: "auto",
-    lineHeight: 1,
-    animation: "pulse 1.5s infinite ease-in-out",
-  };
-
-  const statusMessageStyle: JSX.CSSProperties = {
-    marginTop: "8px",
-    marginBottom: 0,
-    fontSize: "0.8rem",
-    textAlign: "center",
-    color: message.startsWith("Failed") ||
-        message.startsWith("Comment cannot") ||
-        message.startsWith("An error")
-      ? "#ff8a8a"
-      : "#cccccc",
-    minHeight: "1em",
-    width: "100%",
-  };
+  const popoverStyle: JSX.CSSProperties = {};
+  if (isDragging) {
+    popoverStyle.transform = `translateY(${dragOffset}px)`;
+  }
 
   return (
-    <div
-      style={{ position: "relative", display: "inline-block" }}
-      onMouseEnter={showPopover}
-      onMouseLeave={startHideTimer}
-    >
+    <div className="popover-trigger-wrapper" onClick={showPopover}>
       {props.children}
 
       <style>
         {`
+          .popover-trigger-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+          }
+          .popover-base {
+            position: fixed;
+            bottom: 55px;
+            right: 20px;
+            padding: 15px;
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(80, 80, 80, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            width: 250px;
+            min-height: 120px;
+            z-index: 50;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            font-family: Inter, sans-serif;
+            transition: opacity ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            touch-action: none;
+          }
+          .popover-base.is-dragging {
+            transition: none;
+          }
+          .popover-base.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+          }
+          .popover-base.success-mode {
+             justify-content: center;
+             align-items: center;
+          }
+          .popover-textarea-container {
+            position: relative;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+          }
+          .popover-textarea {
+            width: 100%;
+            padding: 10px;
+            /* Adjust padding-bottom only if hint is shown */
+            /* padding-bottom: 28px; */
+            border-radius: 4px;
+            border: 1px solid #555;
+            background: rgba(0, 0, 0, 0.3);
+            color: #eee;
+            box-sizing: border-box;
+            resize: none;
+            font-size: 0.9rem;
+            font-family: inherit;
+            min-height: 60px;
+            flex-grow: 1;
+            touch-action: pan-y;
+          }
+          .popover-inline-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 0.75rem;
+            color: #666;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+          }
+          /* Apply padding and show hint only when hint is active and textarea has content */
+          .popover-textarea:not(:placeholder-shown) + .popover-inline-hint {
+             opacity: 1;
+          }
+          .popover-textarea-container.has-hint .popover-textarea {
+             padding-bottom: 28px;
+          }
+
+          .popover-bottom-row {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            gap: 10px;
+            min-height: 24px;
+            flex-shrink: 0;
+          }
+          .popover-github-link {
+            display: inline-block;
+            color: #cccccc;
+            transition: color 0.2s ease;
+            flex-shrink: 0;
+          }
+          .popover-github-link:hover {
+            color: #ffffff;
+          }
+          .popover-form {
+            margin: 0;
+            padding: 0;
+            margin-left: auto;
+            flex-shrink: 0;
+          }
+          .popover-submit-button {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: none;
+            background: hsl(210, 75%, 50%);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: background-color 0.2s ease, transform 0.1s ease, color 0.2s ease;
+            transform: scale(1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 32px;
+          }
+          .popover-submit-button:hover:not(:disabled) {
+             background: hsl(210, 75%, 55%);
+             transform: scale(1.02);
+          }
+          .popover-submit-button:disabled {
+            background: hsl(210, 15%, 40%);
+            color: #aaa;
+            cursor: not-allowed;
+            transform: scale(1);
+          }
+          .popover-submit-button.loading {
+             background: #555;
+             color: #aaa;
+             cursor: wait;
+          }
+          .popover-status-message {
+             margin-top: 8px;
+             margin-bottom: 0;
+             font-size: 0.8rem;
+             text-align: center;
+             color: #cccccc;
+             min-height: 1em;
+             width: 100%;
+             flex-shrink: 0;
+          }
+          .popover-status-message.error {
+             color: #ff8a8a;
+          }
+          .popover-success-heart {
+             font-size: 3rem;
+             text-align: center;
+             color: #39d353;
+             text-shadow: 0 0 8px rgba(57, 211, 83, 0.7), 0 0 12px rgba(57, 211, 83, 0.5), 0 0 18px rgba(57, 211, 83, 0.3);
+             margin: auto;
+             line-height: 1;
+             animation: pulse 1.5s infinite ease-in-out;
+          }
+
           @keyframes pulse {
             0% { transform: scale(1); text-shadow: 0 0 8px rgba(57, 211, 83, 0.7), 0 0 12px rgba(57, 211, 83, 0.5), 0 0 18px rgba(57, 211, 83, 0.3); }
             50% { transform: scale(1.08); text-shadow: 0 0 12px rgba(57, 211, 83, 0.9), 0 0 18px rgba(57, 211, 83, 0.7), 0 0 25px rgba(57, 211, 83, 0.5); }
             100% { transform: scale(1); text-shadow: 0 0 8px rgba(57, 211, 83, 0.7), 0 0 12px rgba(57, 211, 83, 0.5), 0 0 18px rgba(57, 211, 83, 0.3); }
           }
+
+          @media (max-width: 768px) {
+            .popover-base {
+              left: 10px;
+              right: 10px;
+              bottom: 50px;
+              top: auto;
+              width: auto;
+              height: auto;
+              min-height: 0;
+              max-height: 70vh;
+              border-radius: 12px;
+              padding: 20px;
+              font-size: 1rem;
+              transform: translateY(calc(100% + 50px));
+            }
+            .popover-base.visible {
+              transform: translateY(0);
+            }
+            .popover-base.visible.is-dragging {
+               /* transform is set by inline style */
+            }
+            .popover-base.visible:not(.is-dragging) {
+               transition: opacity ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out;
+               transform: translateY(0);
+            }
+            .popover-textarea-container {
+               /* No specific styles needed */
+            }
+            .popover-textarea {
+              font-size: 1rem;
+              min-height: 100px;
+              /* Ensure no extra padding on mobile */
+              padding-bottom: 10px;
+            }
+            .popover-submit-button {
+               padding: 12px 16px;
+               font-size: 1rem;
+            }
+          }
         `}
       </style>
 
-      <div ref={popoverRef} style={popoverBaseStyle}>
-        {isSubmittedSuccessfully ? <div style={successHeartStyle}>🙏</div> : (
-          <>
-            <div style={textareaContainerStyle}>
-              <textarea
-                ref={textareaRef}
-                id="comment-input"
-                value={comment}
-                onInput={(e) =>
-                  setComment((e.target as HTMLTextAreaElement).value)}
-                onKeyDown={handleKeyDown}
-                disabled={isLoading}
-                required
-                rows={3}
-                maxLength={200}
-                style={textareaStyle}
-                placeholder="Say something&hellip;"
-              />
-              <span style={inlineHintStyle}>
-                {modifierKeySymbol} + ↵
-              </span>
-            </div>
-
-            <div style={bottomRowStyle}>
-              <a
-                href="https://github.com/seangreen-org/sg-fresh"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View source code on GitHub"
-                style={githubLinkStyle}
-                onMouseOver={(e) =>
-                  Object.assign(e.currentTarget.style, githubLinkHoverStyle)}
-                onMouseOut={(e) =>
-                  Object.assign(e.currentTarget.style, githubLinkStyle)}
+      <div
+        ref={popoverRef}
+        className={`popover-base ${popoverVisibilityClass} ${popoverSuccessClass} ${draggingClass}`}
+        style={popoverStyle}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {isSubmittedSuccessfully
+          ? <div className="popover-success-heart">🙏</div>
+          : (
+            <>
+              {/* Add class conditionally for styling */}
+              <div
+                className={`popover-textarea-container ${
+                  showKeyboardHint ? "has-hint" : ""
+                }`}
               >
-                <GitHubLogo />
-              </a>
+                <textarea
+                  ref={textareaRef}
+                  id="comment-input"
+                  className="popover-textarea"
+                  value={comment}
+                  onInput={(e) =>
+                    setComment((e.target as HTMLTextAreaElement).value)}
+                  onKeyDown={handleKeyDown}
+                  disabled={isLoading}
+                  required
+                  maxLength={200}
+                  placeholder="Say something&hellip;"
+                />
+                {/* Conditionally render the hint */}
+                {showKeyboardHint && (
+                  <span className="popover-inline-hint">
+                    {modifierKeySymbol} + ↵
+                  </span>
+                )}
+              </div>
 
-              <form ref={formRef} onSubmit={handleSubmit} style={formStyle}>
-                <button
-                  type="submit"
-                  disabled={isButtonDisabled}
-                  style={currentSubmitButtonStyle}
-                  aria-label="Send comment"
-                  onMouseOver={(e) => {
-                    if (!isButtonDisabled) {
-                      Object.assign(
-                        e.currentTarget.style,
-                        submitButtonHoverStyle,
-                      );
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    Object.assign(
-                      e.currentTarget.style,
-                      currentSubmitButtonStyle,
-                    );
-                  }}
+              <div className="popover-bottom-row">
+                <a
+                  href="https://github.com/seangreen-org/sg-fresh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View source code on GitHub"
+                  className="popover-github-link"
                 >
-                  {isLoading ? "Sending..." : <SendIcon />}
-                </button>
-              </form>
-            </div>
-            {message && <p style={statusMessageStyle}>{message}</p>}
-          </>
-        )}
+                  <GitHubLogo />
+                </a>
+                <form
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  className="popover-form"
+                >
+                  <button
+                    type="submit"
+                    disabled={isButtonDisabled}
+                    className={`popover-submit-button ${
+                      isLoading ? "loading" : ""
+                    }`}
+                    aria-label="Send comment"
+                  >
+                    {isLoading ? "Sending..." : <SendIcon />}
+                  </button>
+                </form>
+              </div>
+              {message && (
+                <p
+                  className={`popover-status-message ${
+                    message.startsWith("Failed") ||
+                      message.startsWith("Comment cannot") ||
+                      message.startsWith("An error")
+                      ? "error"
+                      : ""
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
+            </>
+          )}
       </div>
     </div>
   );

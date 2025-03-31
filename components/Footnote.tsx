@@ -59,16 +59,12 @@ export default function Footnote(): JSX.Element {
         }}
       >
         <LetterBox>
-          <a
-            href="https://github.com/seangreen-org/sg-fresh"
-            target="_blank"
-            rel="noopener noreferrer"
+          <span
             style={nameStyle}
             class="footnote-name-link"
-            onClick={(e) => e.preventDefault()}
           >
             Sean Green
-          </a>
+          </span>
         </LetterBox>
         <span style={{ color: "#303030", margin: 8 }}>/</span>
         <span style={yearStyle}>2025</span>
