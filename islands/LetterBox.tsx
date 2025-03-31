@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import type { JSX } from "preact/jsx-runtime";
 
-let hideTimeout: number | undefined;
 const FADE_OUT_DELAY = 2000;
 const TRANSITION_DURATION = 200; // ms
 const SWIPE_DISMISS_THRESHOLD = 80; // pixels to drag down to dismiss
