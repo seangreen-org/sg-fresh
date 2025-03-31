@@ -1,5 +1,5 @@
 import { type Locator, type Page } from "npm:playwright";
-import { HeartColor, rotationColorMap } from "@/data/colors.ts";
+import { HeartColor, rotationColorMap } from "@data/colors.ts";
 
 export class HeartPage {
   #lastHueColorChange: string | null = null;

@@ -55,7 +55,8 @@
     "@routes/": "./routes/",
     "@islands/": "./islands/",
     "@components/": "./components/",
-    "@serivces/": "./services/"
+    "@serivces/": "./services/",
+    "@data/": "./data/",
   },
   "compilerOptions": {
     "jsx": "react-jsx",

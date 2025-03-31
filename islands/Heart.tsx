@@ -5,8 +5,8 @@ import {
   colorNames,
   type HeartColor,
   rotationColorMap,
-} from "../data/colors.ts";
-import trees from "@/data/trees.ts";
+} from "@data/colors.ts";
+import trees from "@data/trees.ts";
 
 interface HeartProps {
   initialColor?: string;

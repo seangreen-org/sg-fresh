@@ -1,5 +1,5 @@
 import { expect } from "$std/expect/mod.ts";
-import { colorNames, HeartColor } from "@/data/colors.ts";
+import { colorNames, HeartColor } from "@data/colors.ts";
 import { withTestFixture } from "./utils/testHelper.ts";
 
 Deno.test(

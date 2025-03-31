@@ -1,5 +1,5 @@
 import type { JSX } from "preact/jsx-runtime";
-import Footnote from "../components/Footnote.tsx";
+import Footnote from "@components/Footnote.tsx";
 import GalaxyBackground from "@components/GalaxyBackground.tsx";
 
 interface LayoutProps {
