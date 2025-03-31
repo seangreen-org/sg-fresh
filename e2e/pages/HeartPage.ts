@@ -2,9 +2,9 @@ import { type Locator, type Page } from "npm:playwright";
 import { HeartColor, rotationColorMap } from "@/data/colors.ts";
 
 export class HeartPage {
-  private readonly page: Page;
-  private readonly heartSvg: Locator;
-  private lastHueColorChange: string | null = null;
+  #lastHueColorChange: string | null = null;
+  readonly #page: Page;
+  readonly #heartSvg: Locator;
   readonly interactivePath: Locator;
   readonly heart: {
     touch: () => Promise<void>;
@@ -16,16 +16,16 @@ export class HeartPage {
   };
 
   constructor(page: Page) {
-    this.page = page;
-    this.heartSvg = page.getByTestId("heart");
+    this.#page = page;
+    this.#heartSvg = page.getByTestId("heart");
     this.interactivePath = page.locator("path.interactive-heart");
 
-    this.page.on("request", (request) => {
+    this.#page.on("request", (request) => {
       if (request.url().includes("/api/hue") && request.method() === "POST") {
         try {
           const postData = request.postDataJSON();
           if (postData && typeof postData.color === "string") {
-            this.lastHueColorChange = postData.color;
+            this.#lastHueColorChange = postData.color;
           }
         } catch (e) {
           console.error("Error parsing POST data:", e);
@@ -36,10 +36,10 @@ export class HeartPage {
     this.heart = {
       touch: () => this.interactivePath.click(),
       hover: () => this.interactivePath.hover(),
-      leave: () => this.page.mouse.move(0, 0),
-      isVisible: () => this.heartSvg.isVisible(),
+      leave: () => this.#page.mouse.move(0, 0),
+      isVisible: () => this.#heartSvg.isVisible(),
       getColorAsync: async () => {
-        const style = await this.heartSvg.getAttribute("style");
+        const style = await this.#heartSvg.getAttribute("style");
         if (!style) return null;
 
         const match = style.match(/hue-rotate\((\d+)deg\)/);
@@ -51,22 +51,22 @@ export class HeartPage {
 
         return color ?? HeartColor.Green;
       },
-      getLastHueColorChange: () => this.lastHueColorChange,
+      getLastHueColorChange: () => this.#lastHueColorChange,
     };
   }
 
   async openAsync(color?: string): Promise<void> {
     const url = color ? `/${color}` : "/";
-    await this.page.goto(`http://localhost:8000${url}`);
+    await this.#page.goto(`http://localhost:8000${url}`);
   }
 
   async getPageTitleAsync(): Promise<string> {
-    return await this.page.title();
+    return await this.#page.title();
   }
 
   async isHeartBeatingAsync(): Promise<boolean> {
     const beatingAnimationName = "heartbeat";
-    const style = await this.heartSvg.getAttribute("style") ?? "";
+    const style = await this.#heartSvg.getAttribute("style") ?? "";
     const match = style.match(/animation:\s*([^;]+);/);
     const animation = match ? match[1].trim().replace(/\s+/g, " ") : null;
     return animation?.includes(beatingAnimationName) ?? false;
@@ -74,7 +74,7 @@ export class HeartPage {
 
   async waitForUrlToMatchAsync(expectedPath: string): Promise<boolean> {
     try {
-      await this.page.waitForURL((url) => url.pathname.includes(expectedPath));
+      await this.#page.waitForURL((url) => url.pathname.includes(expectedPath));
       return true;
     } catch {
       return false;
