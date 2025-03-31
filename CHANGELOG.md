@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/seangreen-org/sg-fresh/compare/v1.6.0...v1.6.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* hacky vibe code change ([c983f8b](https://github.com/seangreen-org/sg-fresh/commit/c983f8bc4e196c4d2984e86b66358a73ae388472))
+
 # [1.6.0](https://github.com/seangreen-org/sg-fresh/compare/v1.5.0...v1.6.0) (2025-03-31)
 
 
