@@ -5,7 +5,7 @@ const FADE_OUT_DELAY = 2000;
 const TRANSITION_DURATION = 200; // ms
 const SWIPE_DISMISS_THRESHOLD = 80; // pixels to drag down to dismiss
 
-interface CommentPopoverTriggerProps {
+interface LetterBoxProps {
   children: JSX.Element;
 }
 
@@ -39,8 +39,8 @@ const SendIcon = () => (
   </svg>
 );
 
-export default function CommentPopoverTrigger(
-  props: CommentPopoverTriggerProps,
+export default function Letterbox(
+  props: LetterBoxProps,
 ): JSX.Element {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const [comment, setComment] = useState("");
@@ -259,7 +259,7 @@ export default function CommentPopoverTrigger(
           }
           .popover-base {
             position: fixed;
-            bottom: 55px;
+            bottom: 60px !important;
             right: 20px;
             padding: 15px;
             background: rgba(30, 30, 30, 0.85);
@@ -293,8 +293,8 @@ export default function CommentPopoverTrigger(
             pointer-events: auto;
           }
           .popover-base.success-mode {
-             justify-content: center;
-             align-items: center;
+            justify-content: center;
+            align-items: center;
           }
           .popover-textarea-container {
             position: relative;
@@ -305,8 +305,6 @@ export default function CommentPopoverTrigger(
           .popover-textarea {
             width: 100%;
             padding: 10px;
-            /* Adjust padding-bottom only if hint is shown */
-            /* padding-bottom: 28px; */
             border-radius: 4px;
             border: 1px solid #555;
             background: rgba(0, 0, 0, 0.3);
@@ -332,10 +330,10 @@ export default function CommentPopoverTrigger(
           }
           /* Apply padding and show hint only when hint is active and textarea has content */
           .popover-textarea:not(:placeholder-shown) + .popover-inline-hint {
-             opacity: 1;
+            opacity: 1;
           }
           .popover-textarea-container.has-hint .popover-textarea {
-             padding-bottom: 28px;
+            padding-bottom: 28px;
           }
 
           .popover-bottom-row {
@@ -444,8 +442,8 @@ export default function CommentPopoverTrigger(
                /* transform is set by inline style */
             }
             .popover-base.visible:not(.is-dragging) {
-               transition: opacity ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out;
-               transform: translateY(0);
+              transition: opacity ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out;
+              transform: translateY(0);
             }
             .popover-textarea-container {
                /* No specific styles needed */
@@ -457,8 +455,8 @@ export default function CommentPopoverTrigger(
               padding-bottom: 10px;
             }
             .popover-submit-button {
-               padding: 12px 16px;
-               font-size: 1rem;
+              padding: 12px 16px;
+              font-size: 1rem;
             }
           }
         `}
