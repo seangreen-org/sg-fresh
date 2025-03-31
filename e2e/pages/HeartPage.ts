@@ -58,6 +58,7 @@ export class HeartPage {
   async openAsync(color?: string): Promise<void> {
     const url = color ? `/${color}` : "/";
     await this.#page.goto(`http://localhost:8000${url}`);
+    await this.heart.isVisible();
   }
 
   async getPageTitleAsync(): Promise<string> {

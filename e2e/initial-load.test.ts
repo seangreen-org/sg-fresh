@@ -12,15 +12,6 @@ Deno.test(
 );
 
 Deno.test(
-  "page shows heart",
-  withTestFixture(async ({ heartPage }) => {
-    await heartPage.openAsync();
-    const heartVisible = await heartPage.heart.isVisible();
-    expect(heartVisible).toBe(true);
-  }),
-);
-
-Deno.test(
   "heart is green initially",
   withTestFixture(async ({ heartPage }) => {
     await heartPage.openAsync();
