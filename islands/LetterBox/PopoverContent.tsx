@@ -88,8 +88,8 @@ export function PopoverContent({
                 rel="noopener noreferrer"
                 aria-label="View source code on GitHub"
                 className="popover-github-link"
-                data-umamni-event="outbound-link-click"
-                data-umamni-event-url={GITHUB_REPO_URL}
+                data-umami-event="outbound-link-click"
+                data-umami-event-url={GITHUB_REPO_URL}
               >
                 <GitHubLogo />
               </a>
