@@ -204,11 +204,9 @@ export default function Letterbox(
     isSubmittedSuccessfully,
   ]);
 
-  // Effect for handling the Escape key
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        // Only close if not currently loading or showing success message
         if (!isLoading && !isSubmittedSuccessfully) {
           closePopover();
         }
@@ -224,7 +222,6 @@ export default function Letterbox(
     };
   }, [isPopoverVisible, closePopover, isLoading, isSubmittedSuccessfully]);
 
-  // Effect for cleaning up timers on unmount
   useEffect(() => {
     return () => {
       clearSuccessTimer();
