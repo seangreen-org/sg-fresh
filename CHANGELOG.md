@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/seangreen-org/sg-fresh/compare/v1.8.0...v1.8.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* umam(n)i typo ([255f0d7](https://github.com/seangreen-org/sg-fresh/commit/255f0d7e925753e74d7a8bc98a3657615d971cf6))
+
 # [1.8.0](https://github.com/seangreen-org/sg-fresh/compare/v1.7.0...v1.8.0) (2025-04-01)
 
 
