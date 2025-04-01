@@ -7,6 +7,7 @@ import { letterboxStyles } from "./styles.ts";
 const FADE_OUT_DELAY = 2000;
 const TRANSITION_DURATION = 200;
 const COMMENT_API_ENDPOINT = "/api/comment";
+const HOVER_CLOSE_DELAY = 150;
 
 interface LetterBoxProps {
   children: JSX.Element;
@@ -20,6 +21,7 @@ export default function Letterbox(
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const fadeOutTimeoutRef = useRef<number | undefined>();
+  const hoverCloseTimerRef = useRef<number | undefined>();
 
   const { isMacLike, isTouchMobile } = usePlatformInfo();
   const modifierKeySymbol = isMacLike ? "⌘" : "Ctrl";
@@ -36,20 +38,26 @@ export default function Letterbox(
     fadeOutTimeoutRef.current = undefined;
   }, []);
 
+  const clearHoverCloseTimer = useCallback(() => {
+    clearTimeout(hoverCloseTimerRef.current);
+    hoverCloseTimerRef.current = undefined;
+  }, []);
+
   const closePopover = useCallback(() => {
+    clearHoverCloseTimer();
     clearSuccessTimer();
     setIsPopoverVisible(false);
     setTimeout(() => {
-      if (!isPopoverVisible) {
+      if (!popoverRef.current?.classList.contains("visible")) {
         setIsSubmittedSuccessfully(false);
-        setComment("");
         setMessage("");
         setIsLoading(false);
       }
     }, TRANSITION_DURATION);
-  }, [isPopoverVisible, clearSuccessTimer]);
+  }, [clearSuccessTimer, clearHoverCloseTimer]);
 
   const showPopover = useCallback(() => {
+    clearHoverCloseTimer();
     clearSuccessTimer();
     setIsSubmittedSuccessfully(false);
     setMessage("");
@@ -59,7 +67,38 @@ export default function Letterbox(
         textareaRef.current?.focus();
       });
     }
-  }, [isPopoverVisible, clearSuccessTimer]);
+  }, [isPopoverVisible, clearSuccessTimer, clearHoverCloseTimer]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!isTouchMobile) {
+      clearHoverCloseTimer();
+      showPopover();
+    }
+  }, [isTouchMobile, showPopover, clearHoverCloseTimer]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isTouchMobile) {
+      clearHoverCloseTimer();
+      hoverCloseTimerRef.current = setTimeout(() => {
+        if (!isLoading && !isSubmittedSuccessfully && !comment.trim()) {
+          closePopover();
+        }
+      }, HOVER_CLOSE_DELAY);
+    }
+  }, [
+    isTouchMobile,
+    closePopover,
+    clearHoverCloseTimer,
+    isLoading,
+    isSubmittedSuccessfully,
+    comment,
+  ]);
+
+  const handleMobileClick = useCallback(() => {
+    if (isTouchMobile && !isPopoverVisible) {
+      showPopover();
+    }
+  }, [isTouchMobile, isPopoverVisible, showPopover]);
 
   const handleSubmit = useCallback(
     async (e?: JSX.TargetedEvent<HTMLFormElement, Event>) => {
@@ -71,6 +110,7 @@ export default function Letterbox(
       setMessage("");
       setIsSubmittedSuccessfully(false);
       clearSuccessTimer();
+      clearHoverCloseTimer();
 
       try {
         const response = await fetch(COMMENT_API_ENDPOINT, {
@@ -99,7 +139,13 @@ export default function Letterbox(
         setIsLoading(false);
       }
     },
-    [comment, isLoading, clearSuccessTimer, closePopover],
+    [
+      comment,
+      isLoading,
+      clearSuccessTimer,
+      closePopover,
+      clearHoverCloseTimer,
+    ],
   );
 
   const handleKeyDown = useCallback(
@@ -128,49 +174,63 @@ export default function Letterbox(
       if (
         isPopoverVisible &&
         popoverRef.current &&
-        !popoverRef.current.contains(event.target as Node)
+        triggerRef.current &&
+        event.target
       ) {
         if (
-          !triggerRef.current ||
+          !popoverRef.current.contains(event.target as Node) &&
           !triggerRef.current.contains(event.target as Node)
         ) {
-          closePopover();
+          if (!isLoading && !isSubmittedSuccessfully) {
+            closePopover();
+          }
         }
       }
     };
 
     if (isPopoverVisible) {
       document.addEventListener("click", handleClickOutside, true);
-    } else {
-      document.removeEventListener("click", handleClickOutside, true);
     }
 
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [isPopoverVisible, popoverRef, triggerRef, closePopover]);
+  }, [
+    isPopoverVisible,
+    popoverRef,
+    triggerRef,
+    closePopover,
+    isLoading,
+    isSubmittedSuccessfully,
+  ]);
 
+  // Effect for handling the Escape key
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closePopover();
+        // Only close if not currently loading or showing success message
+        if (!isLoading && !isSubmittedSuccessfully) {
+          closePopover();
+        }
       }
     };
+
     if (isPopoverVisible) {
       document.addEventListener("keydown", handleEscapeKey);
-    } else {
-      document.removeEventListener("keydown", handleEscapeKey);
     }
+
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [isPopoverVisible, closePopover]);
+  }, [isPopoverVisible, closePopover, isLoading, isSubmittedSuccessfully]);
 
+  // Effect for cleaning up timers on unmount
   useEffect(() => {
     return () => {
       clearSuccessTimer();
+      clearHoverCloseTimer();
     };
-  }, [clearSuccessTimer]);
+  }, [clearSuccessTimer, clearHoverCloseTimer]);
 
   return (
     <>
@@ -179,7 +239,9 @@ export default function Letterbox(
       <div
         ref={triggerRef}
         className="popover-trigger-wrapper"
-        onClick={showPopover}
+        onClick={isTouchMobile ? handleMobileClick : undefined}
+        onMouseEnter={!isTouchMobile ? handleMouseEnter : undefined}
+        onMouseLeave={!isTouchMobile ? handleMouseLeave : undefined}
       >
         {children}
 
