@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/seangreen-org/sg-fresh/compare/v1.6.2...v1.7.0) (2025-04-01)
+
+
+### Features
+
+* hover opens LetterBox ([b91c6a9](https://github.com/seangreen-org/sg-fresh/commit/b91c6a951eeb50db270c4cb03586c4d16826c645))
+
 ## [1.6.2](https://github.com/seangreen-org/sg-fresh/compare/v1.6.1...v1.6.2) (2025-03-31)
 
 
