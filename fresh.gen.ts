@@ -9,7 +9,10 @@ import * as $api_comment from "./routes/api/comment.ts";
 import * as $api_hue from "./routes/api/hue.ts";
 import * as $index from "./routes/index.tsx";
 import * as $Heart from "./islands/Heart.tsx";
-import * as $LetterBox from "./islands/LetterBox.tsx";
+import * as $LetterBox_LetterBox from "./islands/LetterBox/LetterBox.tsx";
+import * as $LetterBox_PopoverContent from "./islands/LetterBox/PopoverContent.tsx";
+import * as $LetterBox_icons from "./islands/LetterBox/icons.tsx";
+import * as $LetterBox_styles from "./islands/LetterBox/styles.ts";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -23,7 +26,10 @@ const manifest = {
   },
   islands: {
     "./islands/Heart.tsx": $Heart,
-    "./islands/LetterBox.tsx": $LetterBox,
+    "./islands/LetterBox/LetterBox.tsx": $LetterBox_LetterBox,
+    "./islands/LetterBox/PopoverContent.tsx": $LetterBox_PopoverContent,
+    "./islands/LetterBox/icons.tsx": $LetterBox_icons,
+    "./islands/LetterBox/styles.ts": $LetterBox_styles,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

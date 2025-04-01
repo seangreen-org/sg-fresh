@@ -1,5 +1,5 @@
 import type { JSX } from "preact/jsx-runtime";
-import LetterBox from "@islands/LetterBox.tsx";
+import LetterBox from "@islands/LetterBox/LetterBox.tsx";
 
 export default function Footnote(): JSX.Element {
   const angle = (() => {

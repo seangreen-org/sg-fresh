@@ -8,59 +8,62 @@
 
 ## [1.6.1](https://github.com/seangreen-org/sg-fresh/compare/v1.6.0...v1.6.1) (2025-03-31)
 
-
 ### Bug Fixes
 
-* hacky vibe code change ([c983f8b](https://github.com/seangreen-org/sg-fresh/commit/c983f8bc4e196c4d2984e86b66358a73ae388472))
+- hacky vibe code change
+  ([c983f8b](https://github.com/seangreen-org/sg-fresh/commit/c983f8bc4e196c4d2984e86b66358a73ae388472))
 
 # [1.6.0](https://github.com/seangreen-org/sg-fresh/compare/v1.5.0...v1.6.0) (2025-03-31)
 
-
 ### Features
 
-* improved LetterBox ([bc94166](https://github.com/seangreen-org/sg-fresh/commit/bc94166496ea99cf05a790310a527dc936336658))
+- improved LetterBox
+  ([bc94166](https://github.com/seangreen-org/sg-fresh/commit/bc94166496ea99cf05a790310a527dc936336658))
 
 # [1.5.0](https://github.com/seangreen-org/sg-fresh/compare/v1.4.1...v1.5.0) (2025-03-30)
 
-
 ### Features
 
-* vibe coding (WIP) - add comment API and integrate LetterBox component in Footnote ([425ae82](https://github.com/seangreen-org/sg-fresh/commit/425ae8264b21d697cc3ac58d7868b5b559190b6a))
+- vibe coding (WIP) - add comment API and integrate LetterBox component in
+  Footnote
+  ([425ae82](https://github.com/seangreen-org/sg-fresh/commit/425ae8264b21d697cc3ac58d7868b5b559190b6a))
 
 ## [1.4.1](https://github.com/seangreen-org/sg-fresh/compare/v1.4.0...v1.4.1) (2025-03-30)
 
-
 ### Bug Fixes
 
-* remove underline on GitHub link for iOS ([0341f5e](https://github.com/seangreen-org/sg-fresh/commit/0341f5ee84ac74bab7547c16e2867094b6e3e9ea))
+- remove underline on GitHub link for iOS
+  ([0341f5e](https://github.com/seangreen-org/sg-fresh/commit/0341f5ee84ac74bab7547c16e2867094b6e3e9ea))
 
 # [1.4.0](https://github.com/seangreen-org/sg-fresh/compare/v1.3.0...v1.4.0) (2025-03-30)
 
-
 ### Features
 
-* bounds on heart interactive area ([da18177](https://github.com/seangreen-org/sg-fresh/commit/da18177725e20ae3f30c5d807e44109b3c843a03))
+- bounds on heart interactive area
+  ([da18177](https://github.com/seangreen-org/sg-fresh/commit/da18177725e20ae3f30c5d807e44109b3c843a03))
 
 # [1.3.0](https://github.com/seangreen-org/sg-fresh/compare/v1.2.0...v1.3.0) (2025-03-30)
 
-
 ### Features
 
-* enhance heart component with hover effect and transition ([f437d6d](https://github.com/seangreen-org/sg-fresh/commit/f437d6d5740b0199752230485013fef8b5754289))
+- enhance heart component with hover effect and transition
+  ([f437d6d](https://github.com/seangreen-org/sg-fresh/commit/f437d6d5740b0199752230485013fef8b5754289))
 
 # [1.2.0](https://github.com/seangreen-org/sg-fresh/compare/v1.1.0...v1.2.0) (2025-03-30)
 
-
 ### Bug Fixes
 
-* deno fmt vscode integration not great ([0bb0181](https://github.com/seangreen-org/sg-fresh/commit/0bb0181a56b4bbf8e7da71c3a5f4efe256883ced))
-* formatting and add vscode formatOnSave ([bdf5d7e](https://github.com/seangreen-org/sg-fresh/commit/bdf5d7e713ee79b7ac9ea3c06a45b3fb06fe0b7e))
-* remove unnecessary expectation in heart updates test ([bf4f74d](https://github.com/seangreen-org/sg-fresh/commit/bf4f74d0e5168e7e7ee0e768e34cf4edd128319c))
-
+- deno fmt vscode integration not great
+  ([0bb0181](https://github.com/seangreen-org/sg-fresh/commit/0bb0181a56b4bbf8e7da71c3a5f4efe256883ced))
+- formatting and add vscode formatOnSave
+  ([bdf5d7e](https://github.com/seangreen-org/sg-fresh/commit/bdf5d7e713ee79b7ac9ea3c06a45b3fb06fe0b7e))
+- remove unnecessary expectation in heart updates test
+  ([bf4f74d](https://github.com/seangreen-org/sg-fresh/commit/bf4f74d0e5168e7e7ee0e768e34cf4edd128319c))
 
 ### Features
 
-* add GitHub link ([419d274](https://github.com/seangreen-org/sg-fresh/commit/419d2743e79248e98a4948d16fd89dd3035217ac))
+- add GitHub link
+  ([419d274](https://github.com/seangreen-org/sg-fresh/commit/419d2743e79248e98a4948d16fd89dd3035217ac))
 
 # [1.1.0](https://github.com/seangreen-org/sg-fresh/compare/v1.0.0...v1.1.0) (2025-03-30)
 
