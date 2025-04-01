@@ -74,7 +74,7 @@ export default function Heart({
             display: "block",
             filter: `hue-rotate(${
               rotationColorMap[colorNames[currentColorIndex]] ?? 0
-            }deg) ${isHovered ? "saturate(1.7)" : "saturate(1.2)"}`,
+            }deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
             transform: "scale(1)",
             animation: isHovered
               ? "heartbeat 1.5s ease-in-out infinite"
