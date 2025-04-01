@@ -7,7 +7,7 @@ export const letterboxStyles = `
 
 .popover-base {
   position: fixed;
-  bottom: 60px !important; /* Use !important carefully */
+  bottom: 60px !important;
   right: 20px;
   padding: 15px;
   background: rgba(30, 30, 30, 0.85);
@@ -22,7 +22,6 @@ export const letterboxStyles = `
   color: #e0e0e0;
   font-size: 0.9rem;
   font-family: Inter, sans-serif;
-  /* Matches TRANSITION_DURATION in index.tsx (200ms) */
   transition: opacity 200ms ease-out, transform 200ms ease-out;
   opacity: 0;
   transform: translateY(10px);
@@ -64,7 +63,7 @@ export const letterboxStyles = `
   font-family: inherit;
   min-height: 60px;
   flex-grow: 1;
-  touch-action: pan-y; /* Allow vertical scroll/pan within textarea */
+  touch-action: pan-y;
 }
 
 .popover-inline-hint {
@@ -84,7 +83,7 @@ export const letterboxStyles = `
 }
 
 .popover-textarea-container.has-hint .popover-textarea {
-  padding-bottom: 28px; /* Space for the hint */
+  padding-bottom: 28px;
 }
 
 .popover-bottom-row {
@@ -92,7 +91,7 @@ export const letterboxStyles = `
   align-items: center;
   margin-top: 5px;
   gap: 10px;
-  min-height: 24px; /* Ensure consistent height */
+  min-height: 24px;
   flex-shrink: 0;
 }
 
@@ -110,7 +109,7 @@ export const letterboxStyles = `
 .popover-form {
   margin: 0;
   padding: 0;
-  margin-left: auto; /* Push button to the right */
+  margin-left: auto;
   flex-shrink: 0;
 }
 
@@ -128,7 +127,7 @@ export const letterboxStyles = `
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px; /* Ensure minimum size */
+  min-width: 40px;
   min-height: 32px;
 }
 
@@ -141,7 +140,7 @@ export const letterboxStyles = `
   background: hsl(210, 15%, 40%);
   color: #aaa;
   cursor: not-allowed;
-  transform: scale(1); /* Reset transform when disabled */
+  transform: scale(1);
 }
 
 .popover-submit-button.loading {
@@ -156,22 +155,22 @@ export const letterboxStyles = `
   font-size: 0.8rem;
   text-align: center;
   color: #cccccc;
-  min-height: 1em; /* Prevent layout shift */
+  min-height: 1em;
   width: 100%;
   flex-shrink: 0;
 }
 
 .popover-status-message.error {
-  color: #ff8a8a; /* More visible error color */
+  color: #ff8a8a;
 }
 
 .popover-success-heart {
   font-size: 3rem;
   text-align: center;
-  color: #39d353; /* GitHub green */
+  color: #39d353;
   text-shadow: 0 0 8px rgba(57, 211, 83, 0.7),
     0 0 12px rgba(57, 211, 83, 0.5), 0 0 18px rgba(57, 211, 83, 0.3);
-  margin: auto; /* Center vertically and horizontally in success mode */
+  margin: auto;
   line-height: 1;
   animation: pulse 1.5s infinite ease-in-out;
 }
@@ -194,7 +193,6 @@ export const letterboxStyles = `
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .popover-base {
     left: 10px;

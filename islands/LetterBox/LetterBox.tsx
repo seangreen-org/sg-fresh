@@ -174,7 +174,6 @@ export default function Letterbox(
 
   return (
     <>
-      {/* Use the imported CSS string */}
       <style>{letterboxStyles}</style>
 
       <div
