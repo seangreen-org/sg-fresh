@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/seangreen-org/sg-fresh/compare/v1.7.0...v1.8.0) (2025-04-01)
+
+
+### Features
+
+* add tracking attributes to GitHub link in PopoverContent ([9d4af6f](https://github.com/seangreen-org/sg-fresh/commit/9d4af6fdde822cde8868a649c6908a5fb3e58116))
+
 # [1.7.0](https://github.com/seangreen-org/sg-fresh/compare/v1.6.2...v1.7.0) (2025-04-01)
 
 ### Features
