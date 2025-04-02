@@ -79,7 +79,7 @@ export default function Heart({
             animation: isHovered
               ? "heartbeat 1.5s ease-in-out infinite"
               : "none",
-            transition: "all 0.3s ease-out",
+            transition: "filter 1s ease-out",
           }}
         >
           <defs>
