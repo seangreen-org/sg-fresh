@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/seangreen-org/sg-fresh/compare/v1.8.1...v1.9.0) (2025-04-02)
+
+
+### Features
+
+* 1s colour change animation ([7d174d4](https://github.com/seangreen-org/sg-fresh/commit/7d174d4d23776513fd589cfc22b8da41cb2dd098))
+* tone down saturation ([73a6706](https://github.com/seangreen-org/sg-fresh/commit/73a6706261b05cf26c3c18f683a41d77e0d55d4d))
+
 ## [1.8.1](https://github.com/seangreen-org/sg-fresh/compare/v1.8.0...v1.8.1) (2025-04-01)
 
 
