@@ -24,7 +24,7 @@ export default function Heart({
     sendDefaultColorHueRequest();
   }, []);
 
-  const handleClick = async () => {
+  const handleClick = () => {
     const nextIndex = (currentColorIndex +
       Math.floor(Math.random() * (colorNames.length - 1)) +
       1) %
@@ -32,7 +32,7 @@ export default function Heart({
     setCurrentColorIndex(nextIndex);
 
     const colorName = colorNames[nextIndex];
-    await sendHueRequest(colorName);
+    sendHueRequest(colorName);
 
     // @ts-ignore: umami analytics global object
     globalThis.umami.track(`heart-click-${colorName}`);

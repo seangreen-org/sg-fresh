@@ -25,6 +25,32 @@ Deno.test(
 );
 
 Deno.test(
+  "heart updates browser URL when touched",
+  withTestFixture(async ({ heartPage }) => {
+    await heartPage.openAsync();
+
+    await heartPage.heart.touch();
+
+    const expectedColor = heartPage.heart.getLastHueColorChange();
+    expect(await heartPage.waitForUrlToMatchAsync(`/${expectedColor}`))
+      .toBe(true);
+  }),
+);
+
+Deno.test(
+  "heart updates browser URL when touched",
+  withTestFixture(async ({ heartPage }) => {
+    await heartPage.openAsync();
+
+    await heartPage.heart.touch();
+
+    const expectedColor = heartPage.heart.getLastHueColorChange();
+    expect(await heartPage.waitForUrlToMatchAsync(`/${expectedColor}`))
+      .toBe(true);
+  }),
+);
+
+Deno.test(
   "heart beats when hovered",
   withTestFixture(async ({ heartPage }) => {
     await heartPage.openAsync();
