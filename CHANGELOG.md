@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/seangreen-org/sg-fresh/compare/v1.12.0...v1.12.1) (2025-06-03)
+
+
+### Bug Fixes
+
+* re-enable (fixed?) flaky test ([154c02f](https://github.com/seangreen-org/sg-fresh/commit/154c02ff64e9837f792123391d8d9098f1d84000))
+
 # [1.12.0](https://github.com/seangreen-org/sg-fresh/compare/v1.11.0...v1.12.0) (2025-06-03)
 
 
