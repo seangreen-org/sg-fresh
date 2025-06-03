@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/seangreen-org/sg-fresh/compare/v1.9.0...v1.10.0) (2025-06-03)
+
+
+### Features
+
+* static cv ([2101ef2](https://github.com/seangreen-org/sg-fresh/commit/2101ef2b5ec5f8c3a444e49f25a35ff4976e4193))
+
 # [1.9.0](https://github.com/seangreen-org/sg-fresh/compare/v1.8.1...v1.9.0) (2025-04-02)
 
 
