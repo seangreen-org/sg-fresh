@@ -1,3 +1,15 @@
+# [1.12.0](https://github.com/seangreen-org/sg-fresh/compare/v1.11.0...v1.12.0) (2025-06-03)
+
+
+### Bug Fixes
+
+* remove flaky test ([ccb4d63](https://github.com/seangreen-org/sg-fresh/commit/ccb4d63107754f5c37d725331fdbb154355e8b05))
+
+
+### Features
+
+* updated cv ([d1582ee](https://github.com/seangreen-org/sg-fresh/commit/d1582eefce70a813c380241ace8366481b0ef669))
+
 # [1.11.0](https://github.com/seangreen-org/sg-fresh/compare/v1.10.1...v1.11.0) (2025-06-03)
 
 
