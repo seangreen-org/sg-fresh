@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/seangreen-org/sg-fresh/compare/v1.12.1...v1.12.2) (2025-06-04)
+
+
+### Bug Fixes
+
+* cv ammend ([d78a1b5](https://github.com/seangreen-org/sg-fresh/commit/d78a1b57c171e9dd48b3dca1d01b627a5560721c))
+
 ## [1.12.1](https://github.com/seangreen-org/sg-fresh/compare/v1.12.0...v1.12.1) (2025-06-03)
 
 
