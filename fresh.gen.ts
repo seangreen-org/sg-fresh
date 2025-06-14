@@ -9,7 +9,6 @@ import * as $api_comment from "./routes/api/comment.ts";
 import * as $api_hue from "./routes/api/hue.ts";
 import * as $index from "./routes/index.tsx";
 import * as $Heart from "./islands/Heart.tsx";
-import * as $LPPlayer from "./islands/LPPlayer.tsx";
 import * as $LetterBox_LetterBox from "./islands/LetterBox/LetterBox.tsx";
 import * as $LetterBox_PopoverContent from "./islands/LetterBox/PopoverContent.tsx";
 import * as $LetterBox_icons from "./islands/LetterBox/icons.tsx";
@@ -27,7 +26,6 @@ const manifest = {
   },
   islands: {
     "./islands/Heart.tsx": $Heart,
-    "./islands/LPPlayer.tsx": $LPPlayer,
     "./islands/LetterBox/LetterBox.tsx": $LetterBox_LetterBox,
     "./islands/LetterBox/PopoverContent.tsx": $LetterBox_PopoverContent,
     "./islands/LetterBox/icons.tsx": $LetterBox_icons,
