@@ -9,15 +9,15 @@ export async function getWeather(): Promise<WeatherData | null> {
     // Brighton, East Sussex (BN2 9SE)
     const lat = 50.8225;
     const lon = -0.1372;
-    
+
     const response = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day&timezone=auto`,
     );
-    
+
     if (!response.ok) return null;
-    
+
     const data = await response.json();
-    
+
     return {
       temperature: data.current.temperature_2m,
       weatherCode: data.current.weather_code,
