@@ -65,14 +65,15 @@ export default function GalaxyBackground(): JSX.Element {
 
           @keyframes nebula-drift {
             0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -20px) scale(1.1); }
-            66% { transform: translate(-20px, 30px) scale(0.95); }
+            25% { transform: translate(40px, -30px) scale(1.15); }
+            50% { transform: translate(-30px, 40px) scale(0.9); }
+            75% { transform: translate(30px, 30px) scale(1.1); }
             100% { transform: translate(0, 0) scale(1); }
           }
 
           @keyframes nebula-pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
           }
 
           .grid {
@@ -128,9 +129,9 @@ export default function GalaxyBackground(): JSX.Element {
           .nebula-blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: nebula-drift 40s ease-in-out infinite, nebula-pulse 20s ease-in-out infinite;
+            filter: blur(60px);
+            opacity: 0.45;
+            animation: nebula-drift 25s ease-in-out infinite, nebula-pulse 15s ease-in-out infinite;
           }
 
           .vignette {
@@ -150,21 +151,10 @@ export default function GalaxyBackground(): JSX.Element {
           style={{
             width: "900px",
             height: "900px",
-            background: "radial-gradient(circle, rgba(0, 255, 100, 0.8) 0%, rgba(0, 255, 100, 0.4) 30%, transparent 70%)",
-            top: "10%",
-            left: "15%",
+            background: "radial-gradient(circle, rgba(180, 0, 120, 0.8) 0%, rgba(120, 0, 80, 0.4) 40%, transparent 70%)",
+            top: "20%",
+            left: "-10%",
             animationDelay: "0s",
-          }}
-        />
-        <div
-          class="nebula-blob"
-          style={{
-            width: "1100px",
-            height: "1100px",
-            background: "radial-gradient(circle, rgba(0, 200, 255, 0.7) 0%, rgba(0, 200, 255, 0.3) 30%, transparent 70%)",
-            bottom: "5%",
-            right: "10%",
-            animationDelay: "-15s",
           }}
         />
         <div
@@ -172,11 +162,22 @@ export default function GalaxyBackground(): JSX.Element {
           style={{
             width: "800px",
             height: "800px",
-            background: "radial-gradient(circle, rgba(150, 255, 200, 0.6) 0%, rgba(150, 255, 200, 0.3) 30%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(0, 140, 180, 0.8) 0%, rgba(0, 100, 140, 0.4) 40%, transparent 70%)",
+            bottom: "5%",
+            right: "10%",
+            animationDelay: "-10s",
+          }}
+        />
+        <div
+          class="nebula-blob"
+          style={{
+            width: "700px",
+            height: "700px",
+            background: "radial-gradient(circle, rgba(80, 160, 0, 0.7) 0%, rgba(60, 120, 0, 0.4) 40%, transparent 70%)",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            animationDelay: "-30s",
+            animationDelay: "-20s",
           }}
         />
       </div>
