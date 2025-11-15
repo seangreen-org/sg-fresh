@@ -48,15 +48,54 @@ export default function Heart({
             50% { transform: scale(1.03); }
             100% { transform: scale(1); }
           }
+
+          @keyframes glitch {
+            0% { transform: translate(0) skew(0deg); }
+            20% { transform: translate(-5px, 3px) skew(2deg); }
+            40% { transform: translate(-3px, -5px) skew(-2deg); }
+            60% { transform: translate(5px, 3px) skew(-1deg); }
+            80% { transform: translate(3px, -5px) skew(1deg); }
+            100% { transform: translate(0) skew(0deg); }
+          }
+
+          @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+          }
+
+          @keyframes rgb-split {
+            0% { filter: hue-rotate(var(--hue-rotation)) saturate(1); }
+            25% {
+              filter:
+                hue-rotate(var(--hue-rotation))
+                saturate(1.5)
+                drop-shadow(-3px 0 2px rgba(255,0,255,0.5))
+                drop-shadow(3px 0 2px rgba(0,255,255,0.5));
+            }
+            50% { filter: hue-rotate(var(--hue-rotation)) saturate(1); }
+            75% {
+              filter:
+                hue-rotate(var(--hue-rotation))
+                saturate(1.5)
+                drop-shadow(3px 0 2px rgba(255,0,255,0.5))
+                drop-shadow(-3px 0 2px rgba(0,255,255,0.5));
+            }
+            100% { filter: hue-rotate(var(--hue-rotation)) saturate(1); }
+          }
+
+          .heart-container {
+            animation: ${isHovered ? "glitch 0.3s infinite" : "none"};
+          }
         `}
       </style>
       <div
+        class="heart-container"
         style={{
           top: 0,
           left: 0,
           display: "flex",
-          width: "100%",
-          height: "100%",
+          width: "80%",
+          height: "80%",
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -66,20 +105,19 @@ export default function Heart({
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
           height="100%"
-          viewBox="50 20 400 380"
+          viewBox="50 27.5 400 360"
+          preserveAspectRatio="xMidYMid meet"
           style={{
             transformOrigin: "center center",
-            maxWidth: "75%",
-            maxHeight: "75%",
             display: "block",
-            filter: `hue-rotate(${
-              rotationColorMap[colorNames[currentColorIndex]] ?? 0
-            }deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
+            overflow: "visible",
+            "--hue-rotation": `${rotationColorMap[colorNames[currentColorIndex]] ?? 0}deg`,
+            filter: `hue-rotate(${rotationColorMap[colorNames[currentColorIndex]] ?? 0}deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
             transform: "scale(1)",
             animation: isHovered
-              ? "heartbeat 1.5s ease-in-out infinite"
+              ? "heartbeat 1.5s ease-in-out infinite, rgb-split 0.5s infinite"
               : "none",
-            transition: "filter 1s ease-out",
+            transition: "filter 0.3s ease-out",
           }}
         >
           <defs>
@@ -131,14 +169,28 @@ export default function Heart({
               <stop offset="100%" stop-color="#0E8BA0" />
             </linearGradient>
 
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feDropShadow
-                dx="0"
-                dy="0"
-                stdDeviation="10"
-                flood-color="#0EE584"
-                flood-opacity="0.7"
-              />
+            <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur1" />
+              <feColorMatrix in="blur1" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 1 0" result="green" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur2" />
+              <feColorMatrix in="blur2" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.8 0" result="green2" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur3" />
+              <feColorMatrix in="blur3" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.5 0" result="green3" />
+              <feMerge>
+                <feMergeNode in="green3" />
+                <feMergeNode in="green2" />
+                <feMergeNode in="green" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <filter id="chromatic" x="-50%" y="-50%" width="200%" height="200%">
+              <feOffset in="SourceGraphic" dx="2" dy="0" result="r" />
+              <feOffset in="SourceGraphic" dx="-2" dy="0" result="b" />
+              <feColorMatrix in="r" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r2" />
+              <feColorMatrix in="b" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b2" />
+              <feBlend mode="screen" in="r2" in2="b2" result="blend" />
+              <feBlend mode="screen" in="blend" in2="SourceGraphic" />
             </filter>
           </defs>
 
@@ -167,11 +219,14 @@ export default function Heart({
             d=" M 250,80 C 220,20, 140,20, 110,80 C 50,180, 150,300, 250,380 C 350,300, 450,180, 390,80 C 360,20, 280,20, 250,80 Z "
             className="interactive-heart"
             fill="transparent"
-            stroke="#0EE584"
-            filter="url(#glow)"
+            stroke="#00ff41"
+            stroke-width="3"
+            filter={isHovered ? "url(#glow) url(#chromatic)" : "url(#glow)"}
             style={{
               pointerEvents: "all",
               cursor: "pointer",
+              opacity: isHovered ? 1 : 0.9,
+              animation: isHovered ? "flicker 0.1s infinite" : "none",
             }}
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}

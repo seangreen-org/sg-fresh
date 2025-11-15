@@ -51,7 +51,7 @@ export default function Footnote(): JSX.Element {
           bottom: -10,
           right: 0,
           margin: 30,
-          zIndex: 1,
+          zIndex: 100,
           fontFamily: "Inter, sans-serif",
           fontSize: "1rem",
           fontWeight: 400,
