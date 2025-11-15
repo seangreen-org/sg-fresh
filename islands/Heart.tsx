@@ -98,6 +98,8 @@ export default function Heart({
           height: "80%",
           alignItems: "center",
           justifyContent: "center",
+          position: "relative",
+          zIndex: 10,
         }}
       >
         <svg

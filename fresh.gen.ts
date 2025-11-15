@@ -8,6 +8,7 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $api_comment from "./routes/api/comment.ts";
 import * as $api_hue from "./routes/api/hue.ts";
 import * as $index from "./routes/index.tsx";
+import * as $GalaxyBackground from "./islands/GalaxyBackground.tsx";
 import * as $Heart from "./islands/Heart.tsx";
 import * as $LetterBox_LetterBox from "./islands/LetterBox/LetterBox.tsx";
 import * as $LetterBox_PopoverContent from "./islands/LetterBox/PopoverContent.tsx";
@@ -25,6 +26,7 @@ const manifest = {
     "./routes/index.tsx": $index,
   },
   islands: {
+    "./islands/GalaxyBackground.tsx": $GalaxyBackground,
     "./islands/Heart.tsx": $Heart,
     "./islands/LetterBox/LetterBox.tsx": $LetterBox_LetterBox,
     "./islands/LetterBox/PopoverContent.tsx": $LetterBox_PopoverContent,

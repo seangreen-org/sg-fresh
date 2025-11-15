@@ -1,6 +1,6 @@
 import type { JSX } from "preact/jsx-runtime";
 import Footnote from "@components/Footnote.tsx";
-import GalaxyBackground from "@components/GalaxyBackground.tsx";
+import GalaxyBackground from "@islands/GalaxyBackground.tsx";
 
 interface LayoutProps {
   Component: () => JSX.Element;
