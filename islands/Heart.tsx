@@ -44,23 +44,23 @@ export default function Heart({
       <style>
         {`
           @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.05); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.08); }
+            70% { transform: scale(1); }
           }
 
           @keyframes glitch {
-            0% { transform: translate(0) skew(0deg); }
-            20% { transform: translate(-5px, 3px) skew(2deg); }
-            40% { transform: translate(-3px, -5px) skew(-2deg); }
-            60% { transform: translate(5px, 3px) skew(-1deg); }
-            80% { transform: translate(3px, -5px) skew(1deg); }
-            100% { transform: translate(0) skew(0deg); }
+            0%, 90%, 100% { transform: translate(0) skew(0deg); }
+            92% { transform: translate(-2px, 1px) skew(0.5deg); }
+            94% { transform: translate(2px, -1px) skew(-0.5deg); }
+            96% { transform: translate(-1px, 1px) skew(0.3deg); }
           }
 
-          @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+          @keyframes subtle-glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.1); }
           }
 
           @keyframes rgb-split {
@@ -115,7 +115,7 @@ export default function Heart({
             filter: `hue-rotate(${rotationColorMap[colorNames[currentColorIndex]] ?? 0}deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
             transform: "scale(1)",
             animation: isHovered
-              ? "heartbeat 1.5s ease-in-out infinite, rgb-split 0.5s infinite"
+              ? "heartbeat 2s ease-in-out infinite, rgb-split 3s infinite"
               : "none",
             transition: "filter 0.3s ease-out",
           }}
@@ -225,8 +225,6 @@ export default function Heart({
             style={{
               pointerEvents: "all",
               cursor: "pointer",
-              opacity: isHovered ? 1 : 0.9,
-              animation: isHovered ? "flicker 0.1s infinite" : "none",
             }}
             onClick={handleClick}
             onMouseEnter={() => setIsHovered(true)}
