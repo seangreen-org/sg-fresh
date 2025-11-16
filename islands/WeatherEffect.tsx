@@ -1,8 +1,15 @@
 import type { JSX } from "preact/jsx-runtime";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { getWeather, getWeatherEffect } from "@serivces/getWeather.ts";
 
-type WeatherMode = "live" | "clear" | "cloudy" | "foggy" | "rainy" | "snowy" | "stormy";
+type WeatherMode =
+  | "live"
+  | "clear"
+  | "cloudy"
+  | "foggy"
+  | "rainy"
+  | "snowy"
+  | "stormy";
 
 export default function WeatherEffect(): JSX.Element {
   const [weather, setWeather] = useState("");
@@ -10,7 +17,7 @@ export default function WeatherEffect(): JSX.Element {
   const [mode, setMode] = useState<WeatherMode>("live");
   const [showPanel, setShowPanel] = useState(false);
   const [showDebug, setShowDebug] = useState(false);
-  const [keySequence, setKeySequence] = useState<string[]>([]);
+  const keySequence = useRef<string[]>([]);
 
   const konamiCode = [
     "ArrowUp",
@@ -27,22 +34,20 @@ export default function WeatherEffect(): JSX.Element {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent): void => {
-      setKeySequence((prev: string[]) => {
-        const newSequence = [...prev, e.key].slice(-konamiCode.length);
+      keySequence.current = [...keySequence.current, e.key].slice(
+        -konamiCode.length,
+      );
 
-        if (
-          newSequence.length === konamiCode.length &&
-          newSequence.every((key, i) => key === konamiCode[i])
-        ) {
-          setShowDebug(true);
-        }
-
-        return newSequence;
-      });
+      if (
+        keySequence.current.length === konamiCode.length &&
+        keySequence.current.every((key, i) => key === konamiCode[i])
+      ) {
+        setShowDebug(true);
+      }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    globalThis.addEventListener("keydown", handleKeyDown);
+    return () => globalThis.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -191,7 +196,15 @@ export default function WeatherEffect(): JSX.Element {
           <div style={{ marginBottom: "8px", fontWeight: "bold" }}>
             Weather Override:
           </div>
-          {(["live", "clear", "cloudy", "foggy", "rainy", "snowy", "stormy"] as WeatherMode[]).map((m) => (
+          {([
+            "live",
+            "clear",
+            "cloudy",
+            "foggy",
+            "rainy",
+            "snowy",
+            "stormy",
+          ] as WeatherMode[]).map((m) => (
             <div
               key={m}
               onClick={() => setMode(m)}
@@ -201,10 +214,14 @@ export default function WeatherEffect(): JSX.Element {
                 cursor: "pointer",
                 background: mode === m ? "rgba(0,255,65,0.2)" : "transparent",
                 borderRadius: "2px",
-                border: mode === m ? "1px solid #00ff41" : "1px solid transparent",
+                border: mode === m
+                  ? "1px solid #00ff41"
+                  : "1px solid transparent",
               }}
             >
-              {m === "live" ? "🌐 Live Data" : `${getEmoji(m)} ${m.charAt(0).toUpperCase() + m.slice(1)}`}
+              {m === "live"
+                ? "🌐 Live Data"
+                : `${getEmoji(m)} ${m.charAt(0).toUpperCase() + m.slice(1)}`}
             </div>
           ))}
         </div>
@@ -249,19 +266,29 @@ export default function WeatherEffect(): JSX.Element {
         </div>
       )}
 
-      <div class="weather-vignette" style={{ opacity: weatherStyles.opacity }} />
+      <div
+        class="weather-vignette"
+        style={{ opacity: weatherStyles.opacity }}
+      />
     </>
   );
 }
 
 function getEmoji(weather: string): string {
   switch (weather) {
-    case "clear": return "☀️";
-    case "cloudy": return "☁️";
-    case "foggy": return "🌫️";
-    case "rainy": return "🌧️";
-    case "snowy": return "❄️";
-    case "stormy": return "⛈️";
-    default: return "🌐";
+    case "clear":
+      return "☀️";
+    case "cloudy":
+      return "☁️";
+    case "foggy":
+      return "🌫️";
+    case "rainy":
+      return "🌧️";
+    case "snowy":
+      return "❄️";
+    case "stormy":
+      return "⛈️";
+    default:
+      return "🌐";
   }
 }
