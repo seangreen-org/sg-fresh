@@ -1,4 +1,4 @@
-import { type Locator, type Page } from "npm:playwright";
+import { type Locator, type Page } from "npm:playwright@^1.40";
 import { HeartColor, rotationColorMap } from "@data/colors.ts";
 
 export class HeartPage {
