@@ -14,6 +14,7 @@ import * as $LetterBox_LetterBox from "./islands/LetterBox/LetterBox.tsx";
 import * as $LetterBox_PopoverContent from "./islands/LetterBox/PopoverContent.tsx";
 import * as $LetterBox_icons from "./islands/LetterBox/icons.tsx";
 import * as $LetterBox_styles from "./islands/LetterBox/styles.ts";
+import * as $WeatherEffect from "./islands/WeatherEffect.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -32,6 +33,7 @@ const manifest = {
     "./islands/LetterBox/PopoverContent.tsx": $LetterBox_PopoverContent,
     "./islands/LetterBox/icons.tsx": $LetterBox_icons,
     "./islands/LetterBox/styles.ts": $LetterBox_styles,
+    "./islands/WeatherEffect.tsx": $WeatherEffect,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

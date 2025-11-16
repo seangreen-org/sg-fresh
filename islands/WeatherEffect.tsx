@@ -8,7 +8,42 @@ export default function WeatherEffect(): JSX.Element {
   const [weather, setWeather] = useState("");
   const [debug, setDebug] = useState("Loading weather...");
   const [mode, setMode] = useState<WeatherMode>("live");
-  const [showPanel, setShowPanel] = useState(true);
+  const [showPanel, setShowPanel] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  const [keySequence, setKeySequence] = useState<string[]>([]);
+
+  const konamiCode = [
+    "ArrowUp",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "b",
+    "a",
+  ];
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      setKeySequence((prev: string[]) => {
+        const newSequence = [...prev, e.key].slice(-konamiCode.length);
+
+        if (
+          newSequence.length === konamiCode.length &&
+          newSequence.every((key, i) => key === konamiCode[i])
+        ) {
+          setShowDebug(true);
+        }
+
+        return newSequence;
+      });
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const fetchWeather = async (): Promise<void> => {
@@ -110,30 +145,39 @@ export default function WeatherEffect(): JSX.Element {
         `}
       </style>
 
-      <div
-        style={{
-          position: "fixed",
-          top: "10px",
-          left: "10px",
-          color: "#00ff41",
-          fontSize: "12px",
-          zIndex: 1000,
-          background: "rgba(0,0,0,0.8)",
-          padding: "5px 10px",
-          borderRadius: "4px",
-          cursor: "pointer",
-          userSelect: "none",
-        }}
-        onClick={() => setShowPanel(!showPanel)}
-      >
-        {debug} {showPanel ? "▼" : "▶"}
-      </div>
+      {showDebug && (
+        <div
+          style={{
+            position: "fixed",
+            top: "10px",
+            left: "10px",
+            color: "#00ff41",
+            fontSize: "12px",
+            zIndex: 1000,
+            background: "rgba(0,0,0,0.8)",
+            padding: "5px 10px",
+            borderRadius: "4px",
+            cursor: "pointer",
+            userSelect: "none",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            height: "24px",
+          }}
+          onClick={() => setShowPanel(!showPanel)}
+        >
+          <span style={{ whiteSpace: "nowrap" }}>{debug}</span>
+          <span style={{ width: "10px", flexShrink: 0, textAlign: "center" }}>
+            {showPanel ? "▼" : "▶"}
+          </span>
+        </div>
+      )}
 
       {showPanel && (
         <div
           style={{
             position: "fixed",
-            top: "40px",
+            top: "45px",
             left: "10px",
             color: "#00ff41",
             fontSize: "12px",
