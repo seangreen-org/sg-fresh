@@ -97,6 +97,7 @@ export function PopoverContent({
                 ref={formRef}
                 onSubmit={handleSubmit}
                 className="popover-form"
+                novalidate
               >
                 <button
                   type="submit"
