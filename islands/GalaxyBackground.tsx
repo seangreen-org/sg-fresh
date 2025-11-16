@@ -1,7 +1,6 @@
 import type { JSX } from "preact/jsx-runtime";
 
 export default function GalaxyBackground(): JSX.Element {
-
   return (
     <>
       <style>
@@ -140,7 +139,8 @@ export default function GalaxyBackground(): JSX.Element {
             height: "900px",
             top: "-50%",
             left: "-15%",
-            animation: "nebula-rotate 40s ease-in-out infinite, nebula-pulse 20s ease-in-out infinite, color-shift-1 30s ease-in-out infinite",
+            animation:
+              "nebula-rotate 40s ease-in-out infinite, nebula-pulse 20s ease-in-out infinite, color-shift-1 30s ease-in-out infinite",
             animationDelay: "0s",
           }}
         />
@@ -151,7 +151,8 @@ export default function GalaxyBackground(): JSX.Element {
             height: "1100px",
             bottom: "5%",
             right: "10%",
-            animation: "nebula-rotate 45s ease-in-out infinite, nebula-pulse 22s ease-in-out infinite, color-shift-2 35s ease-in-out infinite",
+            animation:
+              "nebula-rotate 45s ease-in-out infinite, nebula-pulse 22s ease-in-out infinite, color-shift-2 35s ease-in-out infinite",
             animationDelay: "-15s",
           }}
         />
@@ -162,7 +163,8 @@ export default function GalaxyBackground(): JSX.Element {
             height: "800px",
             top: "50%",
             left: "50%",
-            animation: "nebula-rotate 50s ease-in-out infinite, nebula-pulse 25s ease-in-out infinite, color-shift-3 40s ease-in-out infinite",
+            animation:
+              "nebula-rotate 50s ease-in-out infinite, nebula-pulse 25s ease-in-out infinite, color-shift-3 40s ease-in-out infinite",
             animationDelay: "-30s",
           }}
         />

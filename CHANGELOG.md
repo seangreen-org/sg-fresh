@@ -1,86 +1,88 @@
 ## [1.12.4](https://github.com/seangreen-org/sg-fresh/compare/v1.12.3...v1.12.4) (2025-06-05)
 
-
 ### Bug Fixes
 
-* minor cv ammend ([0975b96](https://github.com/seangreen-org/sg-fresh/commit/0975b96a21bbef63e07ed1b3a55fce0117ef0b34))
-* moved cv to correct location ([a44f77d](https://github.com/seangreen-org/sg-fresh/commit/a44f77d5afca1c19a81ccf731db08c7c171810f8))
+- minor cv ammend
+  ([0975b96](https://github.com/seangreen-org/sg-fresh/commit/0975b96a21bbef63e07ed1b3a55fce0117ef0b34))
+- moved cv to correct location
+  ([a44f77d](https://github.com/seangreen-org/sg-fresh/commit/a44f77d5afca1c19a81ccf731db08c7c171810f8))
 
 ## [1.12.3](https://github.com/seangreen-org/sg-fresh/compare/v1.12.2...v1.12.3) (2025-06-05)
 
-
 ### Bug Fixes
 
-* minor cv ammend ([9e733ce](https://github.com/seangreen-org/sg-fresh/commit/9e733ced696f35481aa25f8f9a81efd9744557ae))
+- minor cv ammend
+  ([9e733ce](https://github.com/seangreen-org/sg-fresh/commit/9e733ced696f35481aa25f8f9a81efd9744557ae))
 
 ## [1.12.2](https://github.com/seangreen-org/sg-fresh/compare/v1.12.1...v1.12.2) (2025-06-04)
 
-
 ### Bug Fixes
 
-* cv ammend ([d78a1b5](https://github.com/seangreen-org/sg-fresh/commit/d78a1b57c171e9dd48b3dca1d01b627a5560721c))
+- cv ammend
+  ([d78a1b5](https://github.com/seangreen-org/sg-fresh/commit/d78a1b57c171e9dd48b3dca1d01b627a5560721c))
 
 ## [1.12.1](https://github.com/seangreen-org/sg-fresh/compare/v1.12.0...v1.12.1) (2025-06-03)
 
-
 ### Bug Fixes
 
-* re-enable (fixed?) flaky test ([154c02f](https://github.com/seangreen-org/sg-fresh/commit/154c02ff64e9837f792123391d8d9098f1d84000))
+- re-enable (fixed?) flaky test
+  ([154c02f](https://github.com/seangreen-org/sg-fresh/commit/154c02ff64e9837f792123391d8d9098f1d84000))
 
 # [1.12.0](https://github.com/seangreen-org/sg-fresh/compare/v1.11.0...v1.12.0) (2025-06-03)
 
-
 ### Bug Fixes
 
-* remove flaky test ([ccb4d63](https://github.com/seangreen-org/sg-fresh/commit/ccb4d63107754f5c37d725331fdbb154355e8b05))
-
+- remove flaky test
+  ([ccb4d63](https://github.com/seangreen-org/sg-fresh/commit/ccb4d63107754f5c37d725331fdbb154355e8b05))
 
 ### Features
 
-* updated cv ([d1582ee](https://github.com/seangreen-org/sg-fresh/commit/d1582eefce70a813c380241ace8366481b0ef669))
+- updated cv
+  ([d1582ee](https://github.com/seangreen-org/sg-fresh/commit/d1582eefce70a813c380241ace8366481b0ef669))
 
 # [1.11.0](https://github.com/seangreen-org/sg-fresh/compare/v1.10.1...v1.11.0) (2025-06-03)
 
-
 ### Features
 
-* static cv 2 ([2202bc8](https://github.com/seangreen-org/sg-fresh/commit/2202bc8592747b05ca67d0143b43e0c4fae50c98))
+- static cv 2
+  ([2202bc8](https://github.com/seangreen-org/sg-fresh/commit/2202bc8592747b05ca67d0143b43e0c4fae50c98))
 
 ## [1.10.1](https://github.com/seangreen-org/sg-fresh/compare/v1.10.0...v1.10.1) (2025-06-03)
 
-
 ### Bug Fixes
 
-* cv num ([7205e7b](https://github.com/seangreen-org/sg-fresh/commit/7205e7ba12133e57a7c16978a0c4ef54a72fb847))
+- cv num
+  ([7205e7b](https://github.com/seangreen-org/sg-fresh/commit/7205e7ba12133e57a7c16978a0c4ef54a72fb847))
 
 # [1.10.0](https://github.com/seangreen-org/sg-fresh/compare/v1.9.0...v1.10.0) (2025-06-03)
 
-
 ### Features
 
-* static cv ([2101ef2](https://github.com/seangreen-org/sg-fresh/commit/2101ef2b5ec5f8c3a444e49f25a35ff4976e4193))
+- static cv
+  ([2101ef2](https://github.com/seangreen-org/sg-fresh/commit/2101ef2b5ec5f8c3a444e49f25a35ff4976e4193))
 
 # [1.9.0](https://github.com/seangreen-org/sg-fresh/compare/v1.8.1...v1.9.0) (2025-04-02)
 
-
 ### Features
 
-* 1s colour change animation ([7d174d4](https://github.com/seangreen-org/sg-fresh/commit/7d174d4d23776513fd589cfc22b8da41cb2dd098))
-* tone down saturation ([73a6706](https://github.com/seangreen-org/sg-fresh/commit/73a6706261b05cf26c3c18f683a41d77e0d55d4d))
+- 1s colour change animation
+  ([7d174d4](https://github.com/seangreen-org/sg-fresh/commit/7d174d4d23776513fd589cfc22b8da41cb2dd098))
+- tone down saturation
+  ([73a6706](https://github.com/seangreen-org/sg-fresh/commit/73a6706261b05cf26c3c18f683a41d77e0d55d4d))
 
 ## [1.8.1](https://github.com/seangreen-org/sg-fresh/compare/v1.8.0...v1.8.1) (2025-04-01)
 
-
 ### Bug Fixes
 
-* umam(n)i typo ([255f0d7](https://github.com/seangreen-org/sg-fresh/commit/255f0d7e925753e74d7a8bc98a3657615d971cf6))
+- umam(n)i typo
+  ([255f0d7](https://github.com/seangreen-org/sg-fresh/commit/255f0d7e925753e74d7a8bc98a3657615d971cf6))
 
 # [1.8.0](https://github.com/seangreen-org/sg-fresh/compare/v1.7.0...v1.8.0) (2025-04-01)
 
-
 ### Features
 
-* add tracking attributes to GitHub link in PopoverContent ([9d4af6f](https://github.com/seangreen-org/sg-fresh/commit/9d4af6fdde822cde8868a649c6908a5fb3e58116))
+- add tracking attributes to GitHub link in PopoverContent
+  ([9d4af6f](https://github.com/seangreen-org/sg-fresh/commit/9d4af6fdde822cde8868a649c6908a5fb3e58116))
 
 # [1.7.0](https://github.com/seangreen-org/sg-fresh/compare/v1.6.2...v1.7.0) (2025-04-01)
 

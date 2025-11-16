@@ -113,8 +113,12 @@ export default function Heart({
             transformOrigin: "center center",
             display: "block",
             overflow: "visible",
-            "--hue-rotation": `${rotationColorMap[colorNames[currentColorIndex]] ?? 0}deg`,
-            filter: `hue-rotate(${rotationColorMap[colorNames[currentColorIndex]] ?? 0}deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
+            "--hue-rotation": `${
+              rotationColorMap[colorNames[currentColorIndex]] ?? 0
+            }deg`,
+            filter: `hue-rotate(${
+              rotationColorMap[colorNames[currentColorIndex]] ?? 0
+            }deg) ${isHovered ? "saturate(1.3)" : "saturate(1)"}`,
             transform: "scale(1)",
             animation: isHovered
               ? "heartbeat 2s ease-in-out infinite, rgb-split 3s infinite"
@@ -172,12 +176,39 @@ export default function Heart({
             </linearGradient>
 
             <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur1" />
-              <feColorMatrix in="blur1" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 1 0" result="green" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur2" />
-              <feColorMatrix in="blur2" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.8 0" result="green2" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur3" />
-              <feColorMatrix in="blur3" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.5 0" result="green3" />
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="2"
+                result="blur1"
+              />
+              <feColorMatrix
+                in="blur1"
+                type="matrix"
+                values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 1 0"
+                result="green"
+              />
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="10"
+                result="blur2"
+              />
+              <feColorMatrix
+                in="blur2"
+                type="matrix"
+                values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.8 0"
+                result="green2"
+              />
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="20"
+                result="blur3"
+              />
+              <feColorMatrix
+                in="blur3"
+                type="matrix"
+                values="0 0 0 0 0  0 1 0 0 0  0 0.25 0 0 0  0 0 0 0.5 0"
+                result="green3"
+              />
               <feMerge>
                 <feMergeNode in="green3" />
                 <feMergeNode in="green2" />
@@ -189,8 +220,18 @@ export default function Heart({
             <filter id="chromatic" x="-50%" y="-50%" width="200%" height="200%">
               <feOffset in="SourceGraphic" dx="2" dy="0" result="r" />
               <feOffset in="SourceGraphic" dx="-2" dy="0" result="b" />
-              <feColorMatrix in="r" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r2" />
-              <feColorMatrix in="b" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b2" />
+              <feColorMatrix
+                in="r"
+                type="matrix"
+                values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
+                result="r2"
+              />
+              <feColorMatrix
+                in="b"
+                type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                result="b2"
+              />
               <feBlend mode="screen" in="r2" in2="b2" result="blend" />
               <feBlend mode="screen" in="blend" in2="SourceGraphic" />
             </filter>
