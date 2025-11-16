@@ -71,8 +71,87 @@ export default function GalaxyBackground(): JSX.Element {
           }
 
           @keyframes nebula-pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+          }
+
+          @keyframes nebula-rotate {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(30px, -20px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(-20px, 30px) scale(0.95) rotate(240deg); }
+            100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+          }
+
+          @keyframes color-shift-1 {
+            0% {
+              background: radial-gradient(circle, rgba(0, 255, 100, 0.5) 0%, rgba(0, 255, 100, 0.25) 30%, transparent 70%);
+            }
+            16.5% {
+              background: radial-gradient(circle, rgba(0, 227, 177, 0.5) 0%, rgba(0, 227, 177, 0.25) 30%, transparent 70%);
+            }
+            33% {
+              background: radial-gradient(circle, rgba(0, 200, 255, 0.5) 0%, rgba(0, 200, 255, 0.25) 30%, transparent 70%);
+            }
+            49.5% {
+              background: radial-gradient(circle, rgba(80, 120, 240, 0.5) 0%, rgba(80, 120, 240, 0.25) 30%, transparent 70%);
+            }
+            66% {
+              background: radial-gradient(circle, rgba(150, 80, 230, 0.5) 0%, rgba(150, 80, 230, 0.25) 30%, transparent 70%);
+            }
+            83% {
+              background: radial-gradient(circle, rgba(100, 200, 150, 0.5) 0%, rgba(100, 200, 150, 0.25) 30%, transparent 70%);
+            }
+            100% {
+              background: radial-gradient(circle, rgba(0, 255, 100, 0.5) 0%, rgba(0, 255, 100, 0.25) 30%, transparent 70%);
+            }
+          }
+
+          @keyframes color-shift-2 {
+            0% {
+              background: radial-gradient(circle, rgba(0, 200, 255, 0.7) 0%, rgba(0, 200, 255, 0.3) 30%, transparent 70%);
+            }
+            16.5% {
+              background: radial-gradient(circle, rgba(100, 150, 255, 0.7) 0%, rgba(100, 150, 255, 0.3) 30%, transparent 70%);
+            }
+            33% {
+              background: radial-gradient(circle, rgba(180, 100, 255, 0.7) 0%, rgba(180, 100, 255, 0.3) 30%, transparent 70%);
+            }
+            49.5% {
+              background: radial-gradient(circle, rgba(220, 100, 200, 0.7) 0%, rgba(220, 100, 200, 0.3) 30%, transparent 70%);
+            }
+            66% {
+              background: radial-gradient(circle, rgba(200, 150, 180, 0.7) 0%, rgba(200, 150, 180, 0.3) 30%, transparent 70%);
+            }
+            83% {
+              background: radial-gradient(circle, rgba(100, 180, 220, 0.7) 0%, rgba(100, 180, 220, 0.3) 30%, transparent 70%);
+            }
+            100% {
+              background: radial-gradient(circle, rgba(0, 200, 255, 0.7) 0%, rgba(0, 200, 255, 0.3) 30%, transparent 70%);
+            }
+          }
+
+          @keyframes color-shift-3 {
+            0% {
+              background: radial-gradient(circle, rgba(150, 255, 200, 0.6) 0%, rgba(150, 255, 200, 0.3) 30%, transparent 70%);
+            }
+            16.5% {
+              background: radial-gradient(circle, rgba(175, 220, 220, 0.6) 0%, rgba(175, 220, 220, 0.3) 30%, transparent 70%);
+            }
+            33% {
+              background: radial-gradient(circle, rgba(200, 180, 230, 0.6) 0%, rgba(200, 180, 230, 0.3) 30%, transparent 70%);
+            }
+            49.5% {
+              background: radial-gradient(circle, rgba(220, 170, 220, 0.6) 0%, rgba(220, 170, 220, 0.3) 30%, transparent 70%);
+            }
+            66% {
+              background: radial-gradient(circle, rgba(210, 190, 230, 0.6) 0%, rgba(210, 190, 230, 0.3) 30%, transparent 70%);
+            }
+            83% {
+              background: radial-gradient(circle, rgba(180, 220, 215, 0.6) 0%, rgba(180, 220, 215, 0.3) 30%, transparent 70%);
+            }
+            100% {
+              background: radial-gradient(circle, rgba(150, 255, 200, 0.6) 0%, rgba(150, 255, 200, 0.3) 30%, transparent 70%);
+            }
           }
 
           .grid {
@@ -130,7 +209,6 @@ export default function GalaxyBackground(): JSX.Element {
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.6;
-            animation: nebula-drift 40s ease-in-out infinite, nebula-pulse 20s ease-in-out infinite;
           }
 
           .vignette {
@@ -150,9 +228,9 @@ export default function GalaxyBackground(): JSX.Element {
           style={{
             width: "900px",
             height: "900px",
-            background: "radial-gradient(circle, rgba(0, 255, 100, 0.8) 0%, rgba(0, 255, 100, 0.4) 30%, transparent 70%)",
-            top: "10%",
-            left: "15%",
+            top: "-50%",
+            left: "-15%",
+            animation: "nebula-rotate 40s ease-in-out infinite, nebula-pulse 20s ease-in-out infinite, color-shift-1 30s ease-in-out infinite",
             animationDelay: "0s",
           }}
         />
@@ -161,9 +239,9 @@ export default function GalaxyBackground(): JSX.Element {
           style={{
             width: "1100px",
             height: "1100px",
-            background: "radial-gradient(circle, rgba(0, 200, 255, 0.7) 0%, rgba(0, 200, 255, 0.3) 30%, transparent 70%)",
             bottom: "5%",
             right: "10%",
+            animation: "nebula-rotate 45s ease-in-out infinite, nebula-pulse 22s ease-in-out infinite, color-shift-2 35s ease-in-out infinite",
             animationDelay: "-15s",
           }}
         />
@@ -172,10 +250,9 @@ export default function GalaxyBackground(): JSX.Element {
           style={{
             width: "800px",
             height: "800px",
-            background: "radial-gradient(circle, rgba(150, 255, 200, 0.6) 0%, rgba(150, 255, 200, 0.3) 30%, transparent 70%)",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)",
+            animation: "nebula-rotate 50s ease-in-out infinite, nebula-pulse 25s ease-in-out infinite, color-shift-3 40s ease-in-out infinite",
             animationDelay: "-30s",
           }}
         />
