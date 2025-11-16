@@ -2,23 +2,32 @@ import type { JSX } from "preact/jsx-runtime";
 import { useEffect, useState } from "preact/hooks";
 import { getWeather, getWeatherEffect } from "@serivces/getWeather.ts";
 
+type WeatherMode = "live" | "clear" | "cloudy" | "foggy" | "rainy" | "snowy" | "stormy";
+
 export default function GalaxyBackground(): JSX.Element {
   const [weather, setWeather] = useState("");
-  const [debug, setDebug] = useState("");
+  const [debug, setDebug] = useState("Loading weather...");
+  const [mode, setMode] = useState<WeatherMode>("live");
+  const [showPanel, setShowPanel] = useState(true);
 
   useEffect(() => {
     const fetchWeather = async (): Promise<void> => {
-      const data = await getWeather();
-      if (data) {
-        const effect = getWeatherEffect(data.weatherCode);
-        setWeather(effect);
-        setDebug(`Weather: ${effect}, Code: ${data.weatherCode}, Temp: ${data.temperature}°C`);
+      if (mode === "live") {
+        const data = await getWeather();
+        if (data) {
+          const effect = getWeatherEffect(data.weatherCode);
+          setWeather(effect);
+          setDebug(`Weather: ${effect}, Code: ${data.weatherCode}, Temp: ${data.temperature}°C`);
+        } else {
+          setDebug("Weather fetch failed");
+        }
       } else {
-        setDebug("Weather fetch failed");
+        setWeather(mode);
+        setDebug(`Weather: ${mode} (Manual Override)`);
       }
     };
     fetchWeather();
-  }, []);
+  }, [mode]);
 
   const getWeatherStyles = (): { particles: string; opacity: number } => {
     switch (weather) {
@@ -269,8 +278,49 @@ export default function GalaxyBackground(): JSX.Element {
           background: "rgba(0,0,0,0.8)",
           padding: "5px 10px",
           borderRadius: "4px",
-        }}>
-          {debug}
+          cursor: "pointer",
+          userSelect: "none",
+        }}
+        onClick={() => setShowPanel(!showPanel)}
+        >
+          {debug} {showPanel ? "▼" : "▶"}
+        </div>
+      )}
+
+      {showPanel && (
+        <div
+          style={{
+            position: "fixed",
+            top: "40px",
+            left: "10px",
+            color: "#00ff41",
+            fontSize: "12px",
+            zIndex: 1000,
+            background: "rgba(0,0,0,0.9)",
+            padding: "10px",
+            borderRadius: "4px",
+            border: "1px solid #00ff41",
+          }}
+        >
+          <div style={{ marginBottom: "8px", fontWeight: "bold" }}>
+            Weather Override:
+          </div>
+          {(["live", "clear", "cloudy", "foggy", "rainy", "snowy", "stormy"] as WeatherMode[]).map((m) => (
+            <div
+              key={m}
+              onClick={() => setMode(m)}
+              style={{
+                padding: "4px 8px",
+                marginBottom: "4px",
+                cursor: "pointer",
+                background: mode === m ? "rgba(0,255,65,0.2)" : "transparent",
+                borderRadius: "2px",
+                border: mode === m ? "1px solid #00ff41" : "1px solid transparent",
+              }}
+            >
+              {m === "live" ? "🌐 Live Data" : `${getEmoji(m)} ${m.charAt(0).toUpperCase() + m.slice(1)}`}
+            </div>
+          ))}
         </div>
       )}
 
@@ -316,4 +366,16 @@ export default function GalaxyBackground(): JSX.Element {
       <div class="vignette" style={{ opacity: weatherStyles.opacity }} />
     </>
   );
+}
+
+function getEmoji(weather: string): string {
+  switch (weather) {
+    case "clear": return "☀️";
+    case "cloudy": return "☁️";
+    case "foggy": return "🌫️";
+    case "rainy": return "🌧️";
+    case "snowy": return "❄️";
+    case "stormy": return "⛈️";
+    default: return "🌐";
+  }
 }
