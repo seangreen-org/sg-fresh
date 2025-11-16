@@ -31,10 +31,10 @@ export async function getWeather(): Promise<WeatherData | null> {
 export function getWeatherEffect(weatherCode: number): string {
   // WMO Weather codes: https://open-meteo.com/en/docs
   if (weatherCode === 0) return "clear"; // Clear sky
-  if (weatherCode <= 3) return "rainy"; // Testing: force rain for cloudy days
+  if (weatherCode <= 3) return "cloudy"; // Mainly clear, partly cloudy, overcast
   if (weatherCode <= 49) return "foggy"; // Fog
   if (weatherCode <= 69) return "rainy"; // Rain
   if (weatherCode <= 79) return "snowy"; // Snow
   if (weatherCode <= 99) return "stormy"; // Thunderstorm
-  return "rainy";
+  return "clear";
 }
