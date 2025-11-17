@@ -22,29 +22,10 @@ jobs:
         run: deno task check
 
       - name: Install Playwright Chromium
-        run: npx playwright install chromium --with-deps
-
-      - name: Start server
-        run: deno task start > server.log 2>&1 &
-        env:
-          DENO_SERVER_PID: $!
-        timeout-minutes: 5
-
-      - name: Wait for server to start
-        run: sleep 5
+        run: npx playwright@1.42.1 install chromium --with-deps
 
       - name: Run tests
-        run: deno test --allow-all
-
-      - name: Stop server
-        if: always()
-        run: |
-          if [ -n "$DENO_SERVER_PID" ]; then
-            kill $DENO_SERVER_PID
-            echo "Deno server (PID: $DENO_SERVER_PID) has been killed."
-          else
-            echo "No Deno server process found."
-          fi
+        run: deno task test:ci
 
   release:
     name: Semantic Release
