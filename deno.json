@@ -9,7 +9,7 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "test": "deno test -A --no-check --unsanitize-resources --unsanitize-ops e2e/",
+    "test": "deno test -A --no-check e2e/",
     "test:ci": "bash scripts/test-ci.sh"
   },
   "unstable": [

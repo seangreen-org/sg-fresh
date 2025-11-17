@@ -15,8 +15,8 @@ if ! kill -0 $SERVER_PID 2>/dev/null; then
   exit 1
 fi
 
-# Run tests with resource and ops sanitization disabled since we have an external server
-deno test -A --no-check --unsanitize-resources --unsanitize-ops e2e/
+# Run tests
+deno test -A --no-check e2e/
 TEST_EXIT_CODE=$?
 
 # Kill the server and wait for it to fully terminate
