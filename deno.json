@@ -9,12 +9,20 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
-    "test": "deno test -A e2e/",
+    "test": "deno test -A --no-check e2e/",
     "test:ci": "bash scripts/test-ci.sh"
   },
   "unstable": [
     "kv"
   ],
+  "test": {
+    "include": [
+      "e2e/"
+    ],
+    "exclude": [
+      "**/_fresh/*"
+    ]
+  },
   "lint": {
     "rules": {
       "tags": [
