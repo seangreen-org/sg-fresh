@@ -1,3 +1,14 @@
+## [1.12.5](https://github.com/seangreen-org/sg-fresh/compare/v1.12.4...v1.12.5) (2025-11-17)
+
+
+### Bug Fixes
+
+* format ([c436986](https://github.com/seangreen-org/sg-fresh/commit/c436986b67914fffa20c11484e75213bf7d65203))
+* simplify test commands by removing resource and ops sanitization ([0077859](https://github.com/seangreen-org/sg-fresh/commit/0077859821b52b4bfa6ad6eeeaf80a25de75ac0d))
+* update Playwright import to use the correct package ([01ee822](https://github.com/seangreen-org/sg-fresh/commit/01ee822b877f78c83d563dcb1b866894bb4dcdfc))
+* update test commands to disable resource and ops sanitization for external server ([02502d1](https://github.com/seangreen-org/sg-fresh/commit/02502d13d593093624c313883cadd148dce158c9))
+* update test job to run on ubuntu-22.04 ([e09fc69](https://github.com/seangreen-org/sg-fresh/commit/e09fc699cfbc5b32b201f2a6fc1b7efb4e90ca13))
+
 ## [1.12.4](https://github.com/seangreen-org/sg-fresh/compare/v1.12.3...v1.12.4) (2025-06-05)
 
 ### Bug Fixes
