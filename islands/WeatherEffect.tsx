@@ -95,8 +95,14 @@ export default function WeatherEffect(): JSX.Element {
       <style>
         {`
           @keyframes rain-fall {
-            0% { transform: translateY(-20px); opacity: 0.8; }
-            100% { transform: translateY(100vh); opacity: 0.2; }
+            0% { transform: translateY(-20px) translateX(0); opacity: 0.8; }
+            100% { transform: translateY(100vh) translateX(var(--drift)); opacity: 0.2; }
+          }
+
+          @keyframes rain-fall-alt {
+            0% { transform: translateY(-20px) translateX(0); opacity: 0.8; }
+            50% { transform: translateY(50vh) translateX(calc(var(--drift) * 0.3)); }
+            100% { transform: translateY(100vh) translateX(var(--drift)); opacity: 0.2; }
           }
 
           @keyframes snow-fall {
@@ -122,7 +128,10 @@ export default function WeatherEffect(): JSX.Element {
             width: 2px;
             height: 30px;
             background: linear-gradient(transparent, rgba(0, 255, 65, 0.6), rgba(0, 255, 65, 0.3));
-            animation: rain-fall 1s linear infinite;
+          }
+
+          .rain-drop.near-heart {
+            filter: blur(1px);
           }
 
           .snow-flake {
@@ -230,17 +239,29 @@ export default function WeatherEffect(): JSX.Element {
 
       {weatherStyles.particles === "rain" && (
         <div class="weather-effect">
-          {Array.from({ length: 100 }).map((_, i) => (
-            <div
-              key={i}
-              class="rain-drop"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-                animationDuration: `${0.8 + Math.random() * 0.4}s`,
-              }}
-            />
-          ))}
+          {Array.from({ length: 100 }).map((_, i) => {
+            const leftPos = Math.random() * 100;
+            const drift = (Math.random() - 0.5) * 40;
+            const isNearCenter = leftPos > 40 && leftPos < 60;
+            const animation = Math.random() > 0.5
+              ? "rain-fall"
+              : "rain-fall-alt";
+
+            return (
+              <div
+                key={i}
+                class={`rain-drop ${isNearCenter ? "near-heart" : ""}`}
+                style={{
+                  left: `${leftPos}%`,
+                  "--drift": `${drift}px`,
+                  animation: `${animation} ${
+                    0.8 + Math.random() * 0.4
+                  }s linear infinite`,
+                  animationDelay: `${Math.random() * 2}s`,
+                }}
+              />
+            );
+          })}
         </div>
       )}
 
