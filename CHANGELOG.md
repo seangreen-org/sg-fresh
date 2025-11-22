@@ -1,3 +1,11 @@
+# [1.14.0](https://github.com/seangreen-org/sg-fresh/compare/v1.13.0...v1.14.0) (2025-11-22)
+
+
+### Features
+
+* bad process ([27cb441](https://github.com/seangreen-org/sg-fresh/commit/27cb44158c0384da73ced2e84d9884ed9a42bf67))
+* try deploy again ([4f8e25f](https://github.com/seangreen-org/sg-fresh/commit/4f8e25fd1cab30c0b85f4abacfab46e5fcd10cd3))
+
 # [1.13.0](https://github.com/seangreen-org/sg-fresh/compare/v1.12.5...v1.13.0) (2025-11-22)
 
 ### Features
