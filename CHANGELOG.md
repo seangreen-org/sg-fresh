@@ -1,9 +1,9 @@
 # [1.13.0](https://github.com/seangreen-org/sg-fresh/compare/v1.12.5...v1.13.0) (2025-11-22)
 
-
 ### Features
 
-* weather effects ([21297ef](https://github.com/seangreen-org/sg-fresh/commit/21297efdc0851f741a5082c0a7bf90013519072b))
+- weather effects
+  ([21297ef](https://github.com/seangreen-org/sg-fresh/commit/21297efdc0851f741a5082c0a7bf90013519072b))
 
 ## [1.12.5](https://github.com/seangreen-org/sg-fresh/compare/v1.12.4...v1.12.5) (2025-11-17)
 
