@@ -118,6 +118,7 @@ export default function WeatherEffect(): JSX.Element {
 
           .rain-drop {
             position: absolute;
+            top: -50px;
             width: 2px;
             height: 30px;
             background: linear-gradient(transparent, rgba(0, 255, 65, 0.6), rgba(0, 255, 65, 0.3));
@@ -235,7 +236,6 @@ export default function WeatherEffect(): JSX.Element {
               class="rain-drop"
               style={{
                 left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 2}s`,
                 animationDuration: `${0.8 + Math.random() * 0.4}s`,
               }}
